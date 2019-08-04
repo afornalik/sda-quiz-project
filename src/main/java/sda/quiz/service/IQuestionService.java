@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IQuestionService {
 
-    boolean createNewQuestion(QuestionDto questionDto) throws Exception;
+    void createNewQuestion(QuestionDto questionDto) throws Exception;
 
     List<QuestionDto> showAllAvailableQuestion();
 }

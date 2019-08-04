@@ -34,12 +34,11 @@ public class QuestionService implements IQuestionService {
     private QuestionMapper questionMapper;
 
     @Override
-    public boolean createNewQuestion(QuestionDto questionDto) throws Exception {
+    public void createNewQuestion(QuestionDto questionDto) throws Exception {
         if (questionDtoIValidator.isCorrect(questionDto)) {
             questionRepository.save(questionMapper.convertDtoToEntity(questionDto));
-        }
 
-        return false;
+        }
     }
 
     @Override
