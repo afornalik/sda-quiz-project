@@ -14,8 +14,11 @@ import sda.quiz.service.IQuestionService;
 public class QuestionController {
 
 
-    @Autowired
-    private IQuestionService questionService;
+    private final IQuestionService questionService;
+
+    public QuestionController(IQuestionService questionService) {
+        this.questionService = questionService;
+    }
 
 
     @RequestMapping(value = "/addquestion",method = RequestMethod.POST)

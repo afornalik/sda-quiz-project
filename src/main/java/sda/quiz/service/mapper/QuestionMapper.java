@@ -16,15 +16,17 @@ public class QuestionMapper implements Mapper<Question, QuestionDto> {
     @Autowired
     private IAnswerRepository answerRepository;
 
-    @Autowired
-    private IQuestionRepository questionRepository;
+    private final IQuestionRepository questionRepository;
+
+    public QuestionMapper(IQuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
 
 
     @Override
     public Question convertDtoToEntity(QuestionDto questionDto) throws ConvertDtoToEntityException {
         Question question;
         try {
-
             if (questionDto.getId() == null) {
                 question = new Question();
             } else {
@@ -34,15 +36,14 @@ public class QuestionMapper implements Mapper<Question, QuestionDto> {
             question.setContent(questionDto.getQuestion());
             question.setPoint(questionDto.getPoint());
         } catch (Exception e) {
-            throw new ConvertDtoToEntityException();
+            throw new ConvertDtoToEntityException("Cannot convert dto object with id : " + questionDto.getId());
         }
         return question;
     }
 
     @Override
     public QuestionDto convertEntityToDto(Question question) {
-        QuestionDto questionDto = new QuestionDto(
+        return new QuestionDto(
                 question.getIdQuestion(), question.getContent(), question.getPoint(), question.getAnswerList());
-        return questionDto;
     }
 }
