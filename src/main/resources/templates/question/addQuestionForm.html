@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz | Add Question</title>
+    <link th:href="/css/form.css" href="/static/css/form.css"  rel="stylesheet" type="text/css"/>
+    <script src="/static/js/form.js"></script>
+</head>
+<body>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-5 d-flex align-items-center">
+            <h1>Stwórz nowe pytanie</h1>
+        </div>
+        <div class="col-md-6 offset-md-1">
+            <form class="mt-4 mt-md-0">
+                <div class="form-group">
+                    <label for="question"> tekst pytania </label>
+                    <input class="form-control" id="question" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="point"> punkty za poprawną odpowiedz </label>
+                    <input class="form-control" id="point" type="number"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">możliwości do wyboru</label>
+                    <input class="form-control" id="email" type="email"/>
+
+                </div>
+                <div class="form-group">
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/js/form.js"></script>
+</body>
+</html>

@@ -11,58 +11,61 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
+import sda.quiz.QuizApplication;
+import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
 import sda.quiz.repository.IQuestionRepository;
-import sda.quiz.service.mapper.exception.ConvertDtoToEntityException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public class QuestionMapperTest {
 
 
+    @Autowired
+    private QuestionMapper questionMapper;
 
-    @Mock
-    private IQuestionRepository questionRepository;
+    @Autowired
+    private AnswerMapper answerMapper;
 
-    @InjectMocks
-    private Mapper< Question,QuestionDto> questionMapper = new QuestionMapper(questionRepository);
+    private QuestionDto dummyQuestionDto;
 
-
-
-    private List<Answer> answerList;
+    private List<AnswerDto> answerList;
 
     @Before
     public void init() {
-        Answer answer1 = new Answer();
-        Answer answer2 = new Answer();
-        Answer answer3 = new Answer();
+        Answer answer1 = new Answer(5l,"fsfsd",true,null);
+        Answer answer2 = answer1;
+        Answer answer3 = answer2;
 
         answerList = new ArrayList<>();
-        answerList.add(answer1);
-        answerList.add(answer2);
-        answerList.add(answer3);
+        answerList.add(answerMapper.convertEntityToDto(answer1));
+        answerList.add(answerMapper.convertEntityToDto(answer2));
+        answerList.add(answerMapper.convertEntityToDto(answer3));
     }
 
     @Test
-    public void shouldReturnEntity() throws ConvertDtoToEntityException {
+    public void shouldReturnEntity()  {
         //given
-        BDDMockito.when(questionRepository.findById(Mockito.any())).thenReturn(Mockito.any());
-        QuestionDto dummyQuestionDto = new QuestionDto(null,"What is my name ?",5,answerList);
+        dummyQuestionDto = new QuestionDto(null,"What is my name ?",5,answerList);
 
         //when
         Question result = questionMapper.convertDtoToEntity(dummyQuestionDto);
+        result.setAnswerList(dummyQuestionDto.getAnswersList().stream().map(answerDto -> answerMapper.convertDtoToEntity(answerDto)).collect(Collectors.toList()));
 
         //than
         Assert.assertEquals(result.getIdQuestion(),dummyQuestionDto.getId());
-        Assert.assertEquals(result.getAnswerList(),dummyQuestionDto.getAnswers());
-        Assert.assertEquals(result.getContent(),dummyQuestionDto.getQuestion());
+        Assert.assertEquals(result.getAnswerList().size(),dummyQuestionDto.getAnswersList().size());
+        Assert.assertEquals(result.getQuestion(),dummyQuestionDto.getQuestion());
         Assert.assertEquals(result.getPoint(),dummyQuestionDto.getPoint());
     }
 

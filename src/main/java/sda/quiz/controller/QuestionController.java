@@ -20,9 +20,16 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+    @RequestMapping(value = "/addquestion",method = RequestMethod.GET)
+    public ModelAndView addQuestionEmptyForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("question/addQuestionForm");
+        return modelAndView;
+    }
+
 
     @RequestMapping(value = "/addquestion",method = RequestMethod.POST)
-    public ModelAndView addQuestion(@ModelAttribute ("question")QuestionDto questionDto) {
+    public ModelAndView addQuestionAfterInsertForm(@ModelAttribute ("question")QuestionDto questionDto) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             questionService.createNewQuestion(questionDto);

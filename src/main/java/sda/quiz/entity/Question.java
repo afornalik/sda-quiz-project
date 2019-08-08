@@ -18,8 +18,8 @@ public class Question {
     @Column(name = "id_question")
     private Long idQuestion;
 
-    @Column(name = "content",nullable = false)
-    private String content;
+    @Column(name = "question",nullable = false)
+    private String question;
 
     @Column(name="point")
     private Integer point;

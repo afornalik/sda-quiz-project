@@ -30,10 +30,10 @@ public class QuestionIValidator implements IValidator<QuestionDto> {
         if(questionDto.getQuestion().length() >255) {
             throw new QuestionValidationException("Question is to long (max 255 character)");
         }
-        if(questionDto.getAnswers().size() <2){
+        if(questionDto.getAnswersList().size() <2){
             throw new QuestionValidationException("Question need to have at least two answer");
         }
-        if(questionDto.getAnswers().size() >6){
+        if(questionDto.getAnswersList().size() >6){
             throw new QuestionValidationException("Question cannot have more than 6 answer");
         }
 

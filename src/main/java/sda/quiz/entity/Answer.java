@@ -21,8 +21,8 @@ public class Answer {
     @Column(name = "id_answer")
     private Long idAnswer;
 
-    @Column(name = "answer_body",nullable = false)
-    private String answerBody;
+    @Column(name = "answer",nullable = false)
+    private String answer;
 
     @Column(name ="is_correct",nullable = false)
     private Boolean isCorrect;
