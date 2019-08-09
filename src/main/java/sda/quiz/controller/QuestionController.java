@@ -20,6 +20,14 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+    @RequestMapping(value = "/showquestions",method = RequestMethod.GET)
+    public ModelAndView showAllQuestions() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("questions",questionService.getAllQuestions());
+        modelAndView.setViewName("question/showAllQuestion");
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/addquestion",method = RequestMethod.GET)
     public ModelAndView addQuestionEmptyForm(){
         ModelAndView modelAndView = new ModelAndView();
@@ -34,7 +42,7 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             questionService.saveNewQuestion(questionDto);
-            modelAndView.setViewName("addQuestionConfirm");
+            modelAndView.setViewName("question/addQuestionConfirm");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
             modelAndView.setViewName("question/addQuestionForm");

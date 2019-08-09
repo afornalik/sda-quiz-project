@@ -15,6 +15,7 @@ import sda.quiz.service.validator.IValidator;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -58,6 +59,11 @@ public class QuestionService implements IQuestionService {
     @Override
     public QuestionDto createEmptyQuestionWith4Answer() {
      return new QuestionDto(null,null,null, Arrays.asList(new AnswerDto(),new AnswerDto(),new AnswerDto(),new AnswerDto()));
+    }
+
+    @Override
+    public Set<QuestionDto> getAllQuestions() {
+        return questionRepository.findAll().stream().map(questionMapper::convertEntityToDto).collect(Collectors.toSet());
     }
 
     @Override
