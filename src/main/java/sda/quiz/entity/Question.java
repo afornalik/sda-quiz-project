@@ -24,7 +24,7 @@ public class Question {
     @Column(name="point")
     private Integer point;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "question")
     private List<Answer> answerList;
 
 

@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz | Add Question</title>
-    <link th:href="/css/form.css" href="/static/css/form.css"  rel="stylesheet" type="text/css"/>
-    <script src="/static/js/form.js"></script>
+
 </head>
 <body>
 
@@ -14,25 +13,52 @@
         <div class="col-md-5 d-flex align-items-center">
             <h1>Stwórz nowe pytanie</h1>
         </div>
-        <div class="col-md-6 offset-md-1">
-            <form class="mt-4 mt-md-0">
+        <div class="">
+            <form class="" th:object="${question}" th:action="@{/addquestion}" method="post">
                 <div class="form-group">
                     <label for="question"> tekst pytania </label>
-                    <input class="form-control" id="question" type="text"/>
+                    <input class="form-control" id="question" th:field="*{question}" type="text"/>
                 </div>
                 <div class="form-group">
                     <label for="point"> punkty za poprawną odpowiedz </label>
-                    <input class="form-control" id="point" type="number"/>
+                    <input class="form-control" id="point" th:field="*{point}" type="number"/>
                 </div>
                 <div class="form-group">
-                    <label for="email">możliwości do wyboru</label>
-                    <input class="form-control" id="email" type="email"/>
+                    <p>odpowiedzi : </p>
+                    <div class="form-group" >
+                        1
+                        <input type="text" th:field="*{answersList[0].answer}">
+                        <input type="checkbox" th:field="*{answersList[0].isCorrect}">
+
+                    </div>
+                    <div class="form-group" >
+                        2
+                        <input type="text" th:field="*{answersList[1].answer}">
+                        <input type="checkbox" th:field="*{answersList[1].isCorrect}">
+
+                    </div>
+                    <div class="form-group" >
+                        3
+                        <input type="text" th:field="*{answersList[2].answer}">
+                        <input type="checkbox" th:field="*{answersList[2].isCorrect}">
+
+                    </div>
+                    <div class="form-group" >
+                        4
+                        <input type="text" th:field="*{answersList[3].answer}">
+                        <input type="checkbox" th:field="*{answersList[3].isCorrect}">
+
+                    </div>
 
                 </div>
                 <div class="form-group">
 
+                </div>
+                <div>
+                    <input type="submit" value="dodaj pytanie" >
                 </div>
             </form>
+            <p th:text="${error}"></p>
         </div>
     </div>
 </div>
