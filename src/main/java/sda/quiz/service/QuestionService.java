@@ -9,7 +9,6 @@ import sda.quiz.entity.Question;
 import sda.quiz.repository.IAnswerRepository;
 import sda.quiz.repository.IQuestionRepository;
 import sda.quiz.service.mapper.AnswerMapper;
-import sda.quiz.service.mapper.Mapper;
 import sda.quiz.service.mapper.QuestionMapper;
 import sda.quiz.service.validator.IValidator;
 

@@ -12,7 +12,7 @@ public class QuestionIValidator implements IValidator<QuestionDto> {
     @Override
     public boolean isCorrect(QuestionDto questionDto) throws Exception {
 
-   /*     if(questionDto.getPoint() == null ) {
+        if(questionDto.getPoint() == null ) {
             throw new QuestionValidationException("Set point for question");
         }
         if(questionDto.getPoint() <0) {
@@ -35,7 +35,7 @@ public class QuestionIValidator implements IValidator<QuestionDto> {
         }
         if(questionDto.getAnswersList().size() >6){
             throw new QuestionValidationException("Question cannot have more than 6 answer");
-        }*/
+        }
 
         return true;
     }

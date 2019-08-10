@@ -11,8 +11,6 @@ import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class AnswerMapperTest {

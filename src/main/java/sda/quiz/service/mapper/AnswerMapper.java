@@ -7,10 +7,11 @@ import sda.quiz.dto.AnswerDto;
 import sda.quiz.entity.Answer;
 
 @Component
-public class AnswerMapper implements Mapper<Answer, AnswerDto> {
+public class AnswerMapper implements IMapper<Answer, AnswerDto> {
 
     private final ModelMapper modelMapper;
 
+    @Autowired
     public AnswerMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }

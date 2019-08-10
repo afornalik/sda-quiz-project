@@ -3,7 +3,7 @@ package sda.quiz.service.mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface Mapper<E,D> {
+public interface IMapper<E,D> {
 
     E convertDtoToEntity(D d);
 

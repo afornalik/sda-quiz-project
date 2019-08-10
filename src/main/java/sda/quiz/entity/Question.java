@@ -27,5 +27,8 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "question")
     private List<Answer> answerList;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
+    private Quiz quiz;
 
 }

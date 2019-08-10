@@ -5,21 +5,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-import sda.quiz.QuizApplication;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
-import sda.quiz.repository.IQuestionRepository;
 
 import java.util.ArrayList;
 import java.util.List;
