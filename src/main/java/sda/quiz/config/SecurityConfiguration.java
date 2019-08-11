@@ -1,4 +1,4 @@
-package sda.quiz.controller;
+package sda.quiz.config;
 
 
 
@@ -49,16 +49,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/head").permitAll()
-                .antMatchers("/404").permitAll()
+
+                .antMatchers("/panelAdmin").permitAll()
                 .antMatchers("/error").permitAll()
                 .antMatchers("/header").permitAll()
-                .antMatchers("/headerAdmin").permitAll()
+                .antMatchers("/listaQuiz").permitAll()
+
                 .antMatchers("/menu").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/ankiety").permitAll()
                 .antMatchers("/quiz").permitAll()
                 .antMatchers("/registration").permitAll()
-                .antMatchers("/admin/**").permitAll().anyRequest()//.hasAuthority("ADMIN").anyRequest()
+                .antMatchers("/admin/fragments/*").permitAll().anyRequest()//.hasAuthority("ADMIN").anyRequest()
 
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")

@@ -1,4 +1,4 @@
-package sda.quiz.controller;
+package sda.quiz.config;
 
 
 

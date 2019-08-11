@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/head "></div>
+
+<body class="home blog custom-background content-sidebar">
+<div class="container">
+    <div id="page" class="hfeed row">
+
+        <div th:replace="/fragments/header"></div>
+
+        <section id="primary2" class="span8">
+        <div>
+            <div>
+                <h2>Create new quiz</h2>
+            </div>
+            <form th:object="${quiz}" method="post" th:action="@{addquiz}">
+                <div>
+                    <label > title
+                        <input type="text" th:field="*{title}" placeholder="isert title here">
+                    </label>
+                </div>
+                <div>
+                    <label > description
+                        <textarea th:field="*{description}" placeholder="Write description ..." ></textarea>
+                    </label>
+                </div>
+                <br><br>
+                <div th:each="question,iter : ${questionList}">
+                    <label th:text="${question.question}"> </label>
+                    <input type="checkbox" name="questionsToAdd" th:value="${question.id}" />
+
+                </div>
+                <div>
+                    <input type="submit"> confirm
+        </div>
+        </form>
+    </div>
+        </section>
+    <section id="secondary" class="widget-area span4" role="complementary">
+        <aside   class="widget well widget_recent_entries">
+
+
+        </aside>
+        <div th:replace="fragments/panelAdmin"></div>
+        <div th:replace="fragments/listaQuiz"></div>
+
+
+
+    </section>
+
+
+
+
+    <div th:replace="fragments/footer "></div>
+
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+

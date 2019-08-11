@@ -24,21 +24,20 @@ public class QuizController {
         this.questionService = questionService;
     }
 
-    @RequestMapping(value="/addquiz",method = RequestMethod.GET)
+    @RequestMapping(value="admin/quiz/addquiz",method = RequestMethod.GET)
     public ModelAndView createQuiz(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("questionList",questionService.getAllQuestions());
         modelAndView.addObject("quiz",quizService.createEmptyQuiz());
-        modelAndView.setViewName("quiz/addQuizForm");
+        modelAndView.setViewName("admin/quiz/addQuizForm");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/addquiz",method = RequestMethod.POST)
-    public ModelAndView addQuizAfterQuizForm(@ModelAttribute("quiz")QuizDto quizDto, @RequestParam("questionsToAdd") int[] questionToAdd){
+    @RequestMapping(value = "admin/quiz/addquiz",method = RequestMethod.POST)
+    public ModelAndView addQuizAfterQuizForm(@ModelAttribute("quiz")QuizDto quizDto, @RequestParam("questionsToAdd") Long[] questionToAdd){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        System.out.println(quizDto.getTitle());
-        System.out.println(questionToAdd.length);
+        modelAndView.setViewName("redirect:/admin/home");
+        quizService.saveQuiz(quizDto,questionToAdd);
         return modelAndView;
     }
 
