@@ -9,42 +9,12 @@
     <div id="page" class="hfeed row">
 
         <div th:replace="/fragments/header"></div>
-        <div align="center" th:if="${userName}">
-            <p style="font-size: 20px; color: #FF1C19;">RRRRRR</p>
-        </div>
 
 
 
 
-        <section id="primary" class="span8">
-            <div id="content" role="main">
-                <article    >
-                    <header class="page-header">
-                        <h1 class="entry-title"><a href="/index" title="  "  >Darmowe ankiety online</a></h1>
-                        <div class="entry-meta">
-                            <span> Zacznij tworzyć ankiety online! </span>
-                        </div>
-                    </header>
-                    <header class="page-header">
-                        <div class="entry-meta">
-                            <span> Twórz ankiety i otrzymaj odpowiedzi szybko i łatwo.</span>
-                        </div>
-                    </header>
-
-                    <div class="entry-content clearfix">
-                        <p> Darmowe ankiety online<br>
-                            Nowoczesne oprogramowanie do badania zadowolenia klientów, opinii pracowników, badań rynku i innych ankiet
-
-
-                        </p>
-
-                        <p>
-                            <a href="/registration" class="more-link">Przejdz do rejestracji <span class="meta-nav">→</span></a>
-                        </p>
-                    </div>
-                </article>
-
-            </div>
+        <section id="primary2" class="span8">
+            <th:block th:include="fragments/primary :: default" />
         </section>
 
         <section id="secondary" class="widget-area span4" role="complementary">
@@ -52,8 +22,8 @@
                 <h2 class="widget-title" th:text="${userName}"></h2>
 
             </aside>
-            <div th:replace="/fragments/panelAdmin"></div>
-            <div th:replace="/fragments/listaQuiz"></div>
+            <div th:replace="fragments/panelAdmin"></div>
+            <div th:replace="fragments/listaQuiz"></div>
 
 
 
