@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/head "></div>
+
+<body class="home blog custom-background content-sidebar">
+<div class="container">
+    <div id="page" class="hfeed row">
+
+
+        <div th:replace="fragments/header "></div>
+
+
+
+
+        <section id="primary" class="span8">
+            <div id="content" role="main">
+                <article    >
+                    <form th:action="@{/login}" method="post" class="form-signin">
+                        <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                        <br/>
+
+                        <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br/>
+                        <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br/>
+
+                        <div align="center"  >
+                            <p style="font-size: 20px; color: #FF1C19;" >Email or Password invalid. please verify</p>
+
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="submit" th:text="Login"></button>
+                    </form>
+                </article>
+
+
+            </div>
+        </section>
+
+        <section id="secondary" class="widget-area span4" role="complementary">
+            <aside   class="widget well widget_recent_entries">
+                <h2 class="widget-title">Stwórz darmowe konto:</h2>
+                <form th:action="@{/registration}" method="get">
+                    <button class="btn btn-md btn-warning btn-block" type="Submit">Formularz do darmowej rejestracji</button>
+                </form>
+
+
+
+                <form th:action="@{/login}" method="POST" class="form-signin">
+                    <h3 class="form-signin-heading" th:text="Logowanie"></h3>
+                    <br/>
+
+                    <input type="text" id="email" name="email" th:placeholder="Email"
+                           class="form-control"/> <br/>
+                    <input type="password" th:placeholder="Password"
+                           id="password" name="password" class="form-control"/> <br/>
+
+
+                    <!--                    <div align="center" th:if="${#param}">-->
+                    <!--                        <p style="font-size: 20px; color: #FF1C19;">Email or Password invalid, please verify</p>-->
+                    <!--                    </div>-->
+
+                    <button class="btn btn-md btn-warning btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Login</button>
+                </form>
+
+
+
+            </aside>
+            <aside id="recent-posts-2" class="widget well widget_recent_entries">
+                <h2>Quizy wiedzy</h2>
+                <ul>
+                    <li>
+                        <a href="/index">Historia</a>
+                    </li>
+                    <li>
+                        <a href="/index">Ludzie</a>
+                    </li>
+                    <li>
+                        <a href="/index">Geografia</a>
+                    </li>
+                    <li>
+                        <a href="/index">Sport</a>
+                    </li>
+                </ul>
+            </aside>
+            <aside   class="widget well widget_recent_entries">
+                <h2 >Kategorie ankiet</h2>
+                <ul>
+                    <li>
+                        <a href="/index">  Test</a>
+                    </li>
+
+                    <li>
+                        <a href="/index">  Test</a>
+                    </li>
+
+                </ul>
+            </aside>
+        </section>
+
+
+
+        <div th:replace="fragments/footer "></div>
+
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
+
+

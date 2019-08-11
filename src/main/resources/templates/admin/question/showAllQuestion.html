@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Question list</h2>
+    <div>
+        <table style="border: solid 2px">
+            <thead>
+                <tr>
+                    <td>question id</td>
+                    <td>question</td>
+                    <td>point</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="question : ${questions}">
+                    <td th:text="${question.id}"></td>
+                    <td th:text="${question.getQuestion()}"></td>
+                    <td th:text="${question.point}"></td>
+
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/}">back to main page</a>
+    </div>
+</body>
+</html>
