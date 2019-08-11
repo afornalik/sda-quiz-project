@@ -11,7 +11,7 @@
     <div>
         <h2>Create new quiz</h2>
     </div>
-    <form th:object="${quiz}" method="post" th:action="@{/addquiz}">
+    <form th:object="${quiz}" method="post" th:action="@{/admin/quiz/addquiz}">
         <div>
             <label > title
                 <input type="text" th:field="*{title}" placeholder="isert title here">
@@ -28,8 +28,9 @@
                 <input type="checkbox" name="questionsToAdd" th:value="${question.id}" />
 
         </div>
+        <br><br>
         <div>
-            <input type="submit"> confirm </div>
+            <input type="submit" > confirm
         </div>
     </form>
 </div>

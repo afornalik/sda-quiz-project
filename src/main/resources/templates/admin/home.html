@@ -72,7 +72,7 @@
 
         <section id="secondary" class="widget-area span4" role="complementary">
             <aside   class="widget well widget_recent_entries">
-                <h2 class="widget-title" th:text="userName"></h2>
+                <h2 class="widget-title" th:text="${userName}"></h2>
 <!--                <form th:action="@{/registration}" method="get">-->
 <!--                    <button class="btn btn-md btn-warning btn-block" type="Submit">Formularz do darmowej rejestracji</button>-->
 <!--                </form>-->
@@ -102,7 +102,7 @@
                 <h2>Panel administracyjny</h2>
                 <ul>
                     <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                        <a th:href="index">Ankiety</a></li>
+                        <a th:href="@{quiz/addquiz}">dodaj ankiete</a></li>
                     <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
                         <a th:href="addquestion">Dodaj pytania</a></li>
                     <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
