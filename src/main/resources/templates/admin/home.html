@@ -1,16 +1,58 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee"
+      xmlns:spring="http://xmlns.jcp.org/xml/ns/javaee">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/test.css"/>
+    <title>Admin Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"  />
+    <style type="text/css" id="custom-background-css">
+        body.custom-background { background-color: #efefef;
+            padding: 20px ; }
+    </style>
+</head>
 
-<div th:replace="fragments/head "></div>
 
 <body class="home blog custom-background content-sidebar">
 <div class="container">
     <div id="page" class="hfeed row">
 
-        <div th:replace="fragments/header "></div>
 
 
+        <header id="branding" role="banner" class="span12">
+            <hgroup>
+                <h1 id="site-title"><a href="http://index.html" title="Serwis do QUIZÓW i ANKIET" rel="home"><span>Serwis do QUIZÓW i ANKIET</span></a></h1>
+                <h2 id="site-description">Projekt SDA</h2>
+            </hgroup>
+
+            <nav id="access" role="navigation">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <span class="brand">MENU </span>
+                            <div class="nav-collapse">
+                                <div class="menu-tab-navi-container">
+                                    <ul id="menu-tab-navi" class="nav">
+                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
+                                            <a href=th:action="@{ankiety}">Home</a></li>
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a th:href="@{/ankiety.html}">Quizy</a></li>
+                                        <li id="menu-item-702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a th:href="@{/ankiety}">Ankiety</a></li>
+
+                                    </ul>
+                                </div>
+
+                                <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">
+                                    <label for="s" class="assistive-text hidden">Search</label>
+                                    <input type="search" class="search-query" name="s" id="s" placeholder="Search">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
 
 
@@ -18,7 +60,7 @@
             <div id="content" role="main">
                 <article    >
                     <header class="page-header">
-                        <h1 class="entry-title"><a href="/index" title="  "  >Darmowe ankiety online</a></h1>
+                        <h1 class="entry-title"><a href="http:/" title="  "  >Darmowe ankiety online</a></h1>
                         <div class="entry-meta">
                             <span> Zacznij tworzyć ankiety online! </span>
                         </div>
@@ -37,13 +79,13 @@
                         </p>
 
                         <p>
-                            <a href="/registration" class="more-link">Przejdz do rejestracji <span class="meta-nav">→</span></a>
+                            <a href="http://" class="more-link">Przejdz do rejestracji <span class="meta-nav">→</span></a>
                         </p>
                     </div>
                 </article>
                 <article id="post-358"  >
                     <header class="page-header">
-                        <h1 class="entry-title"><a href="/index" title="#"  >Darmowe ankiety online</a></h1>
+                        <h1 class="entry-title"><a href="http:/" title="  "  >Darmowe ankiety online</a></h1>
                         <div class="entry-meta">
                             <span> Zacznij tworzyć ankiety online! </span>
                         </div>
@@ -62,7 +104,7 @@
                         </p>
 
                         <p>
-                            <a href="/registration" class="more-link">Przejdz do rejestracji <span class="meta-nav">→</span></a>
+                            <a href="http://" class="more-link">Przejdz do rejestracji <span class="meta-nav">→</span></a>
                         </p>
                     </div>
                 </article>
@@ -72,59 +114,29 @@
 
         <section id="secondary" class="widget-area span4" role="complementary">
             <aside   class="widget well widget_recent_entries">
-                <h2 class="widget-title" th:text="userName"></h2>
-<!--                <form th:action="@{/registration}" method="get">-->
-<!--                    <button class="btn btn-md btn-warning btn-block" type="Submit">Formularz do darmowej rejestracji</button>-->
-<!--                </form>-->
+                <h2 th:text="${userName}" class="widget-title"></h2>
 
 
 
-<!--                <form th:action="@{/login}" method="POST" class="form-signin">-->
-<!--                    <h3 class="form-signin-heading" th:text="Logowanie"></h3>-->
-<!--                    <br/>-->
-
-<!--                    <input type="text" id="email" name="email" th:placeholder="Email"-->
-<!--                           class="form-control"/> <br/>-->
-<!--                    <input type="password" th:placeholder="Password"-->
-<!--                           id="password" name="password" class="form-control"/> <br/>-->
-
-<!--                    <div align="center">-->
-<!--                        <p>Email or Password invalid, please verify</p>-->
-<!--                    </div>-->
-
-<!--                    <button class="btn btn-md btn-warning btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Login</button>-->
-<!--                </form>-->
 
 
 
-            </aside>
-            <aside   class="widget well widget_recent_entries">
-                <h2>Panel administracyjny</h2>
-                <ul>
-                    <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                        <a th:href="index">Ankiety</a></li>
-                    <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                        <a th:href="addquestion">Dodaj pytania</a></li>
-                    <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                        <a th:href="showquestions">Pokaż pytania</a></li>
-                    <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                        <a th:href="index">Ankiety</a></li>
-                </ul>
+
             </aside>
             <aside id="recent-posts-2" class="widget well widget_recent_entries">
                 <h2>Quizy wiedzy</h2>
                 <ul>
                     <li>
-                        <a href="/index">Historia</a>
+                        <a href="http:// /">Historia</a>
                     </li>
                     <li>
-                        <a href="/index">Ludzie</a>
+                        <a href="http:// test/">Ludzie</a>
                     </li>
                     <li>
-                        <a href="/index">Geografia</a>
+                        <a href="http:// test/">Geografia</a>
                     </li>
                     <li>
-                        <a href="/index">Sport</a>
+                        <a href="http:// test/">Sport</a>
                     </li>
                 </ul>
             </aside>
@@ -132,11 +144,11 @@
                 <h2 >Kategorie ankiet</h2>
                 <ul>
                     <li>
-                        <a href="/index">  Test</a>
+                        <a href="http:// /">  Test</a>
                     </li>
 
                     <li>
-                        <a href="/index">  Test</a>
+                        <a href="http:// test/">  Test</a>
                     </li>
 
                 </ul>
@@ -144,16 +156,20 @@
         </section>
 
 
+        <footer id="colophon" role="contentinfo" class="span12">
+            <div id="page-footer" class="well clearfix">
+                <span class="credits alignleft">© 2019 <a href="http://index.html/">Serwis do QUIZÓW i ANKIET</a>,   w budowie.</span>
+                <div id="site-generator">
+                    <a href="http://index.html/" title="Serwis do QUIZÓW i ANKIET" target="_blank" rel="generator">@ Bootstrap </a>
+                </div>
+            </div>
+        </footer>
 
 
-        <div th:replace="fragments/footer "></div>
 
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 </body>
 </html>
-
