@@ -5,7 +5,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
     <title>Registration Form</title>
-    <link rel="stylesheet" th:href="@{/css/test.css}" type="text/css"  />
+    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"  />
     <style type="text/css" id="custom-background-css">
         body.custom-background { background-color: #efefef;
             padding: 20px ; }
@@ -36,9 +36,9 @@
                                         <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
                                             <a href=th:action="@{ankiety}">Home</a></li>
                                         <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a th:href="@{/ankiety.html}">Quizy</a></li>
+                                            <a th:href="@{/templates/quiz.html}">Quizy</a></li>
                                         <li id="menu-item-702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="ankiety.html">Ankiety</a></li>
+                                            <a href="quiz.html">Ankiety</a></li>
 
                                     </ul>
                                 </div>
@@ -62,13 +62,16 @@
                     <form autocomplete="off" action="#" th:action="@{/registration}"
                           th:object="${user}" method="post" class="form-horizontal"
                           role="form">
-                        <h2>Registration Form</h2>
+                        <h2>Formularz rejestracyjny:</h2>
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                                        class="validation-message"></label>
                                 <input type="text" th:field="*{name}" placeholder="Name"
                                        class="form-control"/>
+
+
+
                             </div>
                         </div>
                         <div class="form-group">

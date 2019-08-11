@@ -48,10 +48,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/head").permitAll()
+                .antMatchers("/404").permitAll()
+                .antMatchers("/error").permitAll()
+                .antMatchers("/header").permitAll()
+                .antMatchers("/headerAdmin").permitAll()
+                .antMatchers("/menu").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/ankiety").permitAll()
+                .antMatchers("/quiz").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/admin/**").permitAll().anyRequest()//.hasAuthority("ADMIN").anyRequest()
+
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/admin/home")
