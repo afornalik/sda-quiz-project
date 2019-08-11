@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.entity.User;
+import sda.quiz.service.IQuestionService;
+import sda.quiz.service.IQuizService;
 import sda.quiz.service.QuestionService;
 import sda.quiz.service.UserService;
 
@@ -18,12 +20,17 @@ import sda.quiz.service.UserService;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private final IQuestionService questionService;
+    private final IQuizService quizService;
 
     @Autowired
-    private QuestionService questionService;
-
+    public LoginController(UserService userService, QuestionService questionService, IQuizService quizService) {
+        this.userService = userService;
+        this.questionService = questionService;
+        this.quizService = quizService;
+    }
 
 
     @RequestMapping (value = {"/","/index"}, method = RequestMethod.GET)
@@ -63,6 +70,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("quizList",quizService.getAllQuiz());
         modelAndView.addObject("userName", "Witam na naszej stronie " + user.getName());
         modelAndView.addObject("adminMessage","Content available only for users with admin role");
         modelAndView.setViewName("admin/home");

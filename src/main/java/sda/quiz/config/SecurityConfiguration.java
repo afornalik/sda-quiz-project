@@ -49,10 +49,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/head").permitAll()
+
                 .antMatchers("/panelAdmin").permitAll()
                 .antMatchers("/error").permitAll()
                 .antMatchers("/header").permitAll()
                 .antMatchers("/listaQuiz").permitAll()
+
                 .antMatchers("/menu").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/ankiety").permitAll()
