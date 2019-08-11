@@ -29,7 +29,7 @@ public class QuizController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("questionList",questionService.getAllQuestions());
         modelAndView.addObject("quiz",quizService.createEmptyQuiz());
-        modelAndView.setViewName("quiz/addQuizForm");
+        modelAndView.setViewName("admin/question/addQuizForm");
         return modelAndView;
     }
 
