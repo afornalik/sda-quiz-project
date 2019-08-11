@@ -36,11 +36,6 @@ public class QuizController {
     @RequestMapping(value = "admin/quiz/addquiz",method = RequestMethod.POST)
     public ModelAndView addQuizAfterQuizForm(@ModelAttribute("quiz")QuizDto quizDto, @RequestParam("questionsToAdd") Long[] questionToAdd){
         ModelAndView modelAndView = new ModelAndView();
-     /*   System.out.println(quizDto.getTitle());
-        System.out.println(questionToAdd.length);
-        for(Long i :questionToAdd){
-            System.out.println(i);
-        }*/
         modelAndView.setViewName("redirect:/admin/home");
         quizService.saveQuiz(quizDto,questionToAdd);
         return modelAndView;
