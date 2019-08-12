@@ -12,7 +12,7 @@
             <h3>lista dostępnych quizów</h3>
         </div>
         <di>
-            <form>
+            <form method="get" th:action="@{/admin/home}">
                 <table>
                     <thead>
                         <tr>
@@ -23,10 +23,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="quiz : ${quizList}">
+                        <tr th:each="quiz,iter : ${quizList}">
                             <td th:text="*{quiz.title}"></td>
                             <td > TO DO </td>
                             <td th:text="*{quiz.questions.size()}"></td>
+                            <td><input type="submit" class="btn btn-danger" value="usuń" th:value="*{quiz.idQuiz}" name="delete"> </td>
                         </tr>
                     </tbody>
 
