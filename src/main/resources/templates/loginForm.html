@@ -2,8 +2,46 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/head "></div>
-<style type="text/css">
+<script type="javascript" src="../static/js/walidacja.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#formularz").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                url: {
+                    url: true,
+                },
+                comment: {
+                    required: true,
+                },
+            },
+            messages: {
+                name: {
+                    required: 'Pole wymagane',
+                    minlength: 'Wpisz conajmniej {0} znaki',
+                },
+                email: {
+                    required: 'Pole wymagane',
+                    email: 'Wpisz poprawny adres email',
+                },
 
+
+            }
+        });
+    });
+</script>
+
+<style type="text/css">
+    em, .error {
+        color: red;
+    }
 </style>
 <body class="home blog custom-background content-sidebar">
 <div class="container">
@@ -53,7 +91,7 @@
                         <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br/>
 
                         <div align="center"  >
-                            <p style="font-size: 20px; color: #FF1C19;" >Email lub hasło są nie prawidłowe.<br> Proszę spróbować ponownie.</p>
+                            <p style="font-size: 20px; color: #FF1C19;" >Email lub hasło są błędne.<br> Proszę spróbować ponownie.</p>
 
                         </div>
 

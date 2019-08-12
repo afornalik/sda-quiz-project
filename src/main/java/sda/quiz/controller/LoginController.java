@@ -27,7 +27,7 @@ public class LoginController {
 
 
     @RequestMapping (value = {"/","/index"}, method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return  modelAndView;
@@ -48,10 +48,12 @@ public class LoginController {
         User userExists = userService.findUserByEmail(user.getEmail());
         if(userExists != null) {
             bindingResult
-                .rejectValue("email","error.user", "There is already a user with thath email provider");
+                .rejectValue("email","error.user", "Podany adres jest już zarejestrowany.");
+            bindingResult.rejectValue("password","error.password","Podane hasło jest za krótkie, min 5 znaków.");
+            modelAndView.setViewName("registration");
         }else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Użytkownik został zarejestrowany prawidłowo.");
             modelAndView.addObject("user",user);
             modelAndView.setViewName("registration");
         }
@@ -69,18 +71,25 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/ankiety", method = RequestMethod.GET)
-    public ModelAndView ankiety(){
-        ModelAndView modelAndView = new ModelAndView();
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index(){
+    @RequestMapping(value = "/quiz", method = RequestMethod.GET)
+    public ModelAndView quiz(){
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView loginForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+
 
 //    @RequestMapping (value = "/quiz", method = RequestMethod.GET)
 //    public ModelAndView quiz(){
