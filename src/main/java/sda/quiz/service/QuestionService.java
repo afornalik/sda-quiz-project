@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
+import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.Question;
 import sda.quiz.repository.IAnswerRepository;
 import sda.quiz.repository.IQuestionRepository;
@@ -57,7 +58,7 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public QuestionDto createEmptyQuestionWith4Answer() {
-     return new QuestionDto(null,null,null, Arrays.asList(new AnswerDto(),new AnswerDto(),new AnswerDto(),new AnswerDto()));
+     return new QuestionDto(null,null,null, Arrays.asList(new AnswerDto(),new AnswerDto(),new AnswerDto(),new AnswerDto()),null);
     }
 
     @Override

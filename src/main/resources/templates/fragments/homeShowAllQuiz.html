@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:fragment="showAllQuiz">
+    <div>
+        <div>
+            <h3>lista dostępnych quizów</h3>
+        </div>
+        <di>
+            <form>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>nazwa quizu</td>
+                            <td>kategoria</td>
+                            <td>ilość pytań</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="quiz : ${quizList}">
+                            <td th:text="*{quiz.title}"></td>
+                            <td > TO DO </td>
+                            <td th:text="*{quiz.questions.size()}"></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+            </form>
+        </di>
+
+    </div>
+
+</th:block>
+
+</body>
+</html>

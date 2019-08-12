@@ -28,6 +28,11 @@ public class Quiz {
     @Column(name="create_date")
     private LocalDate createDate;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "quiz")
+    @ManyToMany
+    @JoinTable(
+            name = "quiz_questions",
+            joinColumns = @JoinColumn(name = "quiz_id"),
+            inverseJoinColumns = @JoinColumn(name = "question_id")
+    )
     private Set<Question> questions;
 }

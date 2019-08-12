@@ -19,4 +19,6 @@ public class QuizDto {
     private String description;
     private LocalDate createDate;
     private Set<QuestionDto> questions;
+
+
 }

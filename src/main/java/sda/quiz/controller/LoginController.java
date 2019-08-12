@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.User;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
@@ -22,13 +23,11 @@ public class LoginController {
 
 
     private final UserService userService;
-    private final IQuestionService questionService;
     private final IQuizService quizService;
 
     @Autowired
-    public LoginController(UserService userService, QuestionService questionService, IQuizService quizService) {
+    public LoginController(UserService userService,  IQuizService quizService) {
         this.userService = userService;
-        this.questionService = questionService;
         this.quizService = quizService;
     }
 
@@ -77,32 +76,6 @@ public class LoginController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/ankiety", method = RequestMethod.GET)
-    public ModelAndView ankiety(){
-        ModelAndView modelAndView = new ModelAndView();
-
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
-
-//    @RequestMapping (value = "/quiz", method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        return modelAndView;
-//    }
-//    @RequestMapping(value = "/quiz",method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("quiz");
-//        System.out.println("sdfsdfsdf");
-//
-//        return modelAndView;
-//    }
 
 
 

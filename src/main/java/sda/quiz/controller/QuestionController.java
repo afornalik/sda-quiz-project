@@ -31,7 +31,7 @@ public class QuestionController {
     @RequestMapping(value = "admin/addquestion",method = RequestMethod.GET)
     public ModelAndView addQuestionEmptyForm(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("question",questionService.createEmptyQuestionWith4Answer());
+        modelAndView.addObject("question",new QuestionDto());
         modelAndView.setViewName("admin/question/addQuestionForm");
         return modelAndView;
     }

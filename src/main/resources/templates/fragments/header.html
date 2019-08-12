@@ -1,4 +1,4 @@
-<header id="branding" role="banner" class="span12" xmlns:th="http://www.w3.org/1999/xhtml">
+<header id="branding" role="banner" class="span12" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <hgroup>
         <h1 id="site-title"> <span>Serwis do ANKIET </span></h1>
         <h2 id="site-description">Projekt SDA</h2>
@@ -18,7 +18,8 @@
                                     <a th:href="quiz">Quizy</a></li>
                                 <li id="menu-item-702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
                                     <a th:href="index">Ankiety</a></li>
-
+                                <li id="menu-item-72" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                    <a th:href="@{/logout}">wyloguj</a></li>
                             </ul>
                         </div>
 

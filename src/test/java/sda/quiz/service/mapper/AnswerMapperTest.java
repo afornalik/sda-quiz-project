@@ -27,7 +27,7 @@ public class AnswerMapperTest {
     @Before
     public void init() {
 
-        questionDto = new QuestionDto(4l,"What is your name",5,null);
+        questionDto = new QuestionDto(4l,"What is your name",5,null,null);
 
 
     }

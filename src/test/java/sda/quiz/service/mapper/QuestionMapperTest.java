@@ -48,7 +48,7 @@ public class QuestionMapperTest {
     @Test
     public void shouldReturnEntity()  {
         //given
-        dummyQuestionDto = new QuestionDto(null,"What is my name ?",5,answerList);
+        dummyQuestionDto = new QuestionDto(null,"What is my name ?",5,answerList,null);
 
         //when
         Question result = questionMapper.convertDtoToEntity(dummyQuestionDto);
