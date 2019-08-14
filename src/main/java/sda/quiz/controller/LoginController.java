@@ -66,13 +66,25 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
-    public ModelAndView home(@RequestParam(name = "delete",required = false) Integer toDelete) {
+    public ModelAndView home(@RequestParam(name = "delete",required = false) Long quizToDelete,
+                             @RequestParam(name = "change",required = false) Integer quizToChange,
+                             @RequestParam(name = "run",required = false) Long quizToRun) {
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        ;
+
+        if(quizToDelete != null) {
+            quizService.deleteQuiz(quizToDelete);
+        }
+        if(quizToRun != null) {
+            modelAndView.addObject("quiz",quizService.getQuizById(quizToRun));
+            modelAndView.setViewName("admin/quiz/runQuiz");
+            return modelAndView;
+        }
+
         modelAndView.addObject("quizList",quizService.getAllQuiz());
-        modelAndView.addObject("userName", "Witam na naszej stronie " + user.getName()+"  "+toDelete);
+        modelAndView.addObject("userName", "Witam na naszej stronie " + user.getName());
         modelAndView.addObject("adminMessage","Content available only for users with admin role");
         modelAndView.setViewName("admin/home");
         return modelAndView;

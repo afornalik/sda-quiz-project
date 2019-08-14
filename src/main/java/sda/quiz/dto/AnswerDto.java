@@ -13,6 +13,7 @@ import sda.quiz.entity.Question;
 public class AnswerDto {
 
 
+
     private Long idAnswer;
     private String answer;
     private Boolean isCorrect;

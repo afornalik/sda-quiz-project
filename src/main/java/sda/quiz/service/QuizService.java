@@ -59,5 +59,15 @@ public class QuizService implements IQuizService{
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteQuiz(Long id) {
+        quizRepository.deleteById(id);
+    }
+
+    @Override
+    public QuizDto getQuizById(Long id) {
+        return quizMapper.convertEntityToDto(quizRepository.findById(id).get());
+    }
+
 
 }

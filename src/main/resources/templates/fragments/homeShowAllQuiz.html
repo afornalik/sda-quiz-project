@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 
@@ -27,7 +28,9 @@
                             <td th:text="*{quiz.title}"></td>
                             <td > TO DO </td>
                             <td th:text="*{quiz.questions.size()}"></td>
-                            <td><input type="submit" class="btn btn-danger" value="usuń" th:value="*{quiz.idQuiz}" name="delete"> </td>
+                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
+                            <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>
+                            <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">wykonaj</button> </td>
                         </tr>
                     </tbody>
 
