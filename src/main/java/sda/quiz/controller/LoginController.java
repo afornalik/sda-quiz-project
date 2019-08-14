@@ -10,10 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.User;
-import sda.quiz.service.IQuestionService;
-import sda.quiz.service.IQuizService;
 import sda.quiz.service.QuestionService;
 import sda.quiz.service.UserService;
 
@@ -21,19 +18,16 @@ import sda.quiz.service.UserService;
 @Controller
 public class LoginController {
 
-
-    private final UserService userService;
-    private final IQuizService quizService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
-    public LoginController(UserService userService,  IQuizService quizService) {
-        this.userService = userService;
-        this.quizService = quizService;
-    }
+    private QuestionService questionService;
+
 
 
     @RequestMapping (value = {"/","/index"}, method = RequestMethod.GET)
-    public ModelAndView login() {
+    public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return  modelAndView;
@@ -54,10 +48,12 @@ public class LoginController {
         User userExists = userService.findUserByEmail(user.getEmail());
         if(userExists != null) {
             bindingResult
-                .rejectValue("email","error.user", "There is already a user with thath email provider");
+                .rejectValue("email","error.user", "Podany adres jest już zarejestrowany.");
+            bindingResult.rejectValue("password","error.password","Podane hasło jest za krótkie, min 5 znaków.");
+            modelAndView.setViewName("registration");
         }else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
+            modelAndView.addObject("successMessage", "Użytkownik został zarejestrowany prawidłowo.");
             modelAndView.addObject("user",user);
             modelAndView.setViewName("registration");
         }
@@ -69,13 +65,45 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("quizList",quizService.getAllQuiz());
         modelAndView.addObject("userName", "Witam na naszej stronie " + user.getName());
         modelAndView.addObject("adminMessage","Content available only for users with admin role");
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
 
+    @RequestMapping(value = "/quiz", method = RequestMethod.GET)
+    public ModelAndView quiz(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ModelAndView loginForm(){
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
+
+
+
+//    @RequestMapping (value = "/quiz", method = RequestMethod.GET)
+//    public ModelAndView quiz(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        return modelAndView;
+//    }
+//    @RequestMapping(value = "/quiz",method = RequestMethod.GET)
+//    public ModelAndView quiz(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("quiz");
+//        System.out.println("sdfsdfsdf");
+//
+//        return modelAndView;
+//    }
 
 
 
