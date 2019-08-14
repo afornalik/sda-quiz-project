@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 
@@ -12,7 +13,7 @@
             <h3>lista dostępnych quizów</h3>
         </div>
         <di>
-            <form>
+            <form method="get" th:action="@{/admin/home}">
                 <table>
                     <thead>
                         <tr>
@@ -23,10 +24,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="quiz : ${quizList}">
+                        <tr th:each="quiz,iter : ${quizList}">
                             <td th:text="*{quiz.title}"></td>
                             <td > TO DO </td>
                             <td th:text="*{quiz.questions.size()}"></td>
+                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
+                            <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>
+                            <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">wykonaj</button> </td>
                         </tr>
                     </tbody>
 

@@ -12,4 +12,8 @@ public interface  IQuizService {
     void saveQuiz(QuizDto quizDto,Long[] questionIdList);
 
     List<QuizDto> getAllQuiz();
+
+    void deleteQuiz(Long id);
+
+    QuizDto getQuizById(Long id);
 }

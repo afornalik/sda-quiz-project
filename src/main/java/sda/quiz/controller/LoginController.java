@@ -9,8 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.User;
+import sda.quiz.service.IQuestionService;
+import sda.quiz.service.IQuizService;
 import sda.quiz.service.QuestionService;
 import sda.quiz.service.UserService;
 
@@ -18,12 +22,15 @@ import sda.quiz.service.UserService;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private final IQuizService quizService;
 
     @Autowired
-    private QuestionService questionService;
-
+    public LoginController(UserService userService,  IQuizService quizService) {
+        this.userService = userService;
+        this.quizService = quizService;
+    }
 
 
     @RequestMapping (value = {"/","/index"}, method = RequestMethod.GET)
@@ -60,50 +67,38 @@ public class LoginController {
         return  modelAndView;
     }
 
-    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
-    public ModelAndView home() {
+    @RequestMapping(value = "/admin/home", method = RequestMethod.POST)
+    public ModelAndView home(@RequestParam(name = "delete",required = false) Long quizToDelete,
+                             @RequestParam(name = "change",required = false) Integer quizToChange,
+                             @RequestParam(name = "run",required = false) Long quizToRun) {
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
+
+        if(quizToDelete != null) {
+            quizService.deleteQuiz(quizToDelete);
+        }
+        if(quizToRun != null) {
+            modelAndView.addObject("quiz",quizService.getQuizById(quizToRun));
+            modelAndView.setViewName("admin/quiz/runQuiz");
+            return modelAndView;
+        }
+
+        modelAndView.addObject("quizList",quizService.getAllQuiz());
         modelAndView.addObject("userName", "Witam na naszej stronie " + user.getName());
         modelAndView.addObject("adminMessage","Content available only for users with admin role");
         modelAndView.setViewName("admin/home");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/quiz", method = RequestMethod.GET)
-    public ModelAndView quiz(){
+ /*   @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ModelAndView goToHomePage(){
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("admin/home");
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView loginForm(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
-
-
-
-//    @RequestMapping (value = "/quiz", method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        return modelAndView;
-//    }
-//    @RequestMapping(value = "/quiz",method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("quiz");
-//        System.out.println("sdfsdfsdf");
-//
-//        return modelAndView;
-//    }
 
 
 

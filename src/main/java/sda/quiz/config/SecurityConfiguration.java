@@ -49,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/head").permitAll()
-                .antMatchers("/testt").permitAll()
+
                 .antMatchers("/panelAdmin").permitAll()
                 .antMatchers("/error").permitAll()
                 .antMatchers("/header").permitAll()

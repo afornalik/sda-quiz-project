@@ -10,6 +10,7 @@
     <div id="page" class="hfeed row">
         <header id="branding" role="banner" class="span12">
             <div th:replace="fragments/header "></div>
+
             <nav id="access" role="navigation">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-inner">
@@ -45,7 +46,7 @@
         <section id="primary" class="span8">
             <div id="content" role="main">
                 <article    >
-                    <form th:action="@{/login}" method="post" class="form-signin">
+                    <form th:action="@{/admin/home}" method="post" class="form-signin">
                         <h3 class="form-signin-heading" th:text="Welcome"></h3>
                         <br/>
 
