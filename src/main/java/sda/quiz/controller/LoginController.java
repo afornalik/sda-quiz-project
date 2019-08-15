@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.entity.User;
-import sda.quiz.service.QuestionService;
 import sda.quiz.service.UserService;
-
 
 @Controller
 public class LoginController {
@@ -21,13 +19,8 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private QuestionService questionService;
-
-
-
     @RequestMapping (value = {"/","/index"}, method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index");
         return  modelAndView;
@@ -51,11 +44,14 @@ public class LoginController {
                 .rejectValue("email","error.user", "Podany adres jest już zarejestrowany.");
             bindingResult.rejectValue("password","error.password","Podane hasło jest za krótkie, min 5 znaków.");
             modelAndView.setViewName("registration");
-        }else {
+        }
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("registration");
+        } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "Użytkownik został zarejestrowany prawidłowo.");
             modelAndView.addObject("user",user);
-            modelAndView.setViewName("registration");
+            modelAndView.setViewName("login");
         }
         return  modelAndView;
     }
@@ -76,40 +72,4 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView loginForm(){
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
-
-
-
-//    @RequestMapping (value = "/quiz", method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        return modelAndView;
-//    }
-//    @RequestMapping(value = "/quiz",method = RequestMethod.GET)
-//    public ModelAndView quiz(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("quiz");
-//        System.out.println("sdfsdfsdf");
-//
-//        return modelAndView;
-//    }
-
-
-
-
-
-
-
-
 }
