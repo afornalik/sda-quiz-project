@@ -11,9 +11,30 @@
         <div th:replace="/fragments/header"></div>
 
 
+        <div style="margin-left: 20px;">
+            <form th:object="${quiz}" th:action="@{/}" method="post">
+                <table>
+                    <th:block th:each="question : *{getQuestions()}">
+                    <tr>
+                        <td colspan="4" align="center"><span th:text="${question.question}"></span> </td>
+                    </tr>
+                        <tr>
+                            <th:block th:each="answer : ${question.answersList}">
+                            <td><span th:text="${answer.answer}"></span>aaaaaaaaaaaa<!--<input type="checkbox" th:checked="${answer.isCorrect}"> --></td>
+                            </th:block>
+                        </tr>
 
+                    </th:block>
+                </table>
 
+            </form>
 
+            <th:block th:each="ques : ${quiz.questions}">
+                <th:block th:each="ans : ${ques.answersList}">
+                    <p th:text="${ans.question}"></p>
+                </th:block>
+            </th:block>
+        </div>
 
 
 

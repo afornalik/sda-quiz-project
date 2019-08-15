@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.User;
-import sda.quiz.service.IQuestionService;
-import sda.quiz.service.IQuizService;
-import sda.quiz.service.QuestionService;
-import sda.quiz.service.UserService;
+import sda.quiz.service.*;
 
 
 @Controller
@@ -25,11 +22,13 @@ public class LoginController {
 
     private final UserService userService;
     private final IQuizService quizService;
+    private final IAnswerService answerService;
 
     @Autowired
-    public LoginController(UserService userService,  IQuizService quizService) {
+    public LoginController(UserService userService, IQuizService quizService, IAnswerService answerService) {
         this.userService = userService;
         this.quizService = quizService;
+        this.answerService = answerService;
     }
 
 
@@ -78,6 +77,7 @@ public class LoginController {
             quizService.deleteQuiz(quizToDelete);
         }
         if(quizToRun != null) {
+            QuizDto quizDto = quizService.getQuizById(quizToRun);
             modelAndView.addObject("quiz",quizService.getQuizById(quizToRun));
             modelAndView.setViewName("admin/quiz/runQuiz");
             return modelAndView;

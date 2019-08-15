@@ -66,6 +66,8 @@ public class QuizService implements IQuizService{
 
     @Override
     public QuizDto getQuizById(Long id) {
+        QuizDto quizDto = new QuizDto();
+
         return quizMapper.convertEntityToDto(quizRepository.findById(id).get());
     }
 
