@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -18,7 +19,7 @@ public class QuizDto {
     private String title;
     private String description;
     private LocalDate createDate;
-    private Set<QuestionDto> questions;
+    private List<QuestionDto> questions;
 
 
 }

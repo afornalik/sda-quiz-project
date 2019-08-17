@@ -1,9 +1,9 @@
 package sda.quiz.service;
 
-import sda.quiz.dto.QuestionDto;
+        import sda.quiz.dto.QuestionDto;
 
-import java.util.List;
-import java.util.Set;
+        import java.util.List;
+        import java.util.Set;
 
 public interface IQuestionService {
 
@@ -15,4 +15,6 @@ public interface IQuestionService {
 
 
     List<QuestionDto> showAllAvailableQuestion();
+
+    QuestionDto setAllAnswerToFalse(QuestionDto questionDto);
 }

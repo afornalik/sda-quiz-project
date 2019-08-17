@@ -7,4 +7,6 @@ import java.util.List;
 public interface IAnswerService {
 
     List<AnswerDto> getAllAnswerForQuestion(Long id);
+
+    AnswerDto setAnswerToFalse(AnswerDto answerDto);
 }

@@ -29,4 +29,11 @@ public class AnswerService implements IAnswerService {
     public List<AnswerDto> getAllAnswerForQuestion(Long id) {
         return answerRepository.findAllByQuestion(id).stream().map(answer -> answerMapper.convertEntityToDto(answer)).collect(Collectors.toList());
     }
+
+    @Override
+    public AnswerDto setAnswerToFalse(AnswerDto answerDto) {
+        answerDto.setIsCorrect(false);
+        return answerDto;
+
+    }
 }

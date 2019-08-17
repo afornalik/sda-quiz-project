@@ -15,5 +15,5 @@ public interface  IQuizService {
 
     void deleteQuiz(Long id);
 
-    QuizDto getQuizById(Long id);
+    QuizDto getQuizById(Long id ,boolean resetAnswer);
 }

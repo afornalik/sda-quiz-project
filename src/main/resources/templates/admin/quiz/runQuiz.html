@@ -12,28 +12,26 @@
 
 
         <div style="margin-left: 20px;">
-            <form th:object="${quiz}" th:action="@{/}" method="post">
+            <form th:object="${quiz}" th:action="@{quiz/checkAnswer}" method="post">
+                <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
                 <table>
-                    <th:block th:each="question : *{getQuestions()}">
+
+                    <th:block th:each="question,ind : *{questions}">
                     <tr>
                         <td colspan="4" align="center"><span th:text="${question.question}"></span> </td>
                     </tr>
                         <tr>
-                            <th:block th:each="answer : ${question.answersList}">
-                            <td><span th:text="${answer.answer}"></span>aaaaaaaaaaaa<!--<input type="checkbox" th:checked="${answer.isCorrect}"> --></td>
+                            <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
+                            <td><span th:text="${answer.idAnswer}"></span><input  th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}" type="checkbox" ></td>
                             </th:block>
                         </tr>
 
                     </th:block>
                 </table>
-
+                <input type="submit" value="sprawdz">
             </form>
+           <a th:href="@{/admin/home}" > <button type="submit" class="btn btn-inverse" >wróć</button></a>
 
-            <th:block th:each="ques : ${quiz.questions}">
-                <th:block th:each="ans : ${ques.answersList}">
-                    <p th:text="${ans.question}"></p>
-                </th:block>
-            </th:block>
         </div>
 
 

@@ -3,7 +3,6 @@ package sda.quiz.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.Question;
 import sda.quiz.entity.Quiz;
@@ -26,12 +25,14 @@ public class QuizService implements IQuizService{
     private final IQuizRepository quizRepository;
     private final QuizMapper quizMapper;
     private final IQuestionRepository questionRepository;
+    private final IQuestionService questionService;
 
     @Autowired
-    public QuizService(IQuizRepository quizRepository, QuizMapper quizMapper, IQuestionRepository questionRepository) {
+    public QuizService(IQuizRepository quizRepository, QuizMapper quizMapper, IQuestionRepository questionRepository, IAnswerService answerService, IQuestionService questionService) {
         this.quizRepository = quizRepository;
         this.quizMapper = quizMapper;
         this.questionRepository = questionRepository;
+        this.questionService = questionService;
     }
 
 
@@ -42,7 +43,7 @@ public class QuizService implements IQuizService{
 
     @Override
     public void saveQuiz(QuizDto quizDto, Long[] questionIdList) {
-        Set<Question> questionList = new HashSet<>();
+        List<Question> questionList = new ArrayList<>();
         Quiz quiz = quizMapper.convertDtoToEntity(quizDto);
         for(Long i : questionIdList){
             questionList.add(questionRepository.findById(i).get());
@@ -65,10 +66,12 @@ public class QuizService implements IQuizService{
     }
 
     @Override
-    public QuizDto getQuizById(Long id) {
-        QuizDto quizDto = new QuizDto();
-
-        return quizMapper.convertEntityToDto(quizRepository.findById(id).get());
+    public QuizDto getQuizById(Long id, boolean resetAnswer) {
+        QuizDto quizDto = quizMapper.convertEntityToDto(quizRepository.findById(id).get());
+        if(resetAnswer) {
+            quizDto.setQuestions(quizDto.getQuestions().stream().map(questionService::setAllAnswerToFalse).collect(Collectors.toList()));
+        }
+        return quizDto;
     }
 
 

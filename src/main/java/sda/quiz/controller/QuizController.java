@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class QuizController {
@@ -38,6 +42,14 @@ public class QuizController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/admin/home");
         quizService.saveQuiz(quizDto,questionToAdd);
+        return modelAndView;
+    }
+
+    @RequestMapping(value="admin/quiz/checkAnswer",method =RequestMethod.POST)
+    public ModelAndView checkTheAnswers(@ModelAttribute("quiz")QuizDto quiz){
+        ModelAndView modelAndView = new ModelAndView();
+       QuizDto quizDto = quizService.getQuizById(quiz.getIdQuiz(),false);
+        modelAndView.setViewName("admin/quiz/checkAnswer");
         return modelAndView;
     }
 

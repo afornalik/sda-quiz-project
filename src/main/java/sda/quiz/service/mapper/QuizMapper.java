@@ -26,7 +26,9 @@ public class QuizMapper implements IMapper<Quiz, QuizDto> {
     public Quiz convertDtoToEntity(QuizDto quizDto) {
         Quiz quiz = new Quiz();
         modelMapper.map(quizDto,quiz);
-        quiz.setQuestions(quizDto.getQuestions().stream().map(questionMapper::convertDtoToEntity).collect(Collectors.toSet()));
+        if(quizDto.getQuestions() != null){
+            quiz.setQuestions(quizDto.getQuestions().stream().map(questionMapper::convertDtoToEntity).collect(Collectors.toList()));
+        }
         return quiz;
     }
 
@@ -34,7 +36,7 @@ public class QuizMapper implements IMapper<Quiz, QuizDto> {
     public QuizDto convertEntityToDto(Quiz quiz) {
         QuizDto quizDto = new QuizDto();
         modelMapper.map(quiz,quizDto);
-        quizDto.setQuestions(quiz.getQuestions().stream().map(questionMapper::convertEntityToDto).collect(Collectors.toSet()));
+        quizDto.setQuestions(quiz.getQuestions().stream().map(questionMapper::convertEntityToDto).collect(Collectors.toList()));
         return quizDto;
     }
 }

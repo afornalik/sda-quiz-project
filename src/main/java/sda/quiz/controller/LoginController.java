@@ -77,8 +77,8 @@ public class LoginController {
             quizService.deleteQuiz(quizToDelete);
         }
         if(quizToRun != null) {
-            QuizDto quizDto = quizService.getQuizById(quizToRun);
-            modelAndView.addObject("quiz",quizService.getQuizById(quizToRun));
+            QuizDto quizDto = quizService.getQuizById(quizToRun,true);
+            modelAndView.addObject("quiz",quizDto);
             modelAndView.setViewName("admin/quiz/runQuiz");
             return modelAndView;
         }
