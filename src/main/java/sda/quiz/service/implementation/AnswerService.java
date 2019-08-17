@@ -1,15 +1,14 @@
-package sda.quiz.service;
+package sda.quiz.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.repository.IAnswerRepository;
-import sda.quiz.service.mapper.AnswerMapper;
-import sda.quiz.service.mapper.IMapper;
+import sda.quiz.service.IAnswerService;
+import sda.quiz.service.mapper.implementation.AnswerMapper;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service

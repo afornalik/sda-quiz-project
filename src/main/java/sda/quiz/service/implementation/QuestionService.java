@@ -1,4 +1,4 @@
-package sda.quiz.service;
+package sda.quiz.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,8 +8,10 @@ import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Question;
 import sda.quiz.repository.IAnswerRepository;
 import sda.quiz.repository.IQuestionRepository;
-import sda.quiz.service.mapper.AnswerMapper;
-import sda.quiz.service.mapper.QuestionMapper;
+import sda.quiz.service.IAnswerService;
+import sda.quiz.service.IQuestionService;
+import sda.quiz.service.mapper.implementation.AnswerMapper;
+import sda.quiz.service.mapper.implementation.QuestionMapper;
 import sda.quiz.service.validator.IValidator;
 
 import java.util.Arrays;

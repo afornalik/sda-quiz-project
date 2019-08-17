@@ -1,10 +1,11 @@
-package sda.quiz.service.mapper;
+package sda.quiz.service.mapper.implementation;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.entity.Answer;
+import sda.quiz.service.mapper.IMapper;
 
 @Component
 public class AnswerMapper implements IMapper<Answer, AnswerDto> {

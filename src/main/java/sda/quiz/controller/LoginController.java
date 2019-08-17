@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.dto.QuizDto;
-import sda.quiz.entity.User;
+import sda.quiz.entity.user.User;
 import sda.quiz.service.*;
+import sda.quiz.service.implementation.UserService;
 
 
 @Controller

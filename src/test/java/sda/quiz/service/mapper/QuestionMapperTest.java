@@ -12,11 +12,12 @@ import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
+import sda.quiz.service.mapper.implementation.AnswerMapper;
+import sda.quiz.service.mapper.implementation.QuestionMapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @SpringBootTest

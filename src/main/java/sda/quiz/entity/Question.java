@@ -35,4 +35,6 @@ public class Question {
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "questions")
     private Set<Quiz> quiz;
 
+
+
 }

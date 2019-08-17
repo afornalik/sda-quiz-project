@@ -1,4 +1,4 @@
-package sda.quiz.service;
+package sda.quiz.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,18 +8,19 @@ import sda.quiz.entity.Question;
 import sda.quiz.entity.Quiz;
 import sda.quiz.repository.IQuestionRepository;
 import sda.quiz.repository.IQuizRepository;
-import sda.quiz.service.mapper.QuizMapper;
+import sda.quiz.service.IAnswerService;
+import sda.quiz.service.IQuestionService;
+import sda.quiz.service.IQuizService;
+import sda.quiz.service.mapper.implementation.QuizMapper;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class QuizService implements IQuizService{
+public class QuizService implements IQuizService {
 
 
     private final IQuizRepository quizRepository;

@@ -1,9 +1,10 @@
-package sda.quiz.entity;
+package sda.quiz.entity.user;
 
 
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import sda.quiz.entity.user.response.QuizTaken;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,9 +19,9 @@ import java.util.Set;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int id;
+    private Long id;
 
     @Column(name = "email")
     @Email(message = "Please provide a valid Email")
@@ -47,6 +48,8 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<QuizTaken> quizTakenList;
 
 
 }
