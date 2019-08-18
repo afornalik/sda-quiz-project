@@ -12,6 +12,7 @@ import sda.quiz.dto.QuizDto;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,8 @@ public class QuizController {
     public ModelAndView checkTheAnswers(@ModelAttribute("quiz")QuizDto quiz){
         ModelAndView modelAndView = new ModelAndView();
        QuizDto quizDto = quizService.getQuizById(quiz.getIdQuiz(),false);
+        Map<QuestionDto,Boolean> answerMap = quizService.checkAllAnswer(quiz);
+        modelAndView.addObject("answer",answerMap);
         modelAndView.setViewName("admin/quiz/checkAnswer");
         return modelAndView;
     }

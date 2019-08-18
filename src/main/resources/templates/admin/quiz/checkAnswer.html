@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org"  lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
- <h1>Check Answer</h1>
+ <h1>Wyniki</h1>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <td>numer pytania</td>
+                <td>treść</td>
+                <td>udzielona odpowiedz</td>
+                <td><b>czy poprawnie </b></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ans,iter : ${answer}">
+                <td th:text="*{ans.key.id}"></td>
+                <td th:text="*{ans.key.question}"></td>
+                <td ></td>
+                <td th:text="*{ans.value.booleanValue()}"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

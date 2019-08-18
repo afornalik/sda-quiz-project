@@ -14,15 +14,18 @@
         <div style="margin-left: 20px;">
             <form th:object="${quiz}" th:action="@{quiz/checkAnswer}" method="post">
                 <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
+
                 <table>
 
                     <th:block th:each="question,ind : *{questions}">
                     <tr>
+                        <input type="hidden" th:field="*{questions[__${ind.index}__].id}" th:value="${question.id}">
                         <td colspan="4" align="center"><span th:text="${question.question}"></span> </td>
                     </tr>
                         <tr>
                             <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
-                            <td><span th:text="${answer.idAnswer}"></span><input  th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}" type="checkbox" ></td>
+                                <input type="hidden" th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].idAnswer}" th:value="${answer.idAnswer}">
+                            <td><span th:text="${answer.answer}"></span><input  th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}" type="checkbox" ></td>
                             </th:block>
                         </tr>
 

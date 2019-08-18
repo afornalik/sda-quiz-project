@@ -1,38 +1,31 @@
 package sda.quiz.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
-import sda.quiz.repository.IAnswerRepository;
+import sda.quiz.entity.Answer;
 import sda.quiz.service.IAnswerService;
-import sda.quiz.service.mapper.implementation.AnswerMapper;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import sda.quiz.service.implementation.exception.AnswersAreNullException;
+import sda.quiz.service.implementation.exception.MismatchIdException;
 
 @Service
 @Transactional
 public class AnswerService implements IAnswerService {
 
-    private final IAnswerRepository  answerRepository;
-    private final AnswerMapper answerMapper;
-
-    @Autowired
-    public AnswerService(IAnswerRepository answerRepository, AnswerMapper answerMapper) {
-        this.answerRepository = answerRepository;
-        this.answerMapper = answerMapper;
-    }
-
-    @Override
-    public List<AnswerDto> getAllAnswerForQuestion(Long id) {
-        return answerRepository.findAllByQuestion(id).stream().map(answer -> answerMapper.convertEntityToDto(answer)).collect(Collectors.toList());
-    }
-
     @Override
     public AnswerDto setAnswerToFalse(AnswerDto answerDto) {
         answerDto.setIsCorrect(false);
         return answerDto;
+    }
 
+    @Override
+    public boolean checkAnswer(Answer answer, AnswerDto userAnswer) throws AnswersAreNullException, MismatchIdException {
+        if(answer == null || userAnswer == null){
+            throw new AnswersAreNullException("One of answer is not set");
+        }else if(!answer.getIdAnswer().equals(userAnswer.getIdAnswer())){
+            throw new MismatchIdException("Answer id number mismatch");
+        } else {
+            return answer.getIsCorrect() == userAnswer.getIsCorrect();
+        }
     }
 }

@@ -1,9 +1,11 @@
 package sda.quiz.service;
 
 
+import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface  IQuizService {
 
@@ -16,4 +18,6 @@ public interface  IQuizService {
     void deleteQuiz(Long id);
 
     QuizDto getQuizById(Long id ,boolean resetAnswer);
+
+    Map<QuestionDto, Boolean> checkAllAnswer(QuizDto quizDto);
 }

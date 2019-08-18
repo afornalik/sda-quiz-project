@@ -5,16 +5,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
+import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
 import sda.quiz.repository.IAnswerRepository;
 import sda.quiz.repository.IQuestionRepository;
 import sda.quiz.service.IAnswerService;
 import sda.quiz.service.IQuestionService;
+import sda.quiz.service.implementation.exception.AnswersAreNullException;
+import sda.quiz.service.implementation.exception.MismatchIdException;
 import sda.quiz.service.mapper.implementation.AnswerMapper;
 import sda.quiz.service.mapper.implementation.QuestionMapper;
 import sda.quiz.service.validator.IValidator;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -26,7 +30,7 @@ public class QuestionService implements IQuestionService {
 
 
     private final IQuestionRepository questionRepository;
-    private final IAnswerRepository  answerRepository;
+    private final IAnswerRepository answerRepository;
     private final IAnswerService answerService;
     private final IValidator<QuestionDto> questionDtoIValidator;
     private final QuestionMapper questionMapper;
@@ -46,7 +50,7 @@ public class QuestionService implements IQuestionService {
     public void saveNewQuestion(QuestionDto questionDto) throws Exception {
         if (questionDtoIValidator.isCorrect(questionDto)) {
             Question question = questionMapper.convertDtoToEntity(questionDto);
-            question.setAnswerList(questionDto.getAnswersList().stream().map(answerDto -> answerMapper.convertDtoToEntity(answerDto)).collect(Collectors.toList()));
+            question.setAnswerList(questionDto.getAnswersList().stream().map(answerMapper::convertDtoToEntity).collect(Collectors.toList()));
             question.getAnswerList().forEach(answer -> {
                 answer.setQuestion(question);
                 answerRepository.save(answer);
@@ -54,30 +58,41 @@ public class QuestionService implements IQuestionService {
             questionRepository.save(question);
 
             System.out.println(question.getIdQuestion());
-
-
         }
     }
 
-    @Override
-    public QuestionDto createEmptyQuestionWith4Answer() {
-     return new QuestionDto(null,null,null, Arrays.asList(new AnswerDto(),new AnswerDto(),new AnswerDto(),new AnswerDto()),null);
-    }
 
     @Override
     public Set<QuestionDto> getAllQuestions() {
-        return questionRepository.findAll().stream().map(questionMapper::convertEntityToDto).collect(Collectors.toSet());
+        return questionRepository.findAll()
+                .stream()
+                .map(questionMapper::convertEntityToDto)
+                .collect(Collectors.toSet());
     }
 
-    @Override
-    public List<QuestionDto> showAllAvailableQuestion() {
-        return null;
-    }
 
     @Override
     public QuestionDto setAllAnswerToFalse(QuestionDto questionDto) {
-        questionDto.setAnswersList(questionDto.getAnswersList().stream().map(answerService::setAnswerToFalse).collect(Collectors.toList()));
-      return questionDto;
+        questionDto.setAnswersList(
+                questionDto.getAnswersList()
+                        .stream()
+                        .map(answerService::setAnswerToFalse)
+                        .collect(Collectors.toList()));
+        return questionDto;
 
+    }
+
+    @Override
+    public boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException {
+        if(!question.getIdQuestion().equals(questionDto.getId())){
+            throw new MismatchIdException("Question id number mismatch");
+        }else {
+            for(AnswerDto answerDto : questionDto.getAnswersList()){
+                if(!(answerDto.getIsCorrect().equals(question.getAnswerList().stream().map(answer -> answer.getIdAnswer().equals(answerDto.getIdAnswer())).findFirst().get()))){
+                    return false;
+                }
+            }
+                return true;
+        }
     }
 }
