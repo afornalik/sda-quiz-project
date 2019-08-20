@@ -3,6 +3,7 @@ package sda.quiz.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import sda.quiz.entity.utilities.Category;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -28,6 +29,10 @@ public class Quiz {
 
     @Column(name="create_date")
     private LocalDate createDate;
+
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @ManyToMany
     @JoinTable(

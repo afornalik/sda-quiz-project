@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" lang="pl">
 
 <div th:replace="fragments/head "></div>
 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Home</title>
+</head>
 <body class="home blog custom-background content-sidebar">
 <div class="container">
     <div id="page" class="hfeed row">
@@ -13,16 +17,23 @@
         <section id="primary2" class="span8">
         <div>
             <div>
-                <h2>Create new quiz</h2>
+                <h2>utwórz nowy quiz</h2>
             </div>
             <form th:object="${quiz}" method="post" th:action="@{addquiz}">
                 <div>
-                    <label > title
+                    <label > nazwa
                         <input type="text" th:field="*{title}" placeholder="isert title here">
                     </label>
                 </div>
                 <div>
-                    <label > description
+                    <label > kategoria
+                        <select>
+                            <option th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}" th:text="${cat}"></option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label > opis
                         <textarea th:field="*{description}" placeholder="Write description ..." ></textarea>
                     </label>
                 </div>
