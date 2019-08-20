@@ -1,30 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee"
-      xmlns:spring="http://xmlns.jcp.org/xml/ns/javaee">
-<head>
-    <link rel="stylesheet" type="text/css" href="../static/css/style.css"/>
-    <title>Registration Form</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" type="text/css"  />
-    <style type="text/css" id="custom-background-css">
-        body.custom-background { background-color: #efefef;
-            padding: 20px ; }
-    </style>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
+<div th:replace="fragments/head "></div>
 
-<body class="home blog custom-background content-sidebar">
+ <body class="home blog custom-background content-sidebar">
 <div class="container">
     <div id="page" class="hfeed row">
-
-
-
         <header id="branding" role="banner" class="span12">
-            <hgroup>
-                <h1 id="site-title"><a href="http://index.html" title="Serwis do QUIZÓW i ANKIET" rel="home"><span>Serwis do QUIZÓW i ANKIET</span></a></h1>
-                <h2 id="site-description">Projekt SDA</h2>
-            </hgroup>
-
+            <div th:replace="fragments/header "></div>
             <nav id="access" role="navigation">
                 <div class="navbar navbar-inverse">
                     <div class="navbar-inner">
@@ -33,156 +16,128 @@
                             <div class="nav-collapse">
                                 <div class="menu-tab-navi-container">
                                     <ul id="menu-tab-navi" class="nav">
-                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
-                                            <a href=th:action="@{ankiety}">Home</a></li>
                                         <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a th:href="@{/templates/quiz.html}">Quizy</a></li>
-                                        <li id="menu-item-702" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="quiz.html">Ankiety</a></li>
+                                            <a th:href="index">Home</a></li>
+
+
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a th:href="quiz">Quizy</a></li>
+
+                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
+                                            <a th:href="registration">Rejestracja</a></li>
+
+
 
                                     </ul>
                                 </div>
-
-                                <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">
-                                    <label for="s" class="assistive-text hidden">Search</label>
-                                    <input type="search" class="search-query" name="s" id="s" placeholder="Search">
-                                </form>
+                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
+                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
+                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
+                                <!--                            </form>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
+        <section id="secondary1" class="widget-area span4" role="complementary">
 
 
 
-        <section id="primary" class="span8">
-            <div id="content" role="main">
-                <article    >
-                    <form autocomplete="off" action="#" th:action="@{/registration}"
-                          th:object="${user}" method="post" class="form-horizontal"
-                          role="form">
-                        <h2>Formularz rejestracyjny:</h2>
-                        <div class="form-group">
-                            <div class="col-sm-9">
-                                <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                                       class="validation-message"></label>
-                                <input type="text" th:field="*{name}" placeholder="Name"
-                                       class="form-control"/>
 
 
 
-                            </div>
+                <form autocomplete="off"   th:action="@{/registration}"
+                      th:object="${user}" method="post" class="form-horizontal"
+                      role="form">
+                    <h2>Formularz</h2>
+                    <div>
+                        <div class="nameLabel"   >
+                            <span>Imię: </span>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-9">
-                                <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
-                                       class="validation-message"></label>
-                                <input type="text" th:field="*{lastName}"
-                                       placeholder="Last Name" class="form-control"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-9">
-                                <input type="text" th:field="*{email}" placeholder="Email"
-                                       class="form-control"/> <label
-                                    th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                    class="validation-message"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-9">
-                                <input type="password" th:field="*{password}"
-                                       placeholder="Password" class="form-control"/> <label
-                                    th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                                    class="validation-message"></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-9">
-                                <button type="submit" class="btn btn-primary btn-block">Register User</button>
-                            </div>
-                        </div>
-                        <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
-                    </form>
-                </article>
 
+                            <label for="validationDefaultUsername2" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                   class="validation-message">Imię: </label>
+                            <input type="text" th:field="*{name}"
+                                   class="form-control" id="validationDefaultUsername2" placeholder="Imie" required/>
+                            <br><br>
 
-            </div>
-        </section>
-
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <aside   class="widget well widget_recent_entries">
-
-
-
-
-                <form th:action="@{/login}" method="POST" class="form-signin">
-                    <h3 class="form-signin-heading" th:text="Welcome"></h3>
-                    <br/>
-
-                    <input type="text" id="email" name="email" th:placeholder="Email"
-                           class="form-control"/> <br/>
-                    <input type="password" th:placeholder="Password"
-                           id="password" name="password" class="form-control"/> <br/>
-
-                    <div align="center" >
-                        <p>Email or Password invalid, please verify</p>
                     </div>
 
-                    <button class="btn btn-md btn-warning btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Login</button>
+                    <div>
+                        <div class="nameLabel"   >
+                            <span>Nazwisko:</span>
+                        </div>
+
+
+                            <input type="text" th:field="*{lastName}"
+                                   placeholder="Nazwisko" class="form-control"/>
+                        <br><br>
+
+                    </div>
+                    <div>
+                        <div class="nameLabel"   >
+                            <span>Email:</span>
+                        </div>
+                            <input type="email" th:field="*{email}" placeholder="Email" required
+                                   class="form-control" id="validationDefaultUsername3"/><label
+                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                class="validation-message" for="validationDefaultUsername3"></label>
+                            <br><br>
+
+                    </div>
+                    <div  >
+                        <div class="nameLabel"   >
+                            <span>Hasło:</span>
+                        </div>
+                        <input id="validationDefaultUsername4" type="password" th:field="*{password}"
+                               placeholder="Password" class="form-control" required /> <label
+                            for="validationDefaultUsername4" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                            class="validation-message"></label>
+
+                        </div>
+                        <br><br>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <button class="btn btn-lg btn-primary btn-block"   type="submit" > Zapisz</button>
+
+                        </div>
+                    </div>
+
+                    <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+
                 </form>
 
 
 
-            </aside>
-            <aside id="recent-posts-2" class="widget well widget_recent_entries">
-                <h2>Quizy wiedzy</h2>
-                <ul>
-                    <li>
-                        <a href="http:// /">Historia</a>
-                    </li>
-                    <li>
-                        <a href="http:// test/">Ludzie</a>
-                    </li>
-                    <li>
-                        <a href="http:// test/">Geografia</a>
-                    </li>
-                    <li>
-                        <a href="http:// test/">Sport</a>
-                    </li>
-                </ul>
-            </aside>
-            <aside   class="widget well widget_recent_entries">
-                <h2 >Kategorie ankiet</h2>
-                <ul>
-                    <li>
-                        <a href="http:// /">  Test</a>
-                    </li>
 
-                    <li>
-                        <a href="http:// test/">  Test</a>
-                    </li>
 
-                </ul>
-            </aside>
+
+        </section>
+        <section id="secondary2" class="widget-area span4" role="complementary">
+
+            <div>
+<a href="testt.html">Regulamin :)</a>
+            </div>
+
+
         </section>
 
 
-        <footer id="colophon" role="contentinfo" class="span12">
-            <div id="page-footer" class="well clearfix">
-                <span class="credits alignleft">© 2019 <a href="http://index.html/">Serwis do QUIZÓW i ANKIET</a>,   w budowie.</span>
-                <div id="site-generator">
-                    <a href="http://index.html/" title="Serwis do QUIZÓW i ANKIET" target="_blank" rel="generator">@ Bootstrap </a>
-                </div>
-            </div>
-        </footer>
+        <section id="secondary" class="widget-area span4" role="complementary">
+            <div th:replace="/fragments/rejestracja"></div>
 
 
+        </section>
+
+        <div th:replace="fragments/footer "></div>
 
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>

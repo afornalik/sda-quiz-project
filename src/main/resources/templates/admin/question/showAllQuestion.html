@@ -1,36 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="pl">
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Home</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="fragments/head "></div>
-
 <body class="home blog custom-background content-sidebar">
 <div class="container">
     <div id="page" class="hfeed row">
+        <header id="branding" role="banner" class="span12">
+            <div th:replace="fragments/header "></div>
+            <nav id="access" role="navigation">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <span class="brand">MENU </span>
+                            <div class="nav-collapse">
+                                <div class="menu-tab-navi-container">
+                                    <ul id="menu-tab-navi" class="nav">
+                                        <li  class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a href="/admin/home">Admin</a>  </li>
+                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a href="/admin/addquestion">Dodaj Quiz</a></li>
 
-        <div th:replace="/fragments/header"></div>
-
-
-
-
-
+                                        <li    id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
+                                            <a href="">Edycja Quiz</a></li>
+                                    </ul>
+                                </div>
+                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
+                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
+                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
+                                <!--                            </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
         <section id="primary" class="span8">
             <div id="content" role="main">
-                <article    >
+                <article>
                     <header class="page-header">
-                        <h1 class="entry-title"><a href="/index" title="  "  >Darmowe ankiety online</a></h1>
-                        <div class="entry-meta">
-                            <span> Zacznij tworzyć ankiety online! </span>
-                        </div>
+                        <h1 class="entry-title"><span> Question list</span></h1>
                     </header>
                     <header class="page-header">
                         <div class="entry-meta">
-                            <span> Question list</span>
+
+
+
                             <table style="border: solid 2px">
                                 <thead>
                                 <tr>
@@ -48,80 +62,27 @@
                                 </tr>
                                 </tbody>
                             </table>
+
                         </div>
                     </header>
 
-
-                    <div>
-
-                        <a th:href="@{/}">back to main page</a>
+                    <div class="entry-content clearfix">
+                        <p></p>
                     </div>
                 </article>
-
-
             </div>
         </section>
 
         <section id="secondary" class="widget-area span4" role="complementary">
-            <aside   class="widget well widget_recent_entries">
-                <h2 class="widget-title" th:text="${userName}"></h2>
-                <!--                <form th:action="@{/registration}" method="get">-->
-                <!--                    <button class="btn btn-md btn-warning btn-block" type="Submit">Formularz do darmowej rejestracji</button>-->
-                <!--                </form>-->
+            <!--            <div th:replace="/fragments/rejestracja"></div>-->
 
-
-
-                <!--                <form th:action="@{/login}" method="POST" class="form-signin">-->
-                <!--                    <h3 class="form-signin-heading" th:text="Logowanie"></h3>-->
-                <!--                    <br/>-->
-
-                <!--                    <input type="text" id="email" name="email" th:placeholder="Email"-->
-                <!--                           class="form-control"/> <br/>-->
-                <!--                    <input type="password" th:placeholder="Password"-->
-                <!--                           id="password" name="password" class="form-control"/> <br/>-->
-
-                <!--                    <div align="center">-->
-                <!--                        <p>Email or Password invalid, please verify</p>-->
-                <!--                    </div>-->
-
-                <!--                    <button class="btn btn-md btn-warning btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Login</button>-->
-                <!--                </form>-->
-
-
-
-            </aside>
-            <div th:replace="/fragments/panelAdmin"></div>
-            <aside id="recent-posts-2" class="widget well widget_recent_entries">
-                <h2>Quizy wiedzy</h2>
-                <ul>
-                    <li>
-                        <a href="/index">Historia</a>
-                    </li>
-                    <li>
-                        <a href="/index">Ludzie</a>
-                    </li>
-                    <li>
-                        <a href="/index">Geografia</a>
-                    </li>
-                    <li>
-                        <a href="/index">Sport</a>
-                    </li>
-                </ul>
-            </aside>
-
+            <div th:replace="/fragments/listaQuiz"></div>
         </section>
-
-
-
 
         <div th:replace="fragments/footer "></div>
 
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 
 </body>
 </html>
-
