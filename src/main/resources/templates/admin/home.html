@@ -39,13 +39,11 @@
             <div id="content" role="main">
                 <article>
                     <header class="page-header">
-                        <h1 class="entry-title">Teraz możęsz dodawać nowe Quizy</h1>
+                        <h3 class="entry-title">Teraz możęsz dodawać nowe Quizy</h3>
                     </header>
-                    <header class="page-header">
-                        <div class="entry-meta">
-                            <span> Możesz edytowac swoje Quizy i ankiety.</span>
-                        </div>
-                    </header>
+                    <div>
+                        <th:block th:include="/fragments/homeShowAllQuiz :: showAllQuiz" />
+                    </div>
 
                     <div class="entry-content clearfix">
                         <p></p>

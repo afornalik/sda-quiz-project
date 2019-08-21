@@ -26,7 +26,7 @@
                     <tbody>
                         <tr th:each="quiz,iter : ${quizList}">
                             <td th:text="*{quiz.title}"></td>
-                            <td > TO DO </td>
+                            <td th:text="*{quiz.category}"></td>
                             <td th:text="*{quiz.questions.size()}"></td>
                             <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
                             <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sda.quiz.entity.utilities.Category;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +21,7 @@ public class QuizDto {
     private String description;
     private LocalDate createDate;
     private List<QuestionDto> questions;
+    private Category category;
 
 
 }
