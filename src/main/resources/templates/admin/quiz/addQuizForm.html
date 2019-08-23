@@ -87,12 +87,23 @@
                                 <td><span th:text="${question.question}"></span></td>
                                 <td style="margin: auto; text-align: center;"><input type="checkbox" name="questionsToAdd" th:value="${question.id}"/></td>
                             </tr>
+                            <tr>
+                                <td style="height: 20px;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                      <button class="btn btn-md btn-warning btn-block" >utwórz quiz</button>
+                                     </div>
+                                 </td>
+                                <td>
+                                    <button class="btn btn-md btn-primary btn-block" name="addQuestion" value="true" >dodaj nowe pytanie</button>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div>
-                        <button class="btn btn-md btn-warning btn-block" >utwórz quiz</button>
-                    </div>
+
                 </form>
             </div>
         </section>

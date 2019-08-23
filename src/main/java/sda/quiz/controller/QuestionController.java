@@ -42,7 +42,7 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             questionService.saveNewQuestion(questionDto);
-            modelAndView.setViewName("admin/question/addQuestionConfirm");
+            modelAndView.setViewName("redirect:admin/quiz/addquiz");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
             modelAndView.setViewName("admin/question/addQuestionForm");

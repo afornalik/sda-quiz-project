@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <style>
+        tr {
+            margin: auto;
 
+
+        }
+        table{
+            margin-right: 20px;
+            padding-right: 20px;
+            width: 97%;
+        }
+        .empty{
+            width: 100%;
+            height: 20px;
+            border-top: goldenrod solid 2px;
+        }
+    </style>
+    <title>Quiz</title>
+</head>
 <div th:replace="fragments/head "></div>
 
 <body class="home blog custom-background content-sidebar">
@@ -41,19 +60,20 @@
                     <th:block th:each="question,ind : *{questions}">
                     <tr>
                         <input type="hidden" th:field="*{questions[__${ind.index}__].id}" th:value="${question.id}">
-                        <td colspan="4" align="center"><span th:text="${question.question}"></span> </td>
+                        <td colspan="8" align="center"><span th:text="${question.question}"></span> </td>
                     </tr>
                         <tr>
                             <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
                                 <input type="hidden" th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].idAnswer}" th:value="${answer.idAnswer}">
-                            <td><span th:text="${answer.answer}"></span><input  th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}" type="checkbox" ></td>
+                                <td style="text-align: right"><input style="vertical-align: top;" th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}" type="checkbox" ></td>
+                                <td style="text-align: left"><span th:text="${answer.answer}"></span>
                             </th:block>
                         </tr>
-
+                    <tr ><td class="empty" colspan="8"></td></tr>
                     </th:block>
                 </table>
                 <hr>
-                <input type="submit" value="sprawdz">
+                <input type="submit" value="sprawdź" class="btn btn-md btn-warning btn-block" style="width: 97%">
             </form>
 
 
