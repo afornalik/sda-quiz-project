@@ -3,12 +3,12 @@ package sda.quiz.service.mapper.implementation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sda.quiz.dto.user.response.AnswerGivenDto;
-import sda.quiz.entity.user.response.AnswerGiven;
+import sda.quiz.dto.user.response.AnswerDoneDto;
+import sda.quiz.entity.user.response.AnswerDone;
 import sda.quiz.service.mapper.IMapper;
 
 @Component
-public class AnswerGivenMapper implements IMapper<AnswerGiven, AnswerGivenDto> {
+public class AnswerGivenMapper implements IMapper<AnswerDone, AnswerDoneDto> {
 
     private final ModelMapper modelMapper;
 
@@ -18,16 +18,16 @@ public class AnswerGivenMapper implements IMapper<AnswerGiven, AnswerGivenDto> {
     }
 
     @Override
-    public AnswerGiven convertDtoToEntity(AnswerGivenDto answerGivenDto) {
-        AnswerGiven answerGiven = new AnswerGiven();
-        modelMapper.map(answerGivenDto,answerGiven);
-        return answerGiven;
+    public AnswerDone convertDtoToEntity(AnswerDoneDto answerDoneDto) {
+        AnswerDone answerDone = new AnswerDone();
+        modelMapper.map(answerDoneDto, answerDone);
+        return answerDone;
     }
 
     @Override
-    public AnswerGivenDto convertEntityToDto(AnswerGiven answerGiven) {
-        AnswerGivenDto answerGivenDto = new AnswerGivenDto();
-        modelMapper.map(answerGiven,answerGivenDto);
-        return answerGivenDto;
+    public AnswerDoneDto convertEntityToDto(AnswerDone answerDone) {
+        AnswerDoneDto answerDoneDto = new AnswerDoneDto();
+        modelMapper.map(answerDone, answerDoneDto);
+        return answerDoneDto;
     }
 }

@@ -3,8 +3,7 @@ package sda.quiz.entity.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import sda.quiz.entity.user.response.QuizTaken;
+import sda.quiz.entity.user.response.QuizDone;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -48,7 +47,7 @@ public class User {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<QuizTaken> quizTakenList;
+    private List<QuizDone> quizDoneList;
 
 
 }

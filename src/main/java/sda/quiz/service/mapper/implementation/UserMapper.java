@@ -27,8 +27,8 @@ public class UserMapper implements IMapper<User, UserDto> {
         User user = new User();
         modelMapper.map(userDto,user);
 
-        user.setQuizTakenList(
-                userDto.getQuizTakenDtoList()
+        user.setQuizDoneList(
+                userDto.getQuizDoneDtoList()
                         .stream()
                         .map(quizTakenMapper::convertDtoToEntity)
                         .collect(Collectors.toList()));
@@ -42,8 +42,8 @@ public class UserMapper implements IMapper<User, UserDto> {
         UserDto userDto = new UserDto();
         modelMapper.map(user,userDto);
 
-        userDto.setQuizTakenDtoList(
-                user.getQuizTakenList()
+        userDto.setQuizDoneDtoList(
+                user.getQuizDoneList()
                         .stream()
                         .map(quizTakenMapper::convertEntityToDto)
                         .collect(Collectors.toList()));

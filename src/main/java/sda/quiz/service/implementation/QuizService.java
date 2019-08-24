@@ -7,6 +7,7 @@ import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.Question;
 import sda.quiz.entity.Quiz;
+import sda.quiz.entity.utilities.Category;
 import sda.quiz.repository.IQuestionRepository;
 import sda.quiz.repository.IQuizRepository;
 import sda.quiz.service.IAnswerService;
@@ -62,6 +63,12 @@ public class QuizService implements IQuizService {
     @Override
     public List<QuizDto> getAllQuiz() {
         List<Quiz> quizzes = quizRepository.findAll();
+        return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QuizDto> getQuizzes(Category category) {
+        List<Quiz> quizzes = quizRepository.findByCategory(category);
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }
 

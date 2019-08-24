@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sda.quiz.dto.user.response.QuizTakenDto;
+import sda.quiz.dto.user.response.QuizDoneDto;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public class UserDto {
     private String email;
     private String name;
     private String lastName;
-    private List<QuizTakenDto> quizTakenDtoList;
+    private List<QuizDoneDto> quizDoneDtoList;
 }

@@ -10,10 +10,10 @@ import sda.quiz.dto.QuestionDto;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AnswerGivenDto {
+public class AnswerDoneDto {
 
     private Long idAnswerGiven;
     private QuestionDto questionDto;;
-    private QuizTakenDto quizTakenDto;
+    private QuizDoneDto quizDoneDto;
     private Boolean isUserChooseCorrect;
 }

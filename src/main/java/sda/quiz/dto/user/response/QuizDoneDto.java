@@ -13,10 +13,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuizTakenDto {
+public class QuizDoneDto {
 
     private Long idQuizTaken;
     private UserDto userDto;
     private QuizDto quizDto;
-    private List<AnswerGivenDto> answerGivenDtoList;
+    private List<AnswerDoneDto> answerDoneDtoList;
 }
