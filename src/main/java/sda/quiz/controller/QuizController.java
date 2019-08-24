@@ -41,10 +41,16 @@ public class QuizController {
     @RequestMapping(value = "admin/quiz/addquiz",method = RequestMethod.POST)
     public ModelAndView addQuizAfterQuizForm(@ModelAttribute("quiz")QuizDto quizDto,
                                              @RequestParam(name = "questionsToAdd" , required = false) Long[] questionToAdd,
-                                             @RequestParam(name = "addQuestion",required = false) String addQuestion){
+                                             @RequestParam(name = "addQuestion",required = false) String addQuestion,
+                                             @RequestParam(name="delete",required = false) Long id){
 
         ModelAndView modelAndView = new ModelAndView();
-        if(addQuestion != null) {
+        if(id != null){
+            questionService.deleteQuestion(id);
+            modelAndView.addObject("questionList",questionService.getAllQuestions());
+            modelAndView.addObject("quiz",quizService.createEmptyQuiz());
+            modelAndView.setViewName("admin/quiz/addQuizForm");
+        }else if(addQuestion != null) {
             modelAndView.setViewName("redirect:/admin/addquestion");
         }else {
             modelAndView.setViewName("redirect:/admin/home");

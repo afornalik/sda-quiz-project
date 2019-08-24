@@ -17,10 +17,7 @@ import sda.quiz.service.mapper.implementation.AnswerMapper;
 import sda.quiz.service.mapper.implementation.QuestionMapper;
 import sda.quiz.service.validator.IValidator;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -56,8 +53,6 @@ public class QuestionService implements IQuestionService {
                 answerRepository.save(answer);
             });
             questionRepository.save(question);
-
-            System.out.println(question.getIdQuestion());
         }
     }
 
@@ -84,15 +79,27 @@ public class QuestionService implements IQuestionService {
 
     @Override
     public boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException {
-        if(!question.getIdQuestion().equals(questionDto.getId())){
+        if (!question.getIdQuestion().equals(questionDto.getId())) {
             throw new MismatchIdException("Question id number mismatch");
-        }else {
-            for(AnswerDto answerDto : questionDto.getAnswersList()){
-                if(!(answerDto.getIsCorrect().equals(question.getAnswerList().stream().map(answer -> answer.getIdAnswer().equals(answerDto.getIdAnswer())).findFirst().get()))){
-                    return false;
+        } else {
+            for (AnswerDto answerDto : questionDto.getAnswersList()) {
+                Optional<Answer> answerDto1 = question.getAnswerList()
+                        .stream()
+                        .filter(answer -> answer.getIdAnswer()
+                                .equals(answerDto.getIdAnswer()))
+                        .findAny();
+                if (answerDto1.isPresent()) {
+                    if (!(answerDto1.get().getIsCorrect() == answerDto.getIsCorrect())) {
+                        return false;
+                    }
                 }
             }
-                return true;
+            return true;
         }
+    }
+
+    @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
     }
 }

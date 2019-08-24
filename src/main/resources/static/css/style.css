@@ -66,6 +66,50 @@ input{
 }
 textarea,input[type="text"].uneditable-input{width:245px;background-color:#ffffff;border:1px solid #cccccc;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition:border linear .2s, box-shadow linear .2s;-moz-transition:border linear .2s, box-shadow linear .2s;-o-transition:border linear .2s, box-shadow linear .2s;transition:border linear .2s, box-shadow linear .2s;}
 
+.form-group {
+    float: left;
+    width: 100%;
+}
+div.form-label {
+    float: left;
+    text-align: right;
+    width: 50%;
+}
+div.form-label2 {
+    float: left;
+    width: 50%;
+}
+
+div.form-righ {
+    float: left;
+    text-align: right;
+    width: 280px;
+    padding: 10px;
+}
+form-righ,label {
+    width: 280px;
+    float: left;
+    text-align: right;
+    padding: 5px 10px;
+
+}
+div.form-left {
+    padding: 10px;
+    float: left;
+    width: 280px;
+}
+div.form-left,input {
+    width: 280px;
+    float: left;
+    text-align: right;
+    padding: 5px 10px;
+}
+.form-center{
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+
 
 
 .form-control {
@@ -338,12 +382,13 @@ table td[class*="span"],table th[class*="span"],
 .table-hover tbody tr.info:hover td{background-color:#c4e3f3;}
 form{margin:0 0 20px;}
 fieldset{padding:0;margin:0;border:0;}
-legend{display:block;width:100%;padding:0;margin-bottom:20px;font-size:21px;line-height:40px;color:#333333;border:0;border-bottom:1px solid #e5e5e5;}legend small{font-size:15px;color:#999999;}
+legend{display:block;width:100%;padding:0;margin-bottom:20px;font-size:21px;line-height:40px;color:#333333;border:0;border-bottom:1px solid #e5e5e5;}
+legend small{font-size:15px;color:#999999;}
 label,input,button,select,textarea{font-size:14px;font-weight:normal;line-height:20px;}
 input,button,select,textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
-label{display:block;margin-bottom:5px;}
-select,textarea,input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],.uneditable-input{display:inline-block;height:20px;padding:4px 6px;margin-bottom:10px;font-size:14px;line-height:20px;color:#555555;width:245px;-webkit-border-radius:4px;-moz-border-radius:4px;width:245px;border-radius:4px;vertical-align:middle;}
-input,textarea,.uneditable-input{width:206px;}
+label{display:block;margin-bottom:5px;    border: 0px; text-align: right; padding: 10px}
+select,textarea,input[type="text"],input[type="password"],input[type="datetime"],input[type="datetime-local"],input[type="date"],input[type="month"],input[type="time"],input[type="week"],input[type="number"],input[type="email"],input[type="url"],input[type="search"],input[type="tel"],input[type="color"],.uneditable-input{text-align:left; display:inline-block;height:20px;padding:4px 6px;margin-bottom:10px;font-size:14px;line-height:20px;color:#555555;width:245px;-webkit-border-radius:4px;-moz-border-radius:4px;width:245px;border-radius:4px;vertical-align:middle;}
+input,textarea,.uneditable-input{width:606px;}
 textarea{height:auto;}
 input[type="radio"],input[type="checkbox"]{margin:4px 0 0;*margin-top:0;margin-top:1px \9;line-height:normal;}
 input[type="file"],input[type="image"],input[type="submit"],input[type="reset"],input[type="button"],input[type="radio"],input[type="checkbox"]{width:auto;}
