@@ -1,8 +1,5 @@
 package sda.quiz.config;
 
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -58,6 +55,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rejestracja").permitAll()
                 .antMatchers("/index").permitAll()
                 .antMatchers("/quiz").permitAll()
+                .antMatchers("/ankiety").permitAll()
+                .antMatchers("/addAnkiete").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/admin/**").permitAll().anyRequest()//.hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
