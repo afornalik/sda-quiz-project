@@ -40,8 +40,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         User userExists = userService.findUserByEmail(user.getEmail());
         if(userExists != null) {
-            bindingResult
-                .rejectValue("email","error.user", "Podany adres jest już zarejestrowany.");
+            bindingResult.rejectValue("email","error.user", "Podany adres jest już zarejestrowany.");
             bindingResult.rejectValue("password","error.password","Podane hasło jest za krótkie, min 5 znaków.");
             modelAndView.setViewName("registration");
         }

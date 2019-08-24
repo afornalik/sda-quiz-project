@@ -9,11 +9,11 @@ import sda.quiz.entity.Quiz;
 @Component
 public class QuizMapper implements IMapper<Quiz, QuizDto> {
 
-
     private final ModelMapper modelMapper;
 
     @Autowired
     public QuizMapper(ModelMapper modelMapper) {
+
         this.modelMapper = modelMapper;
     }
 

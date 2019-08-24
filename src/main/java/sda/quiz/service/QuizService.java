@@ -14,7 +14,6 @@ import sda.quiz.service.mapper.QuizMapper;
 @Transactional
 public class QuizService implements IQuizService{
 
-
     private final IQuizRepository quizRepository;
 
     private final QuizMapper quizMapper;
@@ -24,7 +23,6 @@ public class QuizService implements IQuizService{
         this.quizRepository = quizRepository;
         this.quizMapper = quizMapper;
     }
-
 
     @Override
     public QuizDto createEmptyQuiz() {
