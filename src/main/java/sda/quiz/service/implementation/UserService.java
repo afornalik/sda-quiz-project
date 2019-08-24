@@ -1,27 +1,27 @@
-package sda.quiz.service;
+package sda.quiz.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
-import sda.quiz.entity.Role;
-import sda.quiz.entity.User;
-import sda.quiz.repository.RoleRepository;
-import sda.quiz.repository.UserRepository;
+import sda.quiz.entity.user.Role;
+import sda.quiz.entity.user.User;
+import sda.quiz.repository.IRoleRepository;
+import sda.quiz.repository.IUserRepository;
 import java.util.Arrays;
 import java.util.HashSet;
 
 @Service ("userService")
 public class UserService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private IUserRepository userRepository;
+    private IRoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(@Qualifier ( "userRepository" ) UserRepository userRepository,
-                       RoleRepository roleRepository,
+    public UserService(@Qualifier ( "userRepository" ) IUserRepository userRepository,
+                       IRoleRepository roleRepository,
                        BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;

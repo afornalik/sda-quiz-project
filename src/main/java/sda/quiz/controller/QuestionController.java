@@ -31,7 +31,7 @@ public class QuestionController {
     @RequestMapping(value = "admin/addquestion",method = RequestMethod.GET)
     public ModelAndView addQuestionEmptyForm(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("question",questionService.createEmptyQuestionWith4Answer());
+        modelAndView.addObject("question",new QuestionDto());
         modelAndView.setViewName("admin/question/addQuestionForm");
         return modelAndView;
     }
@@ -42,7 +42,7 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView();
         try {
             questionService.saveNewQuestion(questionDto);
-            modelAndView.setViewName("admin/question/addQuestionConfirm");
+            modelAndView.setViewName("redirect:admin/quiz/addquiz");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
             modelAndView.setViewName("admin/question/addQuestionForm");

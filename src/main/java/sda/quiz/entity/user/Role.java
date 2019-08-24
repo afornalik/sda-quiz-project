@@ -1,4 +1,4 @@
-package sda.quiz.entity;
+package sda.quiz.entity.user;
 
 
 import javax.persistence.*;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "role_id")
     private int id;
 

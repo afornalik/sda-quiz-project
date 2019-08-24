@@ -3,9 +3,11 @@ package sda.quiz.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import sda.quiz.entity.utilities.Category;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -28,6 +30,15 @@ public class Quiz {
     @Column(name="create_date")
     private LocalDate createDate;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "quiz")
-    private Set<Question> questions;
+    @Column(name = "category")
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    @ManyToMany
+    @JoinTable(
+            name = "quiz_questions",
+            joinColumns = @JoinColumn(name = "quiz_id"),
+            inverseJoinColumns = @JoinColumn(name = "question_id")
+    )
+    private List<Question> questions;
 }

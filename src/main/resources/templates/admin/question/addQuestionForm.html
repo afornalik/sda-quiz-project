@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Quiz | Add Question</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-</head>
-<body>
+<div th:replace="fragments/head "></div>
 
+<body class="home blog custom-background content-sidebar">
+<div class="container">
+    <div id="page" class="hfeed row">
+        <header id="branding" role="banner" class="span12">
+            <div th:replace="fragments/header "></div>
+            <nav id="access" role="navigation">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <span class="brand">MENU </span>
+                            <div class="nav-collapse">
+                                <div class="menu-tab-navi-container">
+                                    <ul id="menu-tab-navi" class="nav">
+
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a href="/admin/addquestion">Dodaj pytanie</a></li>
+
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a href="/admin/question/showAllQuestion">Edycja Quiz</a></li>
+                                    </ul>
+                                </div>
+                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
+                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
+                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
+                                <!--                            </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
 <div class="container mt-5">
     <div class="row">
@@ -62,6 +89,8 @@
         </div>
     </div>
 </div>
-<script src="/static/js/form.js"></script>
+        <div th:replace="fragments/footer "></div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,38 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="pl">
 
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
+<div th:replace="fragments/head "></div>
 
-<!--</body>-->
-<!--<div>-->
-<!--    <div>-->
-<!--        <h2>Create new quiz</h2>-->
-<!--    </div>-->
-<!--    <form th:object="${quiz}" method="post" th:action="@{/addquiz}">-->
-<!--        <div>-->
-<!--            <label > title-->
-<!--                <input type="text" th:field="*{title}" placeholder="isert title here">-->
-<!--            </label>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <label > description-->
-<!--                <textarea th:field="*{description}" placeholder="Write description ..." ></textarea>-->
-<!--            </label>-->
-<!--        </div>-->
-<!--        <br><br>-->
-<!--        <div th:each="question,iter : ${questionList}">-->
-<!--            <label th:text="${question.question}"> </label>-->
-<!--                <input type="checkbox" name="questionsToAdd" th:value="${question.id}" />-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Home</title>
+</head>
+<body class="home blog custom-background content-sidebar">
+<div class="container">
+    <div id="page" class="hfeed row">
+        <header id="branding" role="banner" class="span12">
+            <div th:replace="fragments/header "></div>
+            <nav id="access" role="navigation">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <a href="/admin/home">
+                                <span class="brand">MENU </span>
+                            </a>
+                            <div class="nav-collapse">
+                                <div class="menu-tab-navi-container">
+                                    <ul id="menu-tab-navi" class="nav">
 
-<!--        </div>-->
-<!--        <div>-->
-<!--            <input type="submit"> confirm </div>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
-<!--</html>-->
+
+                                    </ul>
+                                </div>
+                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
+                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
+                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
+                                <!--                            </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section id="primary2" class="span8">
+            <div>
+                <div>
+                    <h2>utwórz nowy quiz</h2>
+                </div>
+                <form th:object="${quiz}" method="post" th:action="@{addquiz}">
+                        <table style="width: auto;">
+                            <tr>
+                                <td><b>nazwa</b></td>
+                                <td style="margin: auto; text-align: center;">
+                                    <label>
+                                    <input type="text" th:field="*{title}" placeholder="">
+                                </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>kategoria</b></td>
+                                <td style="margin: auto; text-align: center;">
+                                    <select th:field="*{{category}}">
+                                        <option th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}"
+                                                th:text="${cat}"
+                                                th:value="${{cat}}">
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>opis</b></td>
+                                <td style="margin: auto; text-align: center;">
+                                    <label>
+                                        <textarea th:field="*{description}" placeholder=""></textarea>
+                                    </label></td>
+                            </tr>
+                        </table>
+                    <hr>
+                    <div>
+                        <h3>Pytania</h3>
+                        <table style="width: auto;">
+                            <thead>
+                            <tr>
+                                <td style="margin: auto; text-align: center;" ><b>treść pytania</b></td>
+                                <td style="margin: auto; text-align: center;"><b>dodaj do quizu</b></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="question,iter : ${questionList}">
+                                <td><span th:text="${question.question}"></span></td>
+                                <td style="margin: auto; text-align: center;"><input type="checkbox" name="questionsToAdd" th:value="${question.id}"/></td>
+                            </tr>
+                            <tr>
+                                <td style="height: 20px;"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>
+                                      <button class="btn btn-md btn-warning btn-block" >utwórz quiz</button>
+                                     </div>
+                                 </td>
+                                <td>
+                                    <button class="btn btn-md btn-primary btn-block" name="addQuestion" value="true" >dodaj nowe pytanie</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+        <section id="secondary" class="widget-area span4" role="complementary">
+
+
+        </section>
+
+
+        <div th:replace="fragments/footer "></div>
+
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>
 

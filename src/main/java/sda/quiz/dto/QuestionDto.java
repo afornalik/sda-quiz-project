@@ -8,6 +8,7 @@ import lombok.Setter;
 import sda.quiz.entity.Answer;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,5 +20,6 @@ public class QuestionDto {
     private String question;
     private Integer point;
     private List<AnswerDto> answersList;
+    private Set<QuizDto> quiz;
 
 }

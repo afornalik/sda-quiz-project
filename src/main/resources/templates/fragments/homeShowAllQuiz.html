@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        tr{
+            row-gap: 2px;
+        }
+    </style>
+
+</head>
+<body>
+
+<th:block th:fragment="showAllQuiz">
+    <div>
+        <div>
+            <h3>lista quizów</h3>
+        </div>
+        <di>
+            <form method="get" th:action="@{/admin/home}">
+                <table style="width: 100%">
+                    <thead>
+                        <tr>
+                            <td><b>nazwa quizu</b></td>
+                            <td><b>kategoria</b></td>
+                            <td><b>ilość pytań</b></td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="quiz,iter : ${quizList}">
+                            <td th:text="*{quiz.title}"></td>
+                            <td th:text="*{quiz.category}"></td>
+                            <td th:text="*{quiz.questions.size()}"></td>
+                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
+                           <!-- <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>-->
+                            <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">wykonaj</button> </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+            </form>
+        </di>
+
+    </div>
+
+</th:block>
+
+</body>
+</html>

@@ -1,16 +1,21 @@
 package sda.quiz.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "question")
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Question {
 
     @Id
@@ -24,11 +29,12 @@ public class Question {
     @Column(name="point")
     private Integer point;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "question")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_id")
-    private Quiz quiz;
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "questions")
+    private Set<Quiz> quiz;
+
+
 
 }

@@ -10,6 +10,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
+import sda.quiz.service.mapper.implementation.AnswerMapper;
+import sda.quiz.service.mapper.implementation.QuestionMapper;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -27,7 +29,7 @@ public class AnswerMapperTest {
     @Before
     public void init() {
 
-        questionDto = new QuestionDto(4l,"What is your name",5,null);
+        questionDto = new QuestionDto(4l,"What is your name",5,null,null);
 
 
     }

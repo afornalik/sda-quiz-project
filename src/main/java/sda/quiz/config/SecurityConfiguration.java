@@ -49,23 +49,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/head").permitAll()
-
                 .antMatchers("/panelAdmin").permitAll()
                 .antMatchers("/error").permitAll()
                 .antMatchers("/header").permitAll()
                 .antMatchers("/listaQuiz").permitAll()
-
                 .antMatchers("/menu").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/ankiety").permitAll()
+                .antMatchers("/rejestracja").permitAll()
+                .antMatchers("/index").permitAll()
                 .antMatchers("/quiz").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers("/admin/**").permitAll().anyRequest()//.hasAuthority("ADMIN").anyRequest()
-
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/admin/home")
-
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

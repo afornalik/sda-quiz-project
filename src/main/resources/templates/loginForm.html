@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/head "></div>
+<script type="javascript" src="../static/js/walidacja.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#formularz").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                },
+                url: {
+                    url: true,
+                },
+                comment: {
+                    required: true,
+                },
+            },
+            messages: {
+                name: {
+                    required: 'Pole wymagane',
+                    minlength: 'Wpisz conajmniej {0} znaki',
+                },
+                email: {
+                    required: 'Pole wymagane',
+                    email: 'Wpisz poprawny adres email',
+                },
+
+
+            }
+        });
+    });
+</script>
+
+<style type="text/css">
+    em, .error {
+        color: red;
+    }
+</style>
+<body class="home blog custom-background content-sidebar">
+<div class="container">
+    <div id="page" class="hfeed row">
+        <header id="branding" role="banner" class="span12">
+            <div th:replace="fragments/header "></div>
+            <nav id="access" role="navigation">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+                        <div class="container">
+                            <span class="brand">MENU </span>
+                            <div class="nav-collapse">
+                                <div class="menu-tab-navi-container">
+                                    <ul id="menu-tab-navi" class="nav">
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a th:href="index">Home</a></li>
+
+
+                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
+                                            <a th:href="quiz">Quizy</a></li>
+
+                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
+                                            <a th:href="registration">Rejestracja</a></li>
+
+
+
+                                    </ul>
+                                </div>
+                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
+                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
+                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
+                                <!--                            </form>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <section id="primary" class="span8">
+            <div id="content" role="main">
+                <article    >
+                    <form th:action="@{/login}" method="post" class="form-signin">
+                        <h3 class="form-signin-heading" th:text="Welcome"></h3>
+                        <br/>
+
+                        <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br/>
+                        <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br/>
+
+                        <div align="center"  >
+                            <p style="font-size: 20px; color: #FF1C19;" >Email lub hasło są błędne.<br> Proszę spróbować ponownie.</p>
+
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="submit" th:text="Login"></button>
+                    </form>
+                </article>
+
+
+            </div>
+        </section>
+
+        <section id="secondary" class="widget-area span4" role="complementary">
+            <div th:replace="/fragments/rejestracja"></div>
+
+            <div th:replace="/fragments/listaQuiz"></div>
+        </section>
+
+        <div th:replace="fragments/footer "></div>
+
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>
