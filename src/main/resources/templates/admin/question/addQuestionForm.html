@@ -47,7 +47,7 @@
 
 
 
-                            <form class="" th:object="${question}" th:action="@{/addquestion}" method="post">
+                            <form class="" th:object="${question}" th:action="@{/admin/addquestion}" method="post">
                                 <div class="form-group">
                                     <label for="question"> tekst pytania </label>
                                     <input class="form-control" id="question" th:field="*{question}" type="text"/>
@@ -103,11 +103,7 @@
             </div>
         </section>
 
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <!--            <div th:replace="/fragments/rejestracja"></div>-->
 
-            <div th:replace="/fragments/listaQuiz"></div>
-        </section>
 
         <div th:replace="fragments/footer "></div>
 

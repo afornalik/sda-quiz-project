@@ -34,12 +34,12 @@ public class QuestionController {
     }
 
 
-    @RequestMapping(value = "/addquestion",method = RequestMethod.POST)
+    @RequestMapping(value = "admin/addquestion",method = RequestMethod.POST)
     public ModelAndView addQuestionAfterInsertForm(@ModelAttribute ("question")QuestionDto questionDto) {
         ModelAndView modelAndView = new ModelAndView();
         try {
             questionService.saveNewQuestion(questionDto);
-            modelAndView.setViewName("redirect:admin/quiz/addquiz");
+            modelAndView.setViewName("redirect:/admin/quiz/addquiz");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
             modelAndView.setViewName("admin/question/addQuestionForm");
