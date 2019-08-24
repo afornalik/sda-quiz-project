@@ -86,6 +86,7 @@
                             <tr th:each="question,iter : ${questionList}">
                                 <td><span th:text="${question.question}"></span></td>
                                 <td style="margin: auto; text-align: center;"><input type="checkbox" name="questionsToAdd" th:value="${question.id}"/></td>
+                                <td> <button class="btn btn-md btn-danger btn-block" th:value="${question.id}" name="delete" >usuń pytanie</button></td>
                             </tr>
                             <tr>
                                 <td style="height: 20px;"></td>

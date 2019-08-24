@@ -15,4 +15,6 @@ public interface IQuestionService {
     QuestionDto setAllAnswerToFalse(QuestionDto questionDto);
 
     boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException;
+
+    void deleteQuestion(Long id);
 }

@@ -97,4 +97,9 @@ public class QuestionService implements IQuestionService {
             return true;
         }
     }
+
+    @Override
+    public void deleteQuestion(Long id) {
+        questionRepository.deleteById(id);
+    }
 }
