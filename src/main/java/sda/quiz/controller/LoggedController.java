@@ -28,7 +28,7 @@ public class LoggedController {
     }
 
 
-    @RequestMapping(value = {"/admin/home"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public ModelAndView home(@RequestParam(name = "delete",required = false) Long quizToDelete,
                              @RequestParam(name = "run",required = false) Long quizToRun,
                              @RequestParam(name ="category",required = false)String category) {

@@ -34,7 +34,7 @@ public class QuestionController {
     }
 
 
-    @RequestMapping(value = "admin/addquestion",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/addquestion",method = RequestMethod.POST)
     public ModelAndView addQuestionAfterInsertForm(@ModelAttribute ("question")QuestionDto questionDto) {
         ModelAndView modelAndView = new ModelAndView();
         try {

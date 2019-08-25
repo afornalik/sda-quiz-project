@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="pl">
+      xmlns:th="http://www.thymeleaf.org"  lang="pl">
 
 <div th:replace="fragments/head "></div>
 
@@ -35,10 +35,9 @@
                 </div>
             </nav>
         </header>
-        <form class="" th:object="${question}" th:action="@{/addquestion}" method="post">
+        <form class="" th:object="${question}" th:action="@{/admin/addquestion}" method="post">
 
             <section id="primary2" class="span8">
-
                 <div id="content" role="main">
                     <article>
                         <header class="page-header">
@@ -50,36 +49,34 @@
                                 <textarea id="question" th:field="*{question}" placeholder="Treść pytania" required/>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="form-addQuizForm">
                                 <label for="question1"><b>Odpowiedź 1:</b></label>
                                 <textarea id="question1" th:field="*{answersList[0].answer}" placeholder="Odpowiedź" required/>
+                                <input type="checkbox" th:field="*{answersList[0].isCorrect}" style="float: left" height="30px" >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-addQuizForm">
                                 <label for="question2"><b>Odpowiedź 2:</b></label>
                                 <textarea id="question2" th:field="*{answersList[1].answer}" placeholder="Odpowiedź" required/>
-
-                                <input type="checkbox" th:field="*{answersList[0].isCorrect}" style="float: left" height="30px" >
+                                <input type="checkbox" th:field="*{answersList[1].isCorrect}" style="float: left" height="30px" >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-addQuizForm">
                                 <label for="question3"><b>Odpowiedź 3:</b></label>
                                 <textarea id="question3" th:field="*{answersList[2].answer}" placeholder="Odpowiedź" />
-                                <input type="checkbox" th:field="*{answersList[0].isCorrect}" style="float: left" height="30px" >
+                                <input type="checkbox" th:field="*{answersList[2].isCorrect}" style="float: left" height="30px" >
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-addQuizForm">
                                 <label for="question4"><b>Odpowiedź 4:</b></label>
-
                                 <textarea id="question4" th:field="*{answersList[3].answer}" placeholder="Odpowiedź" />
+                                <input type="checkbox" th:field="*{answersList[3].isCorrect}" style="float: left" height="30px" >
                             </div>
                         </div>
-
                         <div class="form-group">
                             <div class="form-addQuizForm">
                                 <label style="width: 230px"  for="point"><b>Punkty za poprawną odpowiedz:</b></label>
@@ -88,66 +85,10 @@
                                 <input type="submit" value="dodaj pytanie" >
                             </div>
                         </div>
-
-
-
-
-
                         <div class="entry-content clearfix">
                             <p> </p>
                         </div>
-
                     </article>
-                </div>
-
-            </section>
-            <section id="secondary" class="widget-area span4" role="complementary">
-                <div>
-                    <h3>  </h3>
-
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <label for="question"><b> </b></label>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <label for="question" style="float: right"><b>Poprawna odpowiedzi:</b></label >
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-
-                            <input type="checkbox" th:field="*{answersList[0].isCorrect}" style="float: left" height="30px" >
-                            <!-- <input type="text" th:field="*{answersList[0].answer}">-->
-                            <!--                                        <input type="checkbox" th:field="*{answersList[0].isCorrect}">-->
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <input type="checkbox" th:field="*{answersList[1].isCorrect}" style="float: left">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <input type="checkbox" th:field="*{answersList[2].isCorrect}" style="float: left">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-
-                            <input type="checkbox" th:field="*{answersList[3].isCorrect}" style="float: left">
-
-                        </div>
-                    </div>
-
-
-
                 </div>
             </section>
 
@@ -160,101 +101,3 @@
 
 </body>
 </html>
-
-
-
-<!--        <section id="primary" class="span8">-->
-<!--            <div id="content" role="main">-->
-<!--                <article>-->
-
-
-<!--                    <header class="page-header">-->
-<!--                        <h1 class="entry-title">Stwórz nowe pytanie</h1>-->
-<!--                    </header>-->
-<!--                    <header class="page-header">-->
-<!--                        <div class="entry-meta">-->
-
-
-
-<!--                            <form class="" th:object="${question}" th:action="@{/addquestion}" method="post">-->
-
-<!--                                <div class="form-group">-->
-<!--                                    <div class="form-right">-->
-<!--                                        <label for="question"> tekst pytania </label>-->
-<!--                                        <input class="form-control" id="question" th:field="*{question}" type="text"/>-->
-<!--                                    </div>-->
-<!--                                    <div class="form-left">-->
-<!--                                        <label for="point"> punkty za poprawną odpowiedz </label>-->
-<!--                                        <input class="form-control" id="point" th:field="*{point}" type="number"/>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                                <div class="form-group">-->
-<!--                                    <label for="question"> tekst pytania </label>-->
-<!--                                    <input class="form-control" id="question" th:field="*{question}" type="text"/>-->
-<!--                                </div>-->
-<!--                                <div class="form-group">-->
-<!--                                    <label for="point"> punkty za poprawną odpowiedz </label>-->
-<!--                                    <input class="form-control" id="point" th:field="*{point}" type="number"/>-->
-<!--                                </div>-->
-<!--                                <div class="form-group">-->
-<!--                                    <p>odpowiedzi : </p>-->
-<!--                                    <div class="form-group" >-->
-<!--                                        1-->
-<!--                                        <input type="text" th:field="*{answersList[0].answer}">-->
-<!--                                        <input type="checkbox" th:field="*{answersList[0].isCorrect}">-->
-
-<!--                                    </div>-->
-<!--                                    <div class="form-group" >-->
-<!--                                        2-->
-<!--                                        <input type="text" th:field="*{answersList[1].answer}">-->
-<!--                                        <input type="checkbox" th:field="*{answersList[1].isCorrect}">-->
-
-<!--                                    </div>-->
-<!--                                    <div class="form-group" >-->
-<!--                                        3-->
-<!--                                        <input type="text" th:field="*{answersList[2].answer}">-->
-<!--                                        <input type="checkbox" th:field="*{answersList[2].isCorrect}">-->
-
-<!--                                    </div>-->
-<!--                                    <div class="form-group" >-->
-<!--                                        4-->
-<!--                                        <input type="text" th:field="*{answersList[3].answer}">-->
-<!--                                        <input type="checkbox" th:field="*{answersList[3].isCorrect}">-->
-
-<!--                                    </div>-->
-
-<!--                                </div>-->
-<!--                                <div class="form-group">-->
-
-<!--                                </div>-->
-<!--                                <div>-->
-<!--                                    <input type="submit" value="dodaj pytanie" >-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                            <p th:text="${error}"></p>-->
-
-<!--                        </div>-->
-<!--                    </header>-->
-
-<!--                    <div class="entry-content clearfix">-->
-<!--                        <p></p>-->
-<!--                    </div>-->
-<!--                </article>-->
-<!--            </div>-->
-<!--        </section>-->
-
-<!--        <section id="secondary" class="widget-area span4" role="complementary">-->
-<!--            &lt;!&ndash;            <div th:replace="/fragments/rejestracja"></div>&ndash;&gt;-->
-
-<!--            <div th:replace="/fragments/listaQuiz"></div>-->
-<!--        </section>-->
-
-<!--        <div th:replace="fragments/footer "></div>-->
-
-<!--    </div>-->
-<!--</div>-->
-
-
-<!--</body>-->
-<!--</html>-->
