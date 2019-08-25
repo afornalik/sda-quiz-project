@@ -71,10 +71,18 @@ public class QuizController {
     }
 
     @RequestMapping(value ="quiz", method = RequestMethod.GET)
-    public ModelAndView quiz(){
+    public ModelAndView quiz(@RequestParam(name = "run",required = false) Long quizToRun){
         Quiz quiz = new Quiz();
         ModelAndView modelAndView =new ModelAndView();
         modelAndView.addObject("quiz",quiz);
+        modelAndView.addObject("quizList",quizService.getAllQuiz());
+        if(quizToRun != null) {
+            QuizDto quizDto = quizService.getQuizById(quizToRun,true);
+            modelAndView.addObject("quiz",quizDto);
+            modelAndView.setViewName("admin/quiz/runQuiz");
+            return modelAndView;
+        }
+
         return modelAndView;
     }
 

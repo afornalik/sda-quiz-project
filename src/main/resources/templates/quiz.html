@@ -23,8 +23,10 @@
                                         <a th:href="quiz">Quizy</a></li>
                                     <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
                                         <a th:href="registration">Rejestracja</a></li>
+
                                 </ul>
                             </div>
+
                             <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
                             <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
                             <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
@@ -41,10 +43,10 @@
                     <th:block th:fragment="showAllQuiz">
                         <div>
                             <div>
-                                <h3>lista quizów</h3>
+                                <h3>lista quizów3</h3>
                             </div>
                             <di>
-                                <form method="get" th:action="@{/admin/home}">
+                                <form method="get" th:action="@{/quiz}">
                                     <table style="width: 100%">
                                         <thead>
                                         <tr>
@@ -59,8 +61,8 @@
                                             <td th:text="*{quiz.title}"></td>
                                             <td th:text="*{quiz.category}"></td>
                                             <td th:text="*{quiz.questions.size()}"></td>
-                                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
-                                            <!-- <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>-->
+<!--                                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>-->
+<!--                                            &lt;!&ndash; <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>&ndash;&gt;-->
                                             <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">wykonaj</button> </td>
                                         </tr>
                                         </tbody>

@@ -97,8 +97,9 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="question,iter : ${questionList}">
-                                            <td><span th:text="${question.question}"></span></td>
                                             <td style="margin: auto; text-align: center;"><input type="checkbox" name="questionsToAdd" th:value="${question.id}"  /></td>
+                                            <td><span th:text="${question.question}"></span></td>
+
                                         </tr>
                                         <tr>
                                             <td style="height: 20px;"></td>
