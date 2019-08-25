@@ -38,23 +38,50 @@
         <section id="primary" class="span8">
             <div id="content" role="main">
                 <article>
-                    <header class="page-header">
-                        <h1 class="entry-title">Ostatnio dodane Quizy</h1>
-                    </header>
+                    <th:block th:fragment="showAllQuiz">
+                        <div>
+                            <div>
+                                <h3>lista quizów</h3>
+                            </div>
+                            <di>
+                                <form method="get" th:action="@{/admin/home}">
+                                    <table style="width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <td><b>nazwa quizu</b></td>
+                                            <td><b>kategoria</b></td>
+                                            <td><b>ilość pytań</b></td>
+                                            <td></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="quiz,iter : ${quizList}">
+                                            <td th:text="*{quiz.title}"></td>
+                                            <td th:text="*{quiz.category}"></td>
+                                            <td th:text="*{quiz.questions.size()}"></td>
+                                            <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">usuń</button> </td>
+                                            <!-- <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>-->
+                                            <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">wykonaj</button> </td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
 
 
+                                </form>
+                            </di>
+
+                        </div>
+
+                    </th:block>
 
 
+        </header>
 
-                </article>
-            </div>
-        </section>
-
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <div th:replace="/fragments/rejestracja"></div>
-
-            <div th:replace="/fragments/listaQuiz"></div>
-        </section>
+        <div class="entry-content clearfix">
+            <p></p>
+        </div>
+        </article>
 
         <div th:replace="fragments/footer "></div>
 

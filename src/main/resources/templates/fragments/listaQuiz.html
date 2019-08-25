@@ -1,11 +1,17 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <aside id="recent-posts-2" class="widget well widget_recent_entries" style="text-align: left;">
-    <h2>kategorie</h2>
+    <h2>Kategorie:</h2>
     <ul style="padding: 0; list-style-type: none;text-align: left; margin: 0 0 10px 0px;">
         <li style="list-style-type: none;margin: 5px 0px; text-align: left;" th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}">
-            <a th:href="@{/admin/home/{category}(category=${cat})}">
-                <button class="btn btn-md btn-warning btn-block" th:text="${cat}" ></button>
-            </a>
+<!--            <a th:href="@{/admin/home/{category}(category=${cat})}">-->
+<!--                <button class="btn btn-md btn-warning btn-block" th:text="${cat}" ></button>-->
+<!--            </a>
+
+ -->
+
+            <button type="submit" th:value="@{/admin/home{category}(category=${cat})}"  class="btn btn-md btn-warning btn-block" th:text="${cat}" >ta</button>
+
+
         </li>
 
 

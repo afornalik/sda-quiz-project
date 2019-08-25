@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
+import sda.quiz.entity.Quiz;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
 
@@ -63,7 +64,13 @@ public class QuizController {
         return modelAndView;
     }
 
-
+    @RequestMapping(value ="quiz", method = RequestMethod.GET)
+    public ModelAndView quiz(){
+        Quiz quiz = new Quiz();
+        ModelAndView modelAndView =new ModelAndView();
+        modelAndView.addObject("quiz",quiz);
+        return modelAndView;
+    }
 
 
 }
