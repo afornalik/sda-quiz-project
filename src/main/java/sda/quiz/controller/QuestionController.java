@@ -1,4 +1,5 @@
 package sda.quiz.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,36 +14,34 @@ public class QuestionController {
 
     private final IQuestionService questionService;
 
+    @Autowired
     public QuestionController(IQuestionService questionService) {
         this.questionService = questionService;
     }
 
-    @RequestMapping(value = "admin/question/showAllQuestion",method = RequestMethod.GET)
+    @RequestMapping(value = "/question/showAll")
     public ModelAndView showAllQuestions() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("questions",questionService.getAllQuestions());
-        modelAndView.setViewName("admin/question/showAllQuestion");
+        ModelAndView modelAndView = new ModelAndView("/admin/question/showAll");
+        modelAndView.addObject("questions", questionService.getAllQuestions());
         return modelAndView;
     }
 
-    @RequestMapping(value = "admin/addquestion",method = RequestMethod.GET)
-    public ModelAndView addQuestionEmptyForm(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("question",new QuestionDto());
-        modelAndView.setViewName("admin/question/addQuestionForm");
+    @RequestMapping(value = "/question/add")
+    public ModelAndView addQuestionEmptyForm() {
+        ModelAndView modelAndView = new ModelAndView("/admin/question/add");
+        modelAndView.addObject("question", new QuestionDto());
         return modelAndView;
     }
 
-
-    @RequestMapping(value = "admin/addquestion",method = RequestMethod.POST)
-    public ModelAndView addQuestionAfterInsertForm(@ModelAttribute ("question")QuestionDto questionDto) {
-        ModelAndView modelAndView = new ModelAndView();
+    // TO DO create proper validation
+    @RequestMapping(value = "/question/add", method = RequestMethod.POST)
+    public ModelAndView addQuestionAfterInsertForm(@ModelAttribute("question") QuestionDto questionDto) {
+        ModelAndView modelAndView = new ModelAndView("/admin/question/add");
         try {
             questionService.saveNewQuestion(questionDto);
             modelAndView.setViewName("redirect:/admin/quiz/addquiz");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
-            modelAndView.setViewName("admin/question/addQuestionForm");
         }
         return modelAndView;
     }

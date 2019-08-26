@@ -52,7 +52,7 @@ public class QuizController {
             modelAndView.addObject("quiz",quizService.createEmptyQuiz());
             modelAndView.setViewName("admin/quiz/addQuizForm");
         }else if(addQuestion != null) {
-            modelAndView.setViewName("redirect:/admin/addquestion");
+            modelAndView.setViewName("redirect:/question/add");
         }else {
             modelAndView.setViewName("redirect:/admin/home");
             quizService.saveQuiz(quizDto, questionToAdd);
@@ -70,13 +70,7 @@ public class QuizController {
         return modelAndView;
     }
 
-    @RequestMapping(value ="quiz", method = RequestMethod.GET)
-    public ModelAndView quiz(){
-        Quiz quiz = new Quiz();
-        ModelAndView modelAndView =new ModelAndView();
-        modelAndView.addObject("quiz",quiz);
-        return modelAndView;
-    }
+
 
 
 }
