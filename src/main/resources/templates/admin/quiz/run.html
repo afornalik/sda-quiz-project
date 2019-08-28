@@ -52,7 +52,7 @@
         </header>
 
         <div style="margin-left: 20px;">
-            <form th:object="${quizToRun}" th:action="@{quiz/checkAnswer}" method="post">
+            <form th:object="${quizToRun}" th:action="@{/quiz/answer}" method="post">
                 <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
 
                 <table>

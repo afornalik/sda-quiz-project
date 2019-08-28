@@ -9,19 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
-import sda.quiz.entity.Quiz;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
 
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 public class QuizController {
-
     private final IQuizService quizService;
-
     private final IQuestionService questionService;
 
     @Autowired
@@ -30,47 +25,47 @@ public class QuizController {
         this.questionService = questionService;
     }
 
-    @RequestMapping(value="admin/quiz/addquiz",method = RequestMethod.GET)
-    public ModelAndView createQuiz(){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("questionList",questionService.getAllQuestions());
-        modelAndView.addObject("quiz",quizService.createEmptyQuiz());
-        modelAndView.setViewName("admin/quiz/addQuizForm");
-        return modelAndView;
-    }
+    @RequestMapping(value = "/quiz/add", method = RequestMethod.POST)
+    public ModelAndView addQuiz(@ModelAttribute("quiz") QuizDto quizDto,
+                                             @RequestParam(name = "questionsToAdd", required = false) Long[] questionsToAdd,
+                                             @RequestParam(name = "addQuestion", required = false) String addQuestion,
+                                             @RequestParam(name = "delete", required = false) Long id) {
 
-    @RequestMapping(value = "admin/quiz/addquiz",method = RequestMethod.POST)
-    public ModelAndView addQuizAfterQuizForm(@ModelAttribute("quiz")QuizDto quizDto,
-                                             @RequestParam(name = "questionsToAdd" , required = false) Long[] questionToAdd,
-                                             @RequestParam(name = "addQuestion",required = false) String addQuestion,
-                                             @RequestParam(name="delete",required = false) Long id){
+        ModelAndView modelAndView = new ModelAndView("redirect:/admin/home");
 
-        ModelAndView modelAndView = new ModelAndView();
-        if(id != null){
+        if (id != null) {
             questionService.deleteQuestion(id);
-            modelAndView.addObject("questionList",questionService.getAllQuestions());
-            modelAndView.addObject("quiz",quizService.createEmptyQuiz());
-            modelAndView.setViewName("admin/quiz/addQuizForm");
-        }else if(addQuestion != null) {
+            return setModelAndView(modelAndView);
+
+        } else if (addQuestion != null) {
             modelAndView.setViewName("redirect:/question/add");
-        }else {
-            modelAndView.setViewName("redirect:/admin/home");
-            quizService.saveQuiz(quizDto, questionToAdd);
+
+        } else if (questionsToAdd != null) {
+            quizService.saveQuiz(quizDto, questionsToAdd);
+
         }
         return modelAndView;
     }
 
-    @RequestMapping(value="admin/quiz/checkAnswer",method =RequestMethod.POST)
-    public ModelAndView checkTheAnswers(@ModelAttribute("quiz")QuizDto quiz){
-        ModelAndView modelAndView = new ModelAndView();
-       QuizDto quizDto = quizService.getQuizById(quiz.getIdQuiz(),false);
-        Map<QuestionDto,Boolean> answerMap = quizService.checkAllAnswer(quiz);
-        modelAndView.addObject("answer",answerMap);
-        modelAndView.setViewName("admin/quiz/checkAnswer");
+    @RequestMapping(value = "/quiz/add")
+    public ModelAndView createQuiz() {
+        return setModelAndView(new ModelAndView());
+    }
+
+    @RequestMapping(value = "/quiz/answer", method = RequestMethod.POST)
+    public ModelAndView checkTheAnswers(@ModelAttribute("quiz") QuizDto quiz) {
+        ModelAndView modelAndView = new ModelAndView("/admin/quiz/answer");
+        Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
+        modelAndView.addObject("answer", answerMap);
         return modelAndView;
     }
 
-
+    private ModelAndView setModelAndView(ModelAndView modelAndView) {
+        modelAndView.setViewName("/admin/quiz/add");
+        modelAndView.addObject("questionList", questionService.getAllQuestions());
+        modelAndView.addObject("quiz", quizService.createEmptyQuiz());
+        return modelAndView;
+    }
 
 
 }

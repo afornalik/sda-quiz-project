@@ -37,7 +37,7 @@ public class LoggedController {
 
         } else if (quizToRun != null) {
             modelAndView.addObject("quizToRun", quizService.getQuizById(quizToRun, true));
-            modelAndView.setViewName("admin/quiz/runQuiz");
+            modelAndView.setViewName("admin/quiz/run");
 
         } else if (quizToDelete != null) {
             quizService.deleteQuiz(quizToDelete);

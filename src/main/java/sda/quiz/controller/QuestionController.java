@@ -39,7 +39,7 @@ public class QuestionController {
         ModelAndView modelAndView = new ModelAndView("/admin/question/add");
         try {
             questionService.saveNewQuestion(questionDto);
-            modelAndView.setViewName("redirect:/admin/quiz/addquiz");
+            modelAndView.setViewName("redirect:/quiz/add");
         } catch (Exception e) {
             modelAndView.addObject("error", e.getMessage());
         }

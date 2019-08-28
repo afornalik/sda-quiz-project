@@ -23,10 +23,8 @@
                                     <ul id="menu-tab-navi" class="nav">
                                         <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
                                             <a href="/admin/home">Admin</a>  </li>
-                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
-                                            <a href="/admin/quiz/addquiz">Dodaj Quiz</a></li>
                                         <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="/admin/addquestion">Dodaj Pytanie</a>  </li>
+                                            <a href="/question/add">Dodaj Pytanie</a>  </li>
 
                                     </ul>
                                 </div>
@@ -36,7 +34,7 @@
                 </div>
             </nav>
         </header>
-        <form th:object="${quiz}" method="post" th:action="@{addquiz}">
+        <form th:object="${quiz}" method="post" th:action="@{/quiz/add}">
         <section id="primary2" class="span8">
             <div id="content" role="main">
                 <article>
