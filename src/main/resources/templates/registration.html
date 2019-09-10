@@ -8,11 +8,53 @@
 <div class="container col-10">
 
     <div class="row">
-        <th:block th:insert="fragments/general :: navbar"/>
+        <th:block th:insert="fragments/general :: navbar('')"/>
     </div>
 
     <div class="row d-flex justify-content-center">
-        <th:block th:replace="fragments/general :: registration(${user})" />
+
+        <!--register panel-->
+        <th:block th:fragment="registration(user)">
+            <section id="secondary1" class="card m-3 col-8" role="complementary">
+                <form autocomplete="off" th:action="@{/registration}"
+                      th:object="${user}" method="post" class="card-body form-horizontal"
+                      role="form">
+                    <h2 class="mb-3">Register</h2>
+                    <div>
+                        <label for="validationDefaultUsername2" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                               class="validation-message">Imię: </label>
+                        <input type="text" th:field="*{name}"
+                               class="form-control" id="validationDefaultUsername2" placeholder="First name" required/>
+                        <br>
+                    </div>
+                    <div>
+                        <input type="text" th:field="*{lastName}"
+                               placeholder="Last name" class="form-control" required/>
+                        <br>
+                    </div>
+                    <div>
+                        <input type="email" th:field="*{email}" placeholder="Email" required
+                               class="form-control" id="validationDefaultUsername3"/><label
+                            th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                            class="validation-message" for="validationDefaultUsername3"></label>
+                        <br>
+                    </div>
+                    <div>
+                        <input id="validationDefaultUsername4" type="password" th:field="*{password}"
+                               placeholder="Password" class="form-control" required/> <label
+                            for="validationDefaultUsername4" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                            class="validation-message"></label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+                        </div>
+                    </div>
+                    <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
+                </form>
+            </section>
+        </th:block>
     </div>
 
 

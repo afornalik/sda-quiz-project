@@ -1,62 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<div th:replace="fragments/head "></div>
+<th:block th:insert="fragments/general :: head"/>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Home</title>
-</head>
-<body class="home blog custom-background content-sidebar">
-<div class="container">
-    <div id="page" class="hfeed row">
-        <header id="branding" role="banner" class="span12">
-            <div th:replace="fragments/header "></div>
-            <nav id="access" role="navigation">
-                <div class="navbar navbar-inverse">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <span class="brand">MENU </span>
-                            <div class="nav-collapse">
-                                <div class="menu-tab-navi-container">
-                                    <ul id="menu-tab-navi" class="nav">
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="/admin/home">Admin</a>  </li>
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="/question/add">Dodaj Pytanie</a>  </li>
+<body style="background-color: aliceblue">
 
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+<div class="container col-10">
+
+    <div class="row">
+        <th:block th:insert="fragments/general :: navbar('logout')"/>
+    </div>
+
+
+
+
         <form th:object="${quiz}" method="post" th:action="@{/quiz/add}">
-        <section id="primary2" class="span8">
-            <div id="content" role="main">
-                <article>
-                    <header class="page-header">
-                        <h1 class="entry-title">Utwórz nowy quiz</h1>
-                    </header>
+            <div class="row">
+            <div class="card col-4 m-3">
+                <div class="card-title mt-3 ml-3 mb-0">
+                    <h3>Create new quiz</h3>
+                </div>
                     <div class="form-group">
                         <div class="form-addQuizForm">
-                            <label for="title"><b>Nazwa quizu:</b></label>
-                            <textarea id="title" th:field="*{title}" placeholder=""  />
+                            <label  for="title"><b>name</b></label>
+                            <textarea class="form-control" id="title" th:field="*{title}" placeholder=""  />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-addQuizForm">
-                            <label for="title"><b>Opis:</b></label>
-                            <textarea th:field="*{description}" placeholder=""></textarea>
+                            <label  for="title"><b>description</b></label>
+                            <textarea class="form-control" th:field="*{description}" placeholder=""></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="form-addQuizForm">
-                            <label for="title"><b>Kategoria:</b></label>
-                            <select th:field="*{{category}}">
+                            <label for="title"><b>category</b></label>
+                            <select class="form-control" th:field="*{{category}}">
                                 <option th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}" th:text="${cat}" th:value="${{cat}}">
                                 </option>
                             </select>
@@ -64,60 +43,28 @@
                     </div>
                     <div class="form-group">
                         <div class="form-addQuizForm">
-                            <button class="btn btn-md btn-warning btn-block" >utwórz quiz</button>
+                            <button class="btn btn-md btn-warning btn-block" >create</button>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-
-                        </div>
-                    </div>
-
-                    <div class="entry-content clearfix">
-                        <p> </p>
-                    </div>
-
-                </article>
             </div>
 
-        </section>
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <div>
-                <h3>Lista pytań:</h3>
 
 
-                                    <table style="width: auto;">
-                                        <thead>
-                                        <tr>
-                                            <td style="margin: auto; text-align: center;" ><b>Zaznacz pytania które chcesz dodać do Quizu:</b></td>
-                                            <td style="margin: auto; text-align: center;"> </td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr th:each="question,iter : ${questionList}">
-                                            <td><span th:text="${question.question}"></span></td>
-                                            <td style="margin: auto; text-align: center;"><input type="checkbox" name="questionsToAdd" th:value="${question.id}"  /></td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 20px;"></td>
-                                        </tr>
-                                        <tr>
+            <div class="card col-7 m-3">
+                <button class="btn  btn-primary  m-3 col-3" name="addQuestion" value="true" >new question</button>
 
-                                            <td>
-                                                <button class="btn btn-md btn-primary btn-block" name="addQuestion" value="true" >dodaj nowe pytanie</button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+
             </div>
-        </section>
+            </div>
         </form>
 
-        <div th:replace="fragments/footer "></div>
+            <div class="row align-items-end">
+                <div th:insert="fragments/general :: footer"></div>
+            </div>
+        </div>
 
-    </div>
-</div>
+        <th:block th:insert="fragments/general :: js_import"/>
+
 
 </body>
 </html>
-

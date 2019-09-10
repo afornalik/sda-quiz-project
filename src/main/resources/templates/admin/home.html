@@ -8,11 +8,46 @@
 <div class="container col-10">
 
     <div class="row">
-        <th:block th:insert="fragments/general :: navbar"/>
+        <th:block th:insert="fragments/general :: navbar('logout')"/>
     </div>
 
     <div class="row">
-        <div th:insert="fragments/homeShowAllQuiz :: showAllQuiz" ></div>
+        <!-- home page quizzes list -->
+        <div class="col-12">
+        <th:block th:fragment="showAllQuiz">
+            <div class="card m-3 ">
+                <div class="card-title mt-3 ml-3 mb-0">
+                    <h3>Created Quizzes</h3>
+                </div>
+                <div class="card-body">
+                    <form method="get" th:action="@{/admin/home}">
+                        <table style="width: 100%">
+                            <thead>
+                            <tr>
+                                <td><b>name</b></td>
+                                <td><b>category</b></td>
+                                <td><b>number of questions</b></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="quiz,iter : ${quizList}">
+                                <td th:text="*{quiz.title}"></td>
+                                <td th:text="*{quiz.category}"></td>
+                                <td th:text="*{quiz.questions.size()}"></td>
+                                <td><button type="submit" class="btn btn-danger"  th:value="*{quiz.idQuiz}" name="delete">remove</button> </td>
+                                <!-- <td><button type="submit" class="btn btn-warning"  th:value="*{quiz.idQuiz}" name="change">modyfikuj</button> </td>-->
+                                <td><button type="submit" class="btn btn-primary"  th:value="*{quiz.idQuiz}" name="run">run</button> </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button type="submit" class="btn btn-success" name="create">create new quiz</button>
+                    </form>
+                </div>
+            </div>
+
+        </th:block>
+        </div>
     </div>
 
     <div class="d-flex flex-row">

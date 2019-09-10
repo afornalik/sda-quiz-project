@@ -8,12 +8,45 @@
 <div class="container col-10">
 
     <div class="row">
-        <th:block th:insert="fragments/general :: navbar"/>
+        <th:block th:insert="fragments/general :: navbar('registration')"/>
     </div>
 
     <div class="row">
-        <th:block th:insert="fragments/general :: index_left_section"/>
-        <div th:replace="fragments/general :: login"></div>
+        <!-- Index left fragment-->
+        <th:block th:fragment="index_left_section">
+            <div class="card col-8 m-3">
+                <div class="card-body">
+                    <h5 class="card-title">Welcome</h5>
+                    <p class="card-text">
+
+                    <h1 class="entry-title">Free online quizzes about Java</h1>
+                    <div>
+                        <p>Create Your own online quizzes and share them with Your friends, students or just with other
+                            people.</p>
+                    </div>
+                    <div>
+                        <p>Enjoy our site to learn Java faster.</p>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+
+        <th:block th:fragment="login">
+            <aside class="card  mt-3 mb-3 mr-0">
+                <div class="card-body">
+                    <form th:action="@{/}" method="POST" class="form-signin">
+                        <input type="email" id="email" name="email" th:placeholder="Email"
+                               class="form-control"/> <br/>
+                        <input type="password" th:placeholder="Password"
+                               id="password" name="password" class="form-control"/> <br/>
+                        <button class="btn btn-md btn-warning btn-block" name="Submit" value="Login" type="Submit"
+                                th:text="Login">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </aside>
+        </th:block>
     </div>
 
     <div class="d-flex flex-row">

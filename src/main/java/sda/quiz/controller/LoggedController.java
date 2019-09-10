@@ -27,6 +27,7 @@ public class LoggedController {
     @RequestMapping(value = "/admin/home")
     public ModelAndView home(@RequestParam(name = "delete", required = false) Long quizToDelete,
                              @RequestParam(name = "run", required = false) Long quizToRun,
+                             @RequestParam(name = "create", required = false) String create,
                              @RequestParam(name = "category", required = false) String category) {
 
         ModelAndView modelAndView = new ModelAndView("admin/home");
@@ -41,6 +42,8 @@ public class LoggedController {
 
         } else if (quizToDelete != null) {
             quizService.deleteQuiz(quizToDelete);
+        } else if (create != null) {
+            modelAndView.setViewName("redirect:/quiz/add");
         }
 
         modelAndView.addObject("quizList", quizService.getAllQuiz());
