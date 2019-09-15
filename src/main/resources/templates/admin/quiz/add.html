@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <th:block th:insert="fragments/general :: head"/>
 
@@ -12,59 +12,90 @@
     </div>
 
 
-
-
-        <form th:object="${quiz}" method="post" th:action="@{/quiz/add}">
-            <div class="row">
-            <div class="card col-4 m-3">
+    <form class="text-center" th:object="${quiz}" method="post" th:action="@{/quiz/add}">
+        <div class="row row d-flex justify-content-center">
+            <div class="card col-7 m-3">
                 <div class="card-title mt-3 ml-3 mb-0">
                     <h3>Create new quiz</h3>
                 </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <label  for="title"><b>name</b></label>
-                            <textarea class="form-control" id="title" th:field="*{title}" placeholder=""  />
-                        </div>
+                <div class="form-group">
+                    <div class="form-addQuizForm">
+                        <label for="title"><b>name</b></label>
+                        <textarea class="form-control" id="title" th:field="*{title}" placeholder=""></textarea>
                     </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <label  for="title"><b>description</b></label>
-                            <textarea class="form-control" th:field="*{description}" placeholder=""></textarea>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-addQuizForm">
+                        <label for="title"><b>description</b></label>
+                        <textarea class="form-control" th:field="*{description}" placeholder=""></textarea>
                     </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <label for="title"><b>category</b></label>
-                            <select class="form-control" th:field="*{{category}}">
-                                <option th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}" th:text="${cat}" th:value="${{cat}}">
-                                </option>
-                            </select>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-addQuizForm">
+                        <label for="title"><b>category</b></label>
+                        <select class="form-control" th:field="*{{category}}">
+                            <option th:each="cat : ${T(sda.quiz.entity.utilities.Category).values()}" th:text="${cat}"
+                                    th:value="${{cat}}">
+                            </option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <div class="form-addQuizForm">
-                            <button class="btn btn-md btn-warning btn-block" >create</button>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-addQuizForm">
+                        <button class="btn btn-md btn-warning btn-block">create</button>
                     </div>
+                </div>
             </div>
 
 
+        </div>
 
-            <div class="card col-7 m-3">
-                <button class="btn  btn-primary  m-3 col-3" name="addQuestion" value="true" >new question</button>
-
-
-            </div>
-            </div>
-        </form>
-
-            <div class="row align-items-end">
-                <div th:insert="fragments/general :: footer"></div>
+        <div class="row row d-flex justify-content-center" th:each="ques,ind : *{questions}">
+            <div class="card col-7 mt-3 text-center" style="display: none" th:id="'q'+${ind.index}">
+                <div class="card-title"><span th:text="'Question no. ' + ${ind.index+1}"></span></div>
+                <input class="form-control" type="text" th:field="*{questions[__${ind.index}__].question}" >
+                <button class="btn  btn-danger m-3" name="addQuestion" value="true" type="button"
+                        th:onclick="'show(\''+${2}+'\');'">remove
+                </button>
             </div>
         </div>
 
-        <th:block th:insert="fragments/general :: js_import"/>
+        <div class="row row d-flex justify-content-center">
+            <div class="col-7 mt-3 text-center">
+                <button class="btn  btn-primary m-3" name="addQuestion" value="true" type="button" id="1"
+                        th:onclick="'show(\''+${2}+'\');'">new question
+                </button>
+            </div>
+        </div>
+        <div class="row row d-flex justify-content-center" th:each="question,ind : *{questions}">
+            <div class=" col-7 mt-3 text-center" style="display: none" th:id="${ind.index+2}">
+                <button class="btn  btn-primary m-3" name="addQuestion" value="true" type="button"
+                        th:onclick="'show(\''+${ind.index+3}+'\');'">new question
+                </button>
+            </div>
+        </div>
+    </form>
 
+    <div class="row align-items-end">
+        <div th:insert="fragments/general :: footer"></div>
+    </div>
+</div>
 
+<th:block th:insert="fragments/general :: js_import"/>
+
+<script type="text/javascript">
+    function show(i) {
+        let act = i - 1;
+        let actualQuestion = document.getElementById(act);
+        let nextQuestion = document.getElementById(i);
+        let questionForm = document.getElementById('q'+(i-1));
+        if (nextQuestion.style.display === "none") {
+            actualQuestion.style.display = "none";
+            questionForm.style.display = "block";
+            nextQuestion.style.display = "block";
+        }
+
+    }
+</script>
 </body>
 </html>

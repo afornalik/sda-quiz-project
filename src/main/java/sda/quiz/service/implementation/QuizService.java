@@ -43,8 +43,14 @@ public class QuizService implements IQuizService {
 
 
     @Override
-    public QuizDto createEmptyQuiz() {
-        return new QuizDto();
+    public QuizDto createEmptyQuizWithTwentyQuestions() {
+        QuizDto quizDto = new QuizDto();
+        List<QuestionDto> questionDtoList = new ArrayList<>();
+        for(int i = 0 ; i<=20 ; i++){
+            questionDtoList.add(new QuestionDto());
+        }
+        quizDto.setQuestions(questionDtoList);
+        return quizDto;
     }
 
     @Override

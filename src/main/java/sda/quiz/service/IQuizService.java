@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface  IQuizService {
 
-    QuizDto createEmptyQuiz();
+    QuizDto createEmptyQuizWithTwentyQuestions();
 
     void saveQuiz(QuizDto quizDto,Long[] questionIdList);
 
