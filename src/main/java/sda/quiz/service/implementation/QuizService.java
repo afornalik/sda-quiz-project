@@ -3,6 +3,7 @@ package sda.quiz.service.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
 import sda.quiz.entity.Question;
@@ -46,21 +47,26 @@ public class QuizService implements IQuizService {
     public QuizDto createEmptyQuizWithTwentyQuestions() {
         QuizDto quizDto = new QuizDto();
         List<QuestionDto> questionDtoList = new ArrayList<>();
-        for(int i = 0 ; i<=20 ; i++){
-            questionDtoList.add(new QuestionDto());
+        for (int i = 0; i <= 20; i++) {
+            QuestionDto questionDto = new QuestionDto();
+            List<AnswerDto> answerDtos = new ArrayList<>();
+            for (int j = 0; j <= 3; j++) {
+                answerDtos.add(new AnswerDto());
+            }
+            questionDto.setAnswersList(answerDtos);
+            questionDtoList.add(questionDto);
         }
         quizDto.setQuestions(questionDtoList);
         return quizDto;
     }
 
     @Override
-    public void saveQuiz(QuizDto quizDto, Long[] questionIdList) {
-        List<Question> questionList = new ArrayList<>();
+    public void saveQuiz(QuizDto quizDto) {
         Quiz quiz = quizMapper.convertDtoToEntity(quizDto);
-        for(Long i : questionIdList){
-            questionList.add(questionRepository.findById(i).get());
-        }
-        quiz.setQuestions(questionList);
+        quiz.setQuestions(quiz.getQuestions()
+                .stream()
+                .filter(question -> !question.getQuestion().equals(""))
+                .collect(Collectors.toList()));
         quiz.setCreateDate(LocalDate.now());
         quizRepository.save(quiz);
 
@@ -86,7 +92,7 @@ public class QuizService implements IQuizService {
     @Override
     public QuizDto getQuizById(Long id, boolean resetAnswer) {
         QuizDto quizDto = quizMapper.convertEntityToDto(quizRepository.findById(id).get());
-        if(resetAnswer) {
+        if (resetAnswer) {
             quizDto.setQuestions(quizDto.getQuestions().stream().map(questionService::setAllAnswerToFalse).collect(Collectors.toList()));
         }
         return quizDto;
@@ -95,13 +101,13 @@ public class QuizService implements IQuizService {
     @Override
     public Map<QuestionDto, Boolean> checkAllAnswer(QuizDto quizDto) {
         Map<QuestionDto, Boolean> answerMap = new HashMap<>();
-       for(QuestionDto questionDto : quizDto.getQuestions()){
-           try {
-               answerMap.put(questionDto,questionService.checkAnswerToQuestion(questionRepository.findById(questionDto.getId()).get(),questionDto));
-           } catch (MismatchIdException e) {
-               e.printStackTrace();
-           }
-       }
+        for (QuestionDto questionDto : quizDto.getQuestions()) {
+            try {
+                answerMap.put(questionDto, questionService.checkAnswerToQuestion(questionRepository.findById(questionDto.getId()).get(), questionDto));
+            } catch (MismatchIdException e) {
+                e.printStackTrace();
+            }
+        }
         return answerMap;
     }
 

@@ -1,7 +1,9 @@
 package sda.quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,24 +28,15 @@ public class QuizController {
     }
 
     @RequestMapping(value = "/quiz/add", method = RequestMethod.POST)
-    public ModelAndView addQuiz(@ModelAttribute("quiz") QuizDto quizDto,
-                                             @RequestParam(name = "questionsToAdd", required = false) Long[] questionsToAdd,
-                                             @RequestParam(name = "addQuestion", required = false) String addQuestion,
-                                             @RequestParam(name = "delete", required = false) Long id) {
-
+    public ModelAndView addQuiz(@ModelAttribute("quiz") QuizDto quizDto, BindingResult result){
         ModelAndView modelAndView = new ModelAndView("redirect:/admin/home");
-
-        if (id != null) {
-            questionService.deleteQuestion(id);
-            return setModelAndView(modelAndView);
-
-        } else if (addQuestion != null) {
-            modelAndView.setViewName("redirect:/question/add");
-
-        } else if (questionsToAdd != null) {
-            quizService.saveQuiz(quizDto, questionsToAdd);
-
+        if(result.hasErrors()){
+            modelAndView.setStatus(HttpStatus.BAD_REQUEST);
+            modelAndView.setViewName("/quiz/add");
+        }else {
+            quizService.saveQuiz(quizDto);
         }
+
         return modelAndView;
     }
 

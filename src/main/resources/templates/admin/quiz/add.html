@@ -41,9 +41,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="form-addQuizForm">
-                        <button class="btn btn-md btn-warning btn-block">create</button>
-                    </div>
+                    <button class="btn btn-warning ">create</button>
                 </div>
             </div>
 
@@ -52,10 +50,37 @@
 
         <div class="row row d-flex justify-content-center" th:each="ques,ind : *{questions}">
             <div class="card col-7 mt-3 text-center" style="display: none" th:id="'q'+${ind.index}">
-                <div class="card-title"><span th:text="'Question no. ' + ${ind.index+1}"></span></div>
-                <input class="form-control" type="text" th:field="*{questions[__${ind.index}__].question}" >
+                <div class="card-title"><b><span th:text="'Question no. ' + ${ind.index}"></span> </b></div>
+                <textarea th:id="'text'+${ind.index}" class="form-control"
+                          th:field="*{questions[__${ind.index}__].question}"></textarea>
+                <div class="row m-2">
+                    <b>answers</b>
+                </div>
+                <div class="row m-1" th:each="answer,ans_ind : *{questions[__${ind.index}__].answersList}">
+                    <div class="col-1">
+                        <span th:text="${ans_ind.index+1}"></span>
+                    </div>
+                    <div class="col-10">
+                        <input class="form-control" type="text"
+                               th:field="*{questions[__${ind.index}__].answersList[__${ans_ind.index}__].answer}">
+                    </div>
+                    <div class="col-1 alignright">
+                        <input class="form-control" type="checkbox"
+                               th:field="*{questions[__${ind.index}__].answersList[__${ans_ind.index}__].isCorrect}">
+                    </div>
+                </div>
+                <div class="row m-2 align-left">
+                    <div class="col-8">
+                        <b>Point for good answer : </b>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" type="number" max="10" min="1"
+                                   th:field="*{questions[__${ind.index}__].point}">
+
+                    </div>
+                </div>
                 <button class="btn  btn-danger m-3" name="addQuestion" value="true" type="button"
-                        th:onclick="'show(\''+${2}+'\');'">remove
+                        th:onclick="'remove(\''+${ind.index}+'\');'">remove
                 </button>
             </div>
         </div>
@@ -68,9 +93,9 @@
             </div>
         </div>
         <div class="row row d-flex justify-content-center" th:each="question,ind : *{questions}">
-            <div class=" col-7 mt-3 text-center" style="display: none" th:id="${ind.index+2}">
+            <div class=" col-7 mt-3 text-center" style="display: none" th:id="${ind.index+1}">
                 <button class="btn  btn-primary m-3" name="addQuestion" value="true" type="button"
-                        th:onclick="'show(\''+${ind.index+3}+'\');'">new question
+                        th:onclick="'show(\''+${ind.index+2}+'\');'">new question
                 </button>
             </div>
         </div>
@@ -84,16 +109,28 @@
 <th:block th:insert="fragments/general :: js_import"/>
 
 <script type="text/javascript">
-    function show(i) {
-        let act = i - 1;
-        let actualQuestion = document.getElementById(act);
-        let nextQuestion = document.getElementById(i);
-        let questionForm = document.getElementById('q'+(i-1));
+    function show(question) {
+
+        let actualQuestion = document.getElementById(question - 1);
+        let nextQuestion = document.getElementById(question);
+        let questionFormText = document.getElementById('text' + (question - 1));
+        let questionForm = document.getElementById('q' + (question - 1));
         if (nextQuestion.style.display === "none") {
             actualQuestion.style.display = "none";
             questionForm.style.display = "block";
+            questionFormText.required = "true";
             nextQuestion.style.display = "block";
         }
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function remove(question) {
+        let nextQuestion = document.getElementById(question);
+        let questionForm = document.getElementById('q' + (question))
+        let questionFormText = document.getElementById('text' + (question));
+        questionForm.style.display = "none";
+        nextQuestion.style.display = "none";
+        questionFormText.required = "false";
 
     }
 </script>

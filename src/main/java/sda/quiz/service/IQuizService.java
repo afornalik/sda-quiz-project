@@ -12,7 +12,7 @@ public interface  IQuizService {
 
     QuizDto createEmptyQuizWithTwentyQuestions();
 
-    void saveQuiz(QuizDto quizDto,Long[] questionIdList);
+    void saveQuiz(QuizDto quizDto);
 
     List<QuizDto> getAllQuiz();
 

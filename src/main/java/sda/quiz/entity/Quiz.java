@@ -34,7 +34,7 @@ public class Quiz {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "quiz_questions",
             joinColumns = @JoinColumn(name = "quiz_id"),

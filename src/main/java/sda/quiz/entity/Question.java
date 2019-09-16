@@ -32,7 +32,7 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "questions",cascade = CascadeType.ALL)
     private Set<Quiz> quiz;
 
 
