@@ -46,10 +46,15 @@ public class QuizController {
     }
 
     @RequestMapping(value = "/quiz/answer", method = RequestMethod.POST)
-    public ModelAndView checkTheAnswers(@ModelAttribute("quiz") QuizDto quiz) {
+    public ModelAndView checkTheAnswers(@ModelAttribute("quiz") QuizDto quiz,BindingResult result) {
         ModelAndView modelAndView = new ModelAndView("/admin/quiz/answer");
-        Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
+        if(result.hasErrors()){
+
+        }
+
+           Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
         modelAndView.addObject("answer", answerMap);
+        modelAndView.addObject("quizToRun", quiz);
         return modelAndView;
     }
 

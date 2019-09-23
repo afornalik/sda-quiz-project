@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -15,24 +17,19 @@ import sda.quiz.service.mapper.implementation.AnswerMapper;
 import sda.quiz.service.mapper.implementation.QuestionMapper;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
+@RunWith(JUnit4.class)
 public class AnswerMapperTest {
 
+    private ModelMapper modelMapper = new ModelMapper();
+    private AnswerMapper answerMapper  = new AnswerMapper(modelMapper);
 
-    @Autowired
-    private AnswerMapper answerMapper;
 
-    @Autowired
-    private QuestionMapper questionMapper;
 
     QuestionDto questionDto;
 
     @Before
     public void init() {
-
         questionDto = new QuestionDto(4l,"What is your name",5,null,null);
-
-
     }
 
     @Test

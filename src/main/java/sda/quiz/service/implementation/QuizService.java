@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
+import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
 import sda.quiz.entity.Quiz;
 import sda.quiz.entity.utilities.Category;
@@ -51,7 +52,9 @@ public class QuizService implements IQuizService {
             QuestionDto questionDto = new QuestionDto();
             List<AnswerDto> answerDtos = new ArrayList<>();
             for (int j = 0; j <= 3; j++) {
-                answerDtos.add(new AnswerDto());
+                AnswerDto answerDto = new AnswerDto();
+                answerDto.setQuestion(questionDto);
+                answerDtos.add(answerDto);
             }
             questionDto.setAnswersList(answerDtos);
             questionDtoList.add(questionDto);
@@ -67,6 +70,14 @@ public class QuizService implements IQuizService {
                 .stream()
                 .filter(question -> !question.getQuestion().equals(""))
                 .collect(Collectors.toList()));
+
+        for(int i  = 0; i<quiz.getQuestions().size();i++){
+            List<Answer> answers  = quiz.getQuestions().get(i).getAnswerList();
+            for( int j = 0 ; j < quiz.getQuestions().get(i).getAnswerList().size(); j++){
+               answers.get(j).setQuestion(quiz.getQuestions().get(i));
+            }
+        }
+
         quiz.setCreateDate(LocalDate.now());
         quizRepository.save(quiz);
 

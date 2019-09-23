@@ -1,92 +1,79 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 
-<div th:replace="fragments/head "></div>
+<th:block th:insert="fragments/general :: head"/>
 
-<body class="home blog custom-background content-sidebar">
-<div class="container">
-    <div id="page" class="hfeed row">
-        <header id="branding" role="banner" class="span12">
-            <div th:replace="fragments/header "></div>
-            <nav id="access" role="navigation">
-                <div class="navbar navbar-inverse">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <span class="brand">MENU </span>
-                            <div class="nav-collapse">
-                                <div class="menu-tab-navi-container">
-                                    <ul id="menu-tab-navi" class="nav">
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="/admin/home">Admin</a>  </li>
+<body style="background-color: aliceblue">
 
-                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
-                                            <a href="">Dodaj Quiz</a></li>
+<div class="container col-10">
 
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a href="/admin/question/showAllQuestion">Edycja Quiz</a></li>
-                                    </ul>
+    <div class="row">
+        <th:block th:insert="fragments/general :: navbar('logout')"/>
+    </div>
+    <div>
+        <div>
+            <form th:object="${quizToRun}" th:action="@{/quiz/answer}" method="post">
+                <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
+
+
+                <th:block th:each="question,ind : *{questions}">
+                    <div class="row row d-flex justify-content-center">
+                        <div class="row card col-8 mt-3">
+                            <div class="card-body">
+
+                                <input type="hidden" th:field="*{questions[__${ind.index}__].id}"
+                                       th:value="${question.id}">
+
+                                <div class="card-title">
+                                    <span th:text="${question.question}"></span>
                                 </div>
-                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
-                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
-                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
-                                <!--                            </form>-->
+
+                                <th:block th:each="ans,iter : ${answer}">
+
+                                    <th:block th:if="${question.id}  == ${ans.key.id}">
+                                        <th:block th:if="${ans.value.booleanValue() == true}">
+                                            <p style="color:green;"> good !</p>
+                                        </th:block>
+                                        <th:block th:if="${ans.value.booleanValue() == false}">
+                                            <p style="color: red;"> bad !</p>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+
+                                <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
+
+                                    <input type="hidden"
+                                           th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].idAnswer}"
+                                           th:value="${answer.idAnswer}">
+                                    <div class="row" th:id="${answer.id}">
+                                        <div class="col-2">
+                                            <input class="form-control"
+                                                   th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}"
+                                                   type="checkbox" disabled="disabled">
+                                        </div>
+                                        <div class="col-9">
+                                            <span th:text="${answer.answer}"></span>
+                                        </div>
+                                    </div>
+                                </th:block>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </nav>
-        </header>
-        <section id="primary" class="span8">
-            <div id="content" role="main">
-                <article>
-                    <header class="page-header">
-                        <h1 class="entry-title">Stwórz nowe pytanie</h1>
-                    </header>
-                    <header class="page-header">
-                        <div class="entry-meta">
+                </th:block>
 
-
-
-                            <table>
-                                <thead>
-                                <tr>
-                                    <td>numer pytania</td>
-                                    <td>treść</td>
-                                    <td>udzielona odpowiedz</td>
-                                    <td><b>czy poprawnie </b></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="ans,iter : ${answer}">
-                                    <td th:text="*{ans.key.id}"></td>
-                                    <td th:text="*{ans.key.question}"></td>
-                                    <td ></td>
-                                    <td th:text="*{ans.value.booleanValue()}"></td>
-                                </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </header>
-
-                    <div class="entry-content clearfix">
-                        <p></p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <!--            <div th:replace="/fragments/rejestracja"></div>-->
-
-            <div th:replace="/fragments/listaQuiz"></div>
-        </section>
-
-        <div th:replace="fragments/footer "></div>
-
+            </form>
+        </div>
     </div>
 </div>
-
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
