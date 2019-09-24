@@ -8,7 +8,6 @@ package sda.quiz.service;
 
 public interface IQuestionService {
 
-    void saveNewQuestion(QuestionDto questionDto) throws Exception;
 
     Set<QuestionDto> getAllQuestions();
 
@@ -16,5 +15,4 @@ public interface IQuestionService {
 
     boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException;
 
-    void deleteQuestion(Long id);
 }

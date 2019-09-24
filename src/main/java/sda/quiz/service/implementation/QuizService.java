@@ -71,13 +71,6 @@ public class QuizService implements IQuizService {
                 .filter(question -> !question.getQuestion().equals(""))
                 .collect(Collectors.toList()));
 
-        for(int i  = 0; i<quiz.getQuestions().size();i++){
-            List<Answer> answers  = quiz.getQuestions().get(i).getAnswerList();
-            for( int j = 0 ; j < quiz.getQuestions().get(i).getAnswerList().size(); j++){
-               answers.get(j).setQuestion(quiz.getQuestions().get(i));
-            }
-        }
-
         quiz.setCreateDate(LocalDate.now());
         quizRepository.save(quiz);
 
