@@ -8,6 +8,7 @@ import lombok.Setter;
 import sda.quiz.entity.Answer;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -22,4 +23,20 @@ public class QuestionDto {
     private List<AnswerDto> answersList;
     private Set<QuizDto> quiz;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        QuestionDto that = (QuestionDto) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(question, that.question) &&
+                Objects.equals(point, that.point) &&
+                Objects.equals(answersList, that.answersList) &&
+                Objects.equals(quiz, that.quiz);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, question, point, answersList, quiz);
+    }
 }

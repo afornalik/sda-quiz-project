@@ -69,8 +69,9 @@ public class QuizService implements IQuizService {
         quiz.setQuestions(quiz.getQuestions()
                 .stream()
                 .filter(question -> !question.getQuestion().equals(""))
+                .peek(question -> question.getAnswerList()
+                        .forEach(answer -> answer.setQuestion(question)))
                 .collect(Collectors.toList()));
-
         quiz.setCreateDate(LocalDate.now());
         quizRepository.save(quiz);
 
@@ -89,11 +90,6 @@ public class QuizService implements IQuizService {
     }
 
     @Override
-    public void deleteQuiz(Long id) {
-        quizRepository.deleteById(id);
-    }
-
-    @Override
     public QuizDto getQuizById(Long id, boolean resetAnswer) {
         QuizDto quizDto = quizMapper.convertEntityToDto(quizRepository.findById(id).get());
         if (resetAnswer) {
@@ -105,15 +101,22 @@ public class QuizService implements IQuizService {
     @Override
     public Map<QuestionDto, Boolean> checkAllAnswer(QuizDto quizDto) {
         Map<QuestionDto, Boolean> answerMap = new HashMap<>();
+        QuizDto correctQuiz = quizMapper.convertEntityToDto(quizRepository.findById(quizDto.getIdQuiz()).get());
         for (QuestionDto questionDto : quizDto.getQuestions()) {
-            try {
+            answerMap.put(questionDto, questionDto.equals(correctQuiz.getQuestions().stream().filter(questionDto1 -> questionDto1.getId() == questionDto.getId()).findFirst().get()));
+
+            /*     try {
                 answerMap.put(questionDto, questionService.checkAnswerToQuestion(questionRepository.findById(questionDto.getId()).get(), questionDto));
             } catch (MismatchIdException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
         return answerMap;
     }
 
+    @Override
+    public void deleteQuiz(Long id) {
+        quizRepository.deleteById(id);
+    }
 
 }

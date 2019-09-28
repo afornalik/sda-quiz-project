@@ -60,7 +60,6 @@ public class QuizController {
 
     private ModelAndView setModelAndView(ModelAndView modelAndView) {
         modelAndView.setViewName("/admin/quiz/add");
-        modelAndView.addObject("questionList", questionService.getAllQuestions());
         modelAndView.addObject("quiz", quizService.createEmptyQuizWithTwentyQuestions());
         return modelAndView;
     }

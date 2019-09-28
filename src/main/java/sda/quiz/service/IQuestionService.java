@@ -9,8 +9,6 @@ package sda.quiz.service;
 public interface IQuestionService {
 
 
-    Set<QuestionDto> getAllQuestions();
-
     QuestionDto setAllAnswerToFalse(QuestionDto questionDto);
 
     boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException;
