@@ -10,8 +10,10 @@ import org.junit.runners.JUnit4;
 import org.springframework.boot.test.context.SpringBootTest;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.entity.Answer;
+import sda.quiz.entity.Question;
 import sda.quiz.service.implementation.AnswerService;
-import sda.quiz.service.implementation.exception.MismatchIdException;
+
+import java.util.List;
 
 @SpringBootTest
 @RunWith(JUnit4.class)
@@ -19,17 +21,14 @@ public class AnswerServiceTest {
 
     private AnswerService answerService;
     private AnswerDto dummyAnswerDto;
-    private Answer dummyAnswer;
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
+    private Question dummyQuestion;
 
 
     @Before
     public void init() {
         answerService = new AnswerService();
         dummyAnswerDto = new AnswerDto();
-        dummyAnswer = new Answer();
+        dummyQuestion = new Question();
     }
 
     @Test
@@ -47,65 +46,20 @@ public class AnswerServiceTest {
     }
 
     @Test
-    public void shouldCheckAnswerWithTrueResult() throws MismatchIdException {
+    public void shouldCreateAnswerListWith4EmptyAnswer(){
         //given
-        dummyAnswerDto.setIdAnswer(5L);
-        dummyAnswerDto.setIsCorrect(true);
-        dummyAnswer.setIdAnswer(5L);
-        dummyAnswer.setIsCorrect(true);
+        int QUANTITY_OF_ANSWER = 4;
 
         //when
-        boolean result = answerService.checkAnswer(dummyAnswer,dummyAnswerDto);
+        List<Answer> result = answerService.createAnswerList(dummyQuestion,QUANTITY_OF_ANSWER);
 
         //then
-        Assert.assertTrue(result);
+        Assert.assertEquals(result.size(),QUANTITY_OF_ANSWER);
+        Assert.assertEquals(result.get(0).getQuestion(),dummyQuestion);
+        Assert.assertEquals(result.get(1).getQuestion(),dummyQuestion);
+        Assert.assertEquals(result.get(2).getQuestion(),dummyQuestion);
+        Assert.assertEquals(result.get(3).getQuestion(),dummyQuestion);
     }
 
-    @Test
-    public void shouldCheckAnswerWithFalseResult() throws MismatchIdException {
-        //given
-        dummyAnswerDto.setIdAnswer(5L);
-        dummyAnswerDto.setIsCorrect(false);
-        dummyAnswer.setIdAnswer(5L);
-        dummyAnswer.setIsCorrect(true);
 
-        //when
-        boolean result = answerService.checkAnswer(dummyAnswer,dummyAnswerDto);
-
-        //then
-        Assert.assertFalse(result);
-    }
-
-    @Test
-    public void shouldCheckNullAnswerWithFalseResult() throws MismatchIdException {
-        //given
-        dummyAnswerDto.setIdAnswer(5L);
-        dummyAnswerDto.setIsCorrect(null);
-        dummyAnswer.setIdAnswer(5L);
-        dummyAnswer.setIsCorrect(true);
-
-        //when
-        boolean result = answerService.checkAnswer(dummyAnswer,dummyAnswerDto);
-
-        //then
-        Assert.assertFalse(result);
-    }
-
-    @Test()
-    public void shouldCheckAnswerAndThrowException() throws MismatchIdException {
-        //given
-        dummyAnswerDto.setIdAnswer(4L);
-        dummyAnswerDto.setIsCorrect(true);
-        dummyAnswer.setIdAnswer(5L);
-        dummyAnswer.setIsCorrect(true);
-
-        //then
-        expectedException.expect(MismatchIdException.class);
-        expectedException.expectMessage("Answer ID number mismatch");
-
-        //when
-        boolean result = answerService.checkAnswer(dummyAnswer,dummyAnswerDto);
-
-
-    }
 }

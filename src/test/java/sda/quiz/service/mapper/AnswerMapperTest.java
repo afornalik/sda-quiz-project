@@ -25,7 +25,7 @@ public class AnswerMapperTest {
 
 
 
-    QuestionDto questionDto;
+    private QuestionDto questionDto;
 
     @Before
     public void init() {
