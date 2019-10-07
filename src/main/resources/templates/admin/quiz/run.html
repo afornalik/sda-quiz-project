@@ -4,37 +4,29 @@
 <th:block th:insert="fragments/general :: head"/>
 
 <body style="background-color: aliceblue">
-
 <div class="container col-10">
-
     <div class="row">
         <th:block th:insert="fragments/general :: navbar('logout')"/>
     </div>
-
-
     <div>
         <div>
             <form th:object="${quizToRun}" th:action="@{/quiz/answer}" method="post">
                 <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
-
-
                 <th:block th:each="question,ind : *{questions}">
                     <div class="row row d-flex justify-content-center">
                         <div class="row card col-8 mt-3">
                             <div class="card-body">
-
                                 <input type="hidden" th:field="*{questions[__${ind.index}__].id}"
                                        th:value="${question.id}">
-
                                 <input type="hidden" th:field="*{questions[__${ind.index}__].point}"
                                        th:value="${question.point}">
                                 <input type="hidden" th:field="*{questions[__${ind.index}__].question}"
                                        th:value="${question.question}">
+                                <input type="hidden" th:field="*{questions[__${ind.index}__].quiz}"
+                                       th:value="${question.quiz}">
                                 <div class="card-title">
                                     <span th:text="${question.question}"></span>
                                 </div>
-
-
                                 <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
                                     <input type="hidden"
                                            th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].idAnswer}"
@@ -42,6 +34,9 @@
                                     <input type="hidden"
                                            th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].answer}"
                                            th:value="${answer.answer}">
+                                    <input type="hidden"
+                                           th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].question}"
+                                           th:value="${question}">
 
                                     <div class="row">
                                         <div class="col-2">

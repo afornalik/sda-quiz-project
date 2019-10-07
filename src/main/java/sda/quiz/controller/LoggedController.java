@@ -33,7 +33,7 @@ public class LoggedController {
         ModelAndView modelAndView = new ModelAndView("admin/home");
 
         if (category != null && !category.equals("all")) {
-            modelAndView.addObject("quizList", quizService.getQuizzes(Category.valueOf(category)));
+            modelAndView.addObject("quizList", quizService.getQuizzesByCategory(Category.valueOf(category)));
             return modelAndView;
 
         } else if (quizToRun != null) {
@@ -46,7 +46,7 @@ public class LoggedController {
             modelAndView.setViewName("redirect:/quiz/add");
         }
 
-        modelAndView.addObject("quizList", quizService.getAllQuiz());
+        modelAndView.addObject("quizList", quizService.getAllQuizzes());
         return modelAndView;
     }
 }

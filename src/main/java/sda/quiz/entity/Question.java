@@ -33,7 +33,7 @@ public class Question {
     private List<Answer> answerList;
 
     @ManyToMany(fetch = FetchType.LAZY,mappedBy = "questions",cascade = CascadeType.ALL)
-    private Set<Quiz> quiz;
+    private List<Quiz> quiz;
 
 
 

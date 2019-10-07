@@ -19,10 +19,7 @@ import sda.quiz.service.implementation.exception.MismatchIdException;
 import sda.quiz.service.mapper.implementation.QuizMapper;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,59 +29,51 @@ public class QuizService implements IQuizService {
 
     private final IQuizRepository quizRepository;
     private final QuizMapper quizMapper;
-    private final IQuestionRepository questionRepository;
     private final IQuestionService questionService;
 
     @Autowired
-    public QuizService(IQuizRepository quizRepository, QuizMapper quizMapper, IQuestionRepository questionRepository, IAnswerService answerService, IQuestionService questionService) {
+    public QuizService(IQuizRepository quizRepository, QuizMapper quizMapper, IQuestionService questionService) {
         this.quizRepository = quizRepository;
         this.quizMapper = quizMapper;
-        this.questionRepository = questionRepository;
         this.questionService = questionService;
     }
 
 
     @Override
-    public QuizDto createEmptyQuizWithTwentyQuestions() {
-        QuizDto quizDto = new QuizDto();
-        List<QuestionDto> questionDtoList = new ArrayList<>();
-        for (int i = 0; i <= 20; i++) {
-            QuestionDto questionDto = new QuestionDto();
-            List<AnswerDto> answerDtos = new ArrayList<>();
-            for (int j = 0; j <= 3; j++) {
-                AnswerDto answerDto = new AnswerDto();
-                answerDto.setQuestion(questionDto);
-                answerDtos.add(answerDto);
-            }
-            questionDto.setAnswersList(answerDtos);
-            questionDtoList.add(questionDto);
-        }
-        quizDto.setQuestions(questionDtoList);
-        return quizDto;
+    public QuizDto createEmptyQuiz(int quantityOfQuestion, int quantityOfAnswer) {
+        Quiz quiz = new Quiz();
+        quiz.setQuestions(fillQuiz(quantityOfQuestion, quantityOfAnswer));
+        return quizMapper.convertEntityToDto(quiz);
+    }
+
+    private List<Question> fillQuiz( int quantityOfQuestion, int quantityOfAnswer) {
+        return questionService.createQuestionList(quantityOfQuestion, quantityOfAnswer);
     }
 
     @Override
-    public void saveQuiz(QuizDto quizDto) {
+    public QuizDto saveQuiz(QuizDto quizDto) {
         Quiz quiz = quizMapper.convertDtoToEntity(quizDto);
         quiz.setQuestions(quiz.getQuestions()
                 .stream()
                 .filter(question -> !question.getQuestion().equals(""))
                 .peek(question -> question.getAnswerList()
                         .forEach(answer -> answer.setQuestion(question)))
+                .peek(question -> question.setQuiz(question.getQuiz()))
                 .collect(Collectors.toList()));
         quiz.setCreateDate(LocalDate.now());
         quizRepository.save(quiz);
+        return quizMapper.convertEntityToDto(quiz);
 
     }
 
     @Override
-    public List<QuizDto> getAllQuiz() {
+    public List<QuizDto> getAllQuizzes() {
         List<Quiz> quizzes = quizRepository.findAll();
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<QuizDto> getQuizzes(Category category) {
+    public List<QuizDto> getQuizzesByCategory(Category category) {
         List<Quiz> quizzes = quizRepository.findByCategory(category);
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }
@@ -100,23 +89,39 @@ public class QuizService implements IQuizService {
 
     @Override
     public Map<QuestionDto, Boolean> checkAllAnswer(QuizDto quizDto) {
-        Map<QuestionDto, Boolean> answerMap = new HashMap<>();
-        QuizDto correctQuiz = quizMapper.convertEntityToDto(quizRepository.findById(quizDto.getIdQuiz()).get());
-        for (QuestionDto questionDto : quizDto.getQuestions()) {
-            answerMap.put(questionDto, questionDto.equals(correctQuiz.getQuestions().stream().filter(questionDto1 -> questionDto1.getId() == questionDto.getId()).findFirst().get()));
 
-            /*     try {
-                answerMap.put(questionDto, questionService.checkAnswerToQuestion(questionRepository.findById(questionDto.getId()).get(), questionDto));
-            } catch (MismatchIdException e) {
-                e.printStackTrace();
-            }*/
+
+        Map<QuestionDto, Boolean> answerMap = new HashMap<>();
+
+        QuizDto correctQuiz = quizMapper.convertEntityToDto(quizRepository.findById(quizDto.getIdQuiz()).get());
+        quizDto.setQuestions(quizDto.getQuestions()
+                .stream()
+                .peek(questionDto -> questionDto.setQuiz(correctQuiz.getQuestions()
+                        .stream()
+                        .filter(questionDto1 -> questionDto1.getId().equals(questionDto.getId()))
+                        .findFirst()
+                        .get()
+                        .getQuiz()))
+                .collect(Collectors.toList()));
+        for (QuestionDto questionDto : quizDto.getQuestions()) {
+            answerMap.put(questionDto,
+                    questionDto.equals(correctQuiz.getQuestions()
+                            .stream()
+                            .filter(questionDto1 -> questionDto1.getId().equals(questionDto.getId()))
+                            .findFirst()
+                            .get()));
+
+
         }
         return answerMap;
     }
+
+
 
     @Override
     public void deleteQuiz(Long id) {
         quizRepository.deleteById(id);
     }
+
 
 }

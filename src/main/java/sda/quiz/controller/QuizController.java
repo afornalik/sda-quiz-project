@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.dto.QuizDto;
+import sda.quiz.entity.Quiz;
 import sda.quiz.service.IQuestionService;
 import sda.quiz.service.IQuizService;
 
+import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class QuizController {
@@ -51,8 +55,7 @@ public class QuizController {
         if(result.hasErrors()){
 
         }
-
-           Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
+          Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
         modelAndView.addObject("answer", answerMap);
         modelAndView.addObject("quizToRun", quiz);
         return modelAndView;
@@ -60,7 +63,7 @@ public class QuizController {
 
     private ModelAndView setModelAndView(ModelAndView modelAndView) {
         modelAndView.setViewName("/admin/quiz/add");
-        modelAndView.addObject("quiz", quizService.createEmptyQuizWithTwentyQuestions());
+        modelAndView.addObject("quiz", quizService.createEmptyQuiz(20,4));
         return modelAndView;
     }
 

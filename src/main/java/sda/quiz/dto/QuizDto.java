@@ -8,6 +8,7 @@ import sda.quiz.entity.utilities.Category;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -22,6 +23,7 @@ public class QuizDto {
     private LocalDate createDate;
     private List<QuestionDto> questions;
     private Category category;
+
 
 
 }

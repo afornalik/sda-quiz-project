@@ -4,8 +4,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sda.quiz.dto.AnswerDto;
 import sda.quiz.entity.Answer;
+import sda.quiz.entity.Question;
 import sda.quiz.service.IAnswerService;
-import sda.quiz.service.implementation.exception.MismatchIdException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -18,11 +21,18 @@ public class AnswerService implements IAnswerService {
     }
 
     @Override
-    public boolean checkAnswer(Answer answer, AnswerDto userAnswer) throws MismatchIdException {
-         if(!answer.getIdAnswer().equals(userAnswer.getIdAnswer())){
-            throw new MismatchIdException("Answer ID number mismatch");
-        } else {
-            return answer.getIsCorrect() == userAnswer.getIsCorrect();
-        }
+    public List<Answer> createAnswerList(Question question, int quantityOfAnswer) {
+        return fillAnswerList(new ArrayList<>(),question,quantityOfAnswer);
     }
+
+    private List<Answer> fillAnswerList(List<Answer> answerList,Question question,int quantityOfAnswer){
+        if (quantityOfAnswer == 0) {
+            return answerList;
+        }
+        Answer answer = new Answer();
+        answer.setQuestion(question);
+        answerList.add(answer);
+        return fillAnswerList(answerList,question,quantityOfAnswer-1);
+    }
+
 }

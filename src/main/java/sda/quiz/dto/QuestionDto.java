@@ -21,7 +21,7 @@ public class QuestionDto {
     private String question;
     private Integer point;
     private List<AnswerDto> answersList;
-    private Set<QuizDto> quiz;
+    private List<QuizDto> quiz;
 
     @Override
     public boolean equals(Object o) {

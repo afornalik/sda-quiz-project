@@ -2,15 +2,17 @@ package sda.quiz.service.implementation;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sda.quiz.dto.AnswerDto;
 import sda.quiz.dto.QuestionDto;
 import sda.quiz.entity.Answer;
 import sda.quiz.entity.Question;
+import sda.quiz.entity.Quiz;
 import sda.quiz.service.IAnswerService;
 import sda.quiz.service.IQuestionService;
-import sda.quiz.service.implementation.exception.MismatchIdException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 
@@ -27,7 +29,6 @@ public class QuestionService implements IQuestionService {
     }
 
 
-
     @Override
     public QuestionDto setAllAnswerToFalse(QuestionDto questionDto) {
         questionDto.setAnswersList(
@@ -40,24 +41,19 @@ public class QuestionService implements IQuestionService {
     }
 
     @Override
-    public boolean checkAnswerToQuestion(Question question, QuestionDto questionDto) throws MismatchIdException {
-        if (!question.getIdQuestion().equals(questionDto.getId())) {
-            throw new MismatchIdException("Question ID number mismatch");
-        } else {
-            for (AnswerDto answerDto : questionDto.getAnswersList()) {
-                Optional<Answer> foundAnswer = question.getAnswerList()
-                        .stream()
-                        .filter(answer -> answer.getIdAnswer()
-                                .equals(answerDto.getIdAnswer()))
-                        .findAny();
-                if (foundAnswer.isPresent()) {
-                    if (!answerService.checkAnswer(foundAnswer.get(), answerDto)) {
-                        return false;
-                    }
-                }
-            }
-            return true;
+    public List<Question> createQuestionList( int quantityOfQuestion, int quantityOfAnswer) {
+        return fillQuestionList(new ArrayList<>(),quantityOfQuestion,quantityOfAnswer);
+    }
+
+    private List<Question> fillQuestionList( List<Question> questionList, int quantityOfQuestion, int quantityOfAnswer) {
+        if (quantityOfQuestion == 0) {
+            return questionList;
         }
+        Question question = new Question();
+        question.setAnswerList(answerService.createAnswerList(question,quantityOfAnswer));
+
+        questionList.add(question);
+        return fillQuestionList(questionList, quantityOfQuestion - 1, quantityOfAnswer);
     }
 
 
