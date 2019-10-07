@@ -18,13 +18,11 @@ public interface  IQuizService {
 
     QuizDto saveQuiz(QuizDto quizDto);
 
-    /**
-     * Get All available quizzes
-     * */
-    List<QuizDto> getAllQuizzes();
+    List<QuizDto> getQuizzes();
 
+    List<QuizDto> getQuizzes(int numberOfQuizzes);
 
-    List<QuizDto> getQuizzesByCategory(Category category);
+    List<QuizDto> getQuizzes(Category category);
 
 
 

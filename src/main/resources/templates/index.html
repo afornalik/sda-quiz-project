@@ -52,14 +52,10 @@
     </div>
 
     <div class="row">
-        <div  class="col-md mt-3" th:replace="fragments/general :: random_quizzes"></div>
-        <div  class="col-md mt-3" th:replace="fragments/general :: random_quizzes"></div>
-        <div  class="col-md mt-3" th:replace="fragments/general :: random_quizzes"></div>
-        <div  class="col-md mt-3" th:replace="fragments/general :: random_quizzes"></div>
-        <div  class="col-md mt-3" th:replace="fragments/general :: random_quizzes"></div>
+        <th:block th:each="quiz,iter : ${randomQuizzes}">
+            <div class="col-md mt-3" th:replace="fragments/general :: random_quizzes(${quiz.getIdQuiz()},${quiz.getTitle()},${quiz.getDescription()})"></div>
+        </th:block>
     </div>
-
-
 
 
     <div class="row align-items-end">

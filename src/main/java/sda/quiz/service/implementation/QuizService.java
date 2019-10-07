@@ -67,13 +67,24 @@ public class QuizService implements IQuizService {
     }
 
     @Override
-    public List<QuizDto> getAllQuizzes() {
+    public List<QuizDto> getQuizzes() {
         List<Quiz> quizzes = quizRepository.findAll();
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }
 
     @Override
-    public List<QuizDto> getQuizzesByCategory(Category category) {
+    public List<QuizDto> getQuizzes(int numberOfQuizzes) {
+        List<Quiz> quizzes = quizRepository.findAll();
+        List<Quiz> randomQuizzes = new ArrayList<>();
+        Random random = new Random();
+        for(int i = 0 ; i < numberOfQuizzes; i++) {
+           randomQuizzes.add(quizzes.get(random.nextInt(quizzes.size())));
+        }
+        return randomQuizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<QuizDto> getQuizzes(Category category) {
         List<Quiz> quizzes = quizRepository.findByCategory(category);
         return quizzes.stream().map(quizMapper::convertEntityToDto).collect(Collectors.toList());
     }

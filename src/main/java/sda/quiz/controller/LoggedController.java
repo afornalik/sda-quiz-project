@@ -1,18 +1,12 @@
 package sda.quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import sda.quiz.dto.QuizDto;
-import sda.quiz.entity.user.User;
 import sda.quiz.entity.utilities.Category;
 import sda.quiz.service.IQuizService;
-import sda.quiz.service.implementation.UserService;
 
 @Controller
 public class LoggedController {
@@ -31,14 +25,15 @@ public class LoggedController {
                              @RequestParam(name = "category", required = false) String category) {
 
         ModelAndView modelAndView = new ModelAndView("admin/home");
+        modelAndView.addObject("randomQuizzes",quizService.getQuizzes(5));
 
         if (category != null && !category.equals("all")) {
-            modelAndView.addObject("quizList", quizService.getQuizzesByCategory(Category.valueOf(category)));
+            modelAndView.addObject("quizList", quizService.getQuizzes(Category.valueOf(category)));
             return modelAndView;
 
         } else if (quizToRun != null) {
             modelAndView.addObject("quizToRun", quizService.getQuizById(quizToRun, true));
-            modelAndView.setViewName("admin/quiz/run");
+            modelAndView.setViewName("all/quiz/run");
 
         } else if (quizToDelete != null) {
             quizService.deleteQuiz(quizToDelete);
@@ -46,7 +41,7 @@ public class LoggedController {
             modelAndView.setViewName("redirect:/quiz/add");
         }
 
-        modelAndView.addObject("quizList", quizService.getAllQuizzes());
+        modelAndView.addObject("quizList", quizService.getQuizzes());
         return modelAndView;
     }
 }

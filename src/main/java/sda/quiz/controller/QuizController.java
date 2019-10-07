@@ -23,12 +23,10 @@ import java.util.stream.Collectors;
 @Controller
 public class QuizController {
     private final IQuizService quizService;
-    private final IQuestionService questionService;
 
     @Autowired
-    public QuizController(IQuizService quizService, IQuestionService questionService) {
+    public QuizController(IQuizService quizService) {
         this.quizService = quizService;
-        this.questionService = questionService;
     }
 
     @RequestMapping(value = "/quiz/add", method = RequestMethod.POST)
@@ -51,7 +49,7 @@ public class QuizController {
 
     @RequestMapping(value = "/quiz/answer", method = RequestMethod.POST)
     public ModelAndView checkTheAnswers(@ModelAttribute("quiz") QuizDto quiz,BindingResult result) {
-        ModelAndView modelAndView = new ModelAndView("/admin/quiz/answer");
+        ModelAndView modelAndView = new ModelAndView("all/quiz/answer");
         if(result.hasErrors()){
 
         }

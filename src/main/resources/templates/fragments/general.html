@@ -69,14 +69,17 @@
 </th:block>
 
 <!--random quizzes-->
-<th:block th:fragment="random_quizzes">
+<th:block th:fragment="random_quizzes(idQuiz,title,description)">
     <div class="col-md card p-3 ml-3 mr-3">
         <div class="card-title m-3">
-            <h5>random quiz</h5>
+            <h5 th:text="${title}">random quiz</h5>
         </div>
         <div class="card-body">
-            <p>description ...</p>
+            <p th:text="${description}">description ...</p>
         </div>
+        <form method="get" th:action="@{/admin/home}">
+            <button type="submit" class="btn btn-primary" th:value="${idQuiz}" name="run">run</button>
+        </form>
     </div>
 </th:block>
 
