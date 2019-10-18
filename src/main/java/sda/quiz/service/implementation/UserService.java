@@ -9,11 +9,13 @@ import sda.quiz.entity.user.Role;
 import sda.quiz.entity.user.User;
 import sda.quiz.repository.IRoleRepository;
 import sda.quiz.repository.IUserRepository;
+import sda.quiz.service.IUserService;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
 @Service ("userService")
-public class UserService {
+public class UserService implements IUserService {
 
     private IUserRepository userRepository;
     private IRoleRepository roleRepository;

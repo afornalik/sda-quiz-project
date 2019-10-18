@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<th:block th:insert="fragments/general :: head"/>
+
+<body style="background-color: aliceblue">
+
+<div class="container col-10">
+
+    <div class="row">
+        <th:block th:insert="fragments/general :: navbar('logout')"/>
+    </div>
+    <div>
+        <div>
+            <form th:object="${quizToRun}" th:action="@{/quiz/answer}" method="post">
+                <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
+
+
+                <th:block th:each="question,ind : *{questions}">
+                    <div class="row row d-flex justify-content-center">
+                        <div class="row card col-8 mt-3">
+                            <div class="card-body">
+
+                                <input type="hidden" th:field="*{questions[__${ind.index}__].id}"
+                                       th:value="${question.id}">
+
+                                <div class="card-title">
+                                    <span th:text="${question.question}"></span>
+                                </div>
+
+                                <th:block th:each="ans,iter : ${answer}">
+
+                                    <th:block th:if="${question.id}  == ${ans.key.id}">
+                                        <th:block th:if="${ans.value.booleanValue() == true}">
+                                            <p th:text="'Good + ' + ${ans.key.point}+' points'" style="color:green;"> good !</p>
+                                        </th:block>
+                                        <th:block th:if="${ans.value.booleanValue() == false}">
+                                            <p th:text="'Bad  0  points'" style="color: red;"> bad !</p>
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+
+                                <th:block th:each="answer,iter : *{questions[__${ind.index}__].answersList}">
+
+                                    <input type="hidden"
+                                           th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].idAnswer}"
+                                           th:value="${answer.idAnswer}">
+                                    <div class="row" >
+                                        <div class="col-2">
+                                            <input class="form-control"
+                                                   th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].isCorrect}"
+                                                   type="checkbox" disabled="disabled">
+                                        </div>
+                                        <div class="col-9">
+                                            <span th:text="${answer.answer}"></span>
+                                        </div>
+                                    </div>
+                                </th:block>
+
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+                <div class="row" >
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary" name="backToMenu" value="back">Back to menu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:replace="fragments/general :: footer" ></div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,143 +1,68 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<div th:replace="fragments/head "></div>
+<th:block th:insert="fragments/general :: head"/>
 
- <body class="home blog custom-background content-sidebar">
-<div class="container">
-    <div id="page" class="hfeed row">
-        <header id="branding" role="banner" class="span12">
-            <div th:replace="fragments/header "></div>
-            <nav id="access" role="navigation">
-                <div class="navbar navbar-inverse">
-                    <div class="navbar-inner">
-                        <div class="container">
-                            <span class="brand">MENU </span>
-                            <div class="nav-collapse">
-                                <div class="menu-tab-navi-container">
-                                    <ul id="menu-tab-navi" class="nav">
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a th:href="index">Home</a></li>
+<body style="background-color: aliceblue">
 
+<div class="container col-10">
 
-                                        <li   class="menu-item menu-item-type-post_type menu-item-object-page menu-item-702">
-                                            <a th:href="quiz">Quizy</a></li>
+    <div class="row">
+        <th:block th:insert="fragments/general :: navbar('')"/>
+    </div>
 
-                                        <li id="menu-item-708" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-708 active">
-                                            <a th:href="registration">Rejestracja</a></li>
+    <div class="row d-flex justify-content-center">
 
-
-
-                                    </ul>
-                                </div>
-                                <!--                            <form id="searchform" class="navbar-search pull-right" method="get" action="http:///">-->
-                                <!--                                <label for="s" class="assistive-text hidden">Search</label>-->
-                                <!--                                <input type="search" class="search-query" name="s" id="s" placeholder="Search">-->
-                                <!--                            </form>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <section id="secondary1" class="widget-area span4" role="complementary">
-
-
-
-
-
-
-                <form autocomplete="off"   th:action="@{/registration}"
-                      th:object="${user}" method="post" class="form-horizontal"
+        <!--register panel-->
+        <th:block th:fragment="registration(user)">
+            <section id="secondary1" class="card m-3 col-8" role="complementary">
+                <form autocomplete="off" th:action="@{/registration}"
+                      th:object="${user}" method="post" class="card-body form-horizontal"
                       role="form">
-                    <h2>Formularz</h2>
+                    <h2 class="mb-3">Register</h2>
                     <div>
-                        <div class="nameLabel"   >
-                            <span>Imię: </span>
-                        </div>
-
-                            <label for="validationDefaultUsername2" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                                   class="validation-message">Imię: </label>
-                            <input type="text" th:field="*{name}"
-                                   class="form-control" id="validationDefaultUsername2" placeholder="Imie" required/>
-                            <br><br>
-
-                    </div>
-
-                    <div>
-                        <div class="nameLabel"   >
-                            <span>Nazwisko:</span>
-                        </div>
-
-
-                            <input type="text" th:field="*{lastName}"
-                                   placeholder="Nazwisko" class="form-control"/>
-                        <br><br>
-
+                        <label for="validationDefaultUsername2" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                               class="validation-message">Imię: </label>
+                        <input type="text" th:field="*{name}"
+                               class="form-control" id="validationDefaultUsername2" placeholder="First name" required/>
+                        <br>
                     </div>
                     <div>
-                        <div class="nameLabel"   >
-                            <span>Email:</span>
-                        </div>
-                            <input type="email" th:field="*{email}" placeholder="Email" required
-                                   class="form-control" id="validationDefaultUsername3"/><label
-                                th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                class="validation-message" for="validationDefaultUsername3"></label>
-                            <br><br>
-
+                        <input type="text" th:field="*{lastName}"
+                               placeholder="Last name" class="form-control" required/>
+                        <br>
                     </div>
-                    <div  >
-                        <div class="nameLabel"   >
-                            <span>Hasło:</span>
-                        </div>
+                    <div>
+                        <input type="email" th:field="*{email}" placeholder="Email" required
+                               class="form-control" id="validationDefaultUsername3"/><label
+                            th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                            class="validation-message" for="validationDefaultUsername3"></label>
+                        <br>
+                    </div>
+                    <div>
                         <input id="validationDefaultUsername4" type="password" th:field="*{password}"
-                               placeholder="Password" class="form-control" required /> <label
+                               placeholder="Password" class="form-control" required/> <label
                             for="validationDefaultUsername4" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
                             class="validation-message"></label>
-
-                        </div>
-                        <br><br>
-
-
+                    </div>
+                    <br>
                     <div class="form-group">
-                        <div class="col-sm-9">
-                            <button class="btn btn-lg btn-primary btn-block"   type="submit" > Zapisz</button>
-
+                        <div class="col-sm-4">
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
                         </div>
                     </div>
-
                     <h2><span class="text-success" th:utext="${successMessage}"></span></h2>
-
                 </form>
-
-
-
-
-
-
-        </section>
-        <section id="secondary2" class="widget-area span4" role="complementary">
-
-            <div>
-<a href="testt.html">Regulamin :)</a>
-            </div>
-
-
-        </section>
-
-
-        <section id="secondary" class="widget-area span4" role="complementary">
-            <div th:replace="/fragments/rejestracja"></div>
-
-
-        </section>
-
-        <div th:replace="fragments/footer "></div>
-
+            </section>
+        </th:block>
     </div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+
+
+    <div th:replace="fragments/general :: footer" ></div>
+</div>
+
+<th:block th:insert="fragments/general :: js_import"/>
 </body>
 </html>

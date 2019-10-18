@@ -4,16 +4,17 @@ import org.springframework.stereotype.Component;
 
 public enum Category {
 
-    MATEMATYKA,
-    GEOGRAFIA,
-    FIZYKA,
-    INFORMATYKA,
-    BIOLOGIA,
-    JAVA,
-    INNE;
+   JAVA,
+    SQL,
+    SPRING,
+    HIBERNATE,
+
 
 
 
     Category() {
     }
+
+
+
 }

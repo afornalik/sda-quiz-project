@@ -9,15 +9,15 @@ import sda.quiz.entity.user.User;
 import javax.persistence.*;
 import java.util.List;
 
-@Table(name="quiz_taken")
+@Table(name="quiz_done")
 @Entity
 @Getter
 @Setter
-public class QuizTaken {
+public class QuizDone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_quiz_take")
+    @Column(name = "id_quiz_done")
     private Long idQuizTake;
 
     @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -28,8 +28,8 @@ public class QuizTaken {
     @JoinColumn(name = "quiz_id")
     private Quiz quizTaken;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "quizTaken")
-    private List<AnswerGiven> answersGiven;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "quizDone")
+    private List<AnswerDone> answersGiven;
 
 
 }

@@ -3,14 +3,14 @@ package sda.quiz.service.mapper.implementation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import sda.quiz.dto.user.response.QuizTakenDto;
-import sda.quiz.entity.user.response.QuizTaken;
+import sda.quiz.dto.user.response.QuizDoneDto;
+import sda.quiz.entity.user.response.QuizDone;
 import sda.quiz.service.mapper.IMapper;
 
 import java.util.stream.Collectors;
 
 @Component
-public class QuizTakenMapper implements IMapper<QuizTaken, QuizTakenDto> {
+public class QuizTakenMapper implements IMapper<QuizDone, QuizDoneDto> {
 
     private final ModelMapper modelMapper;
     private final AnswerGivenMapper answerGivenMapper;
@@ -22,32 +22,32 @@ public class QuizTakenMapper implements IMapper<QuizTaken, QuizTakenDto> {
     }
 
     @Override
-    public QuizTaken convertDtoToEntity(QuizTakenDto quizTakenDto) {
+    public QuizDone convertDtoToEntity(QuizDoneDto quizDoneDto) {
 
-        QuizTaken quizTaken = new QuizTaken();
-        modelMapper.map(quizTakenDto, quizTaken);
+        QuizDone quizDone = new QuizDone();
+        modelMapper.map(quizDoneDto, quizDone);
 
-        quizTaken.setAnswersGiven(
-                quizTakenDto.getAnswerGivenDtoList()
+        quizDone.setAnswersGiven(
+                quizDoneDto.getAnswerDoneDtoList()
                         .stream()
                         .map(answerGivenMapper::convertDtoToEntity)
                         .collect(Collectors.toList()));
 
-        return quizTaken;
+        return quizDone;
     }
 
     @Override
-    public QuizTakenDto convertEntityToDto(QuizTaken quizTaken) {
+    public QuizDoneDto convertEntityToDto(QuizDone quizDone) {
 
-        QuizTakenDto quizTakenDto = new QuizTakenDto();
-        modelMapper.map(quizTaken,quizTakenDto);
+        QuizDoneDto quizDoneDto = new QuizDoneDto();
+        modelMapper.map(quizDone, quizDoneDto);
 
-        quizTakenDto.setAnswerGivenDtoList(
-                quizTaken.getAnswersGiven()
+        quizDoneDto.setAnswerDoneDtoList(
+                quizDone.getAnswersGiven()
                         .stream()
                         .map(answerGivenMapper::convertEntityToDto)
                         .collect(Collectors.toList()));
 
-        return quizTakenDto;
+        return quizDoneDto;
     }
 }

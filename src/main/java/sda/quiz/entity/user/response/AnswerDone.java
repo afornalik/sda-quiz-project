@@ -8,14 +8,14 @@ import sda.quiz.entity.Question;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "answer_given")
+@Table(name = "answer_done")
 @Getter
 @Setter
-public class AnswerGiven {
+public class AnswerDone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_answer_given")
+    @Column(name = "id_answer_done")
     private Long idAnswerGiven;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -23,8 +23,8 @@ public class AnswerGiven {
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "quiz_taken_id")
-    private QuizTaken quizTaken;
+    @JoinColumn(name = "quiz_done_id")
+    private QuizDone quizDone;
 
     @Column(name = "is_user_choose_correct",nullable = false)
     private Boolean isUserChooseCorrect;

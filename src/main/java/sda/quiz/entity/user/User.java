@@ -3,8 +3,7 @@ package sda.quiz.entity.user;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Length;
-import sda.quiz.entity.user.response.QuizTaken;
+import sda.quiz.entity.user.response.QuizDone;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,17 +23,17 @@ public class User {
     private Long id;
 
     @Column(name = "email")
-    @Email(message = "Proszę wprowadzić poprawny Email")
-    @NotEmpty(message = "Proszę wprowadzić Email")
+    @Email(message = "Please insert proper email address")
+    @NotEmpty(message = "Please insert email address")
     private String email;
 
     @Column(name="password")
-   // @Length(min = 5,message = "Hasło musi mieć minimum 5 znaków")
-    @NotEmpty(message = "Proszę wprowadzić hasło")
+   // @Length(min = 5,message = "Minimum password length is 5 characters")
+    @NotEmpty(message = "Please insert password")
     private String password;
 
     @Column(name = "name")
-    @NotEmpty(message = "Proszę wprowadzić imię")
+    @NotEmpty(message = "Please insert name")
     private String name;
 
     @Column(name = "last_name")
@@ -48,7 +47,7 @@ public class User {
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<QuizTaken> quizTakenList;
+    private List<QuizDone> quizDoneList;
 
 
 }
