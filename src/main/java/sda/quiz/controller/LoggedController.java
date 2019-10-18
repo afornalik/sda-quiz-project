@@ -1,6 +1,8 @@
 package sda.quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +27,17 @@ public class LoggedController {
                              @RequestParam(name = "category", required = false) String category) {
 
         ModelAndView modelAndView = new ModelAndView("admin/home");
-        modelAndView.addObject("randomQuizzes",quizService.getQuizzes(5));
+       // modelAndView.addObject("randomQuizzes",quizService.getQuizzes(5));
 
         if (category != null && !category.equals("all")) {
+
             modelAndView.addObject("quizList", quizService.getQuizzes(Category.valueOf(category)));
             return modelAndView;
 
         } else if (quizToRun != null) {
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            
             modelAndView.addObject("quizToRun", quizService.getQuizById(quizToRun, true));
             modelAndView.setViewName("all/quiz/run");
 

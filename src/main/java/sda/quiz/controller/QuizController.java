@@ -48,10 +48,16 @@ public class QuizController {
     }
 
     @RequestMapping(value = "/quiz/answer", method = RequestMethod.POST)
-    public ModelAndView checkTheAnswers(@ModelAttribute("quiz") QuizDto quiz,BindingResult result) {
+    public ModelAndView checkTheAnswers(@ModelAttribute("quizToRun") QuizDto quiz,
+                                        @RequestParam(name = "backToMenu", required = false) String backToMenu,
+                                        BindingResult result) {
+
         ModelAndView modelAndView = new ModelAndView("all/quiz/answer");
         if(result.hasErrors()){
 
+        }
+        if(backToMenu!=null) {
+            modelAndView.setViewName("redirect:/admin/home");
         }
           Map<QuestionDto, Boolean> answerMap = quizService.checkAllAnswer(quiz);
         modelAndView.addObject("answer", answerMap);
@@ -64,6 +70,7 @@ public class QuizController {
         modelAndView.addObject("quiz", quizService.createEmptyQuiz(20,4));
         return modelAndView;
     }
+
 
 
 }

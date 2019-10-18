@@ -23,17 +23,17 @@ public class User {
     private Long id;
 
     @Column(name = "email")
-    @Email(message = "Proszę wprowadzić poprawny Email")
-    @NotEmpty(message = "Proszę wprowadzić Email")
+    @Email(message = "Please insert proper email address")
+    @NotEmpty(message = "Please insert email address")
     private String email;
 
     @Column(name="password")
-   // @Length(min = 5,message = "Hasło musi mieć minimum 5 znaków")
-    @NotEmpty(message = "Proszę wprowadzić hasło")
+   // @Length(min = 5,message = "Minimum password length is 5 characters")
+    @NotEmpty(message = "Please insert password")
     private String password;
 
     @Column(name = "name")
-    @NotEmpty(message = "Proszę wprowadzić imię")
+    @NotEmpty(message = "Please insert name")
     private String name;
 
     @Column(name = "last_name")
