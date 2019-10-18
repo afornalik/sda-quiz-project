@@ -32,10 +32,10 @@
 
                                     <th:block th:if="${question.id}  == ${ans.key.id}">
                                         <th:block th:if="${ans.value.booleanValue() == true}">
-                                            <p style="color:green;"> good !</p>
+                                            <p th:text="'Good + ' + ${ans.key.point}+' points'" style="color:green;"> good !</p>
                                         </th:block>
                                         <th:block th:if="${ans.value.booleanValue() == false}">
-                                            <p style="color: red;"> bad !</p>
+                                            <p th:text="'Bad  0  points'" style="color: red;"> bad !</p>
                                         </th:block>
                                     </th:block>
                                 </th:block>
@@ -62,9 +62,16 @@
                     </div>
                 </th:block>
 
+                <div class="row" >
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary" name="backToMenu" value="back">Back to menu</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
+
+    <div th:replace="fragments/general :: footer" ></div>
 </div>
 </body>
 </html>

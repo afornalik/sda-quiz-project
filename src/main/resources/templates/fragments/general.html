@@ -59,27 +59,36 @@
 
 <!--footer-->
 <th:block th:fragment="footer">
-    <div class="page-footer" xmlns:th="http://www.w3.org/1999/xhtml">
-        <footer id="colophon" role="contentinfo" class="span12">
-            <div id="page-footer" class="well clearfix">
-                <span class="credits alignleft">© 2019 <a href="/">Serwis do QUIZÓW i ANKIET</a>,   w budowie.</span>
+        <footer  class="page-footer font-small text-center mt-4"  >
+            <div class="text-center" style="background-color: aliceblue;">
+                <span >© 2019 Copyright: AF , MZ </span>
             </div>
         </footer>
-    </div>
 </th:block>
 
 <!--random quizzes-->
 <th:block th:fragment="random_quizzes(idQuiz,title,description)">
     <div class="col-md card p-3 ml-3 mr-3">
+        <a th:href="@{/admin/home/(run=${idQuiz})}">
         <div class="card-title m-3">
             <h5 th:text="${title}">random quiz</h5>
         </div>
         <div class="card-body">
             <p th:text="${description}">description ...</p>
         </div>
-        <form method="get" th:action="@{/admin/home}">
+     <!--   <form method="get" th:action="">
             <button type="submit" class="btn btn-primary" th:value="${idQuiz}" name="run">run</button>
-        </form>
+        </form>-->
+        </a>
+    </div>
+</th:block>
+
+<!-- separate contents -->
+<th:block th:fragment="separate(text)">
+    <div class="col card p-1 ml-3 mr-3 mb-3">
+        <div class="card-title m-1 ml-3">
+            <h5 th:text="${text}"></h5>
+        </div>
     </div>
 </th:block>
 

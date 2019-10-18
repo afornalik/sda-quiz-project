@@ -49,6 +49,10 @@
         </div>
     </div>
 
+    <div class="row">
+        <th:block th:insert="fragments/general ::separate('Random Quizzes')"/>
+    </div>
+
     <div class="d-flex flex-row">
         <th:block th:each="quiz,iter : ${randomQuizzes}">
             <div class="col-md mt-3" th:replace="fragments/general :: random_quizzes(${quiz.getIdQuiz()},${quiz.getTitle()},${quiz.getDescription()})"></div>
@@ -58,9 +62,7 @@
 
 
 
-    <div class="row align-items-end">
-        <div th:insert="fragments/general :: footer"></div>
-    </div>
+    <div th:replace="fragments/general :: footer" ></div>
 </div>
 
 <th:block th:insert="fragments/general :: js_import"/>

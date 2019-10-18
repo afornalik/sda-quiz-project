@@ -105,9 +105,7 @@
         </div>
     </form>
 
-    <div class="row align-items-end">
-        <div th:insert="fragments/general :: footer"></div>
-    </div>
+    <div th:replace="fragments/general :: footer" ></div>
 </div>
 
 <th:block th:insert="fragments/general :: js_import"/>

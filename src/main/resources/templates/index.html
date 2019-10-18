@@ -3,7 +3,7 @@
 
 <th:block th:insert="fragments/general :: head"/>
 
-<body style="background-color: aliceblue">
+<body style="background-color: aliceblue; ">
 
 
 <div class="container col-10">
@@ -34,7 +34,7 @@
         </th:block>
 
         <th:block th:fragment="login">
-            <aside class="card col  mt-3 mb-3 ">
+            <aside class="card col  mt-3 mb-3 mr-3">
                 <div class="card-body">
                     <form th:action="@{/}" method="POST" class="form-signin">
                         <input type="email" id="email" name="email" th:placeholder="Email"
@@ -52,15 +52,21 @@
     </div>
 
     <div class="row">
+        <th:block th:insert="fragments/general ::separate('Random Quizzes')"/>
+    </div>
+
+    <div class="row">
         <th:block th:each="quiz,iter : ${randomQuizzes}">
             <div class="col-md mt-3" th:replace="fragments/general :: random_quizzes(${quiz.getIdQuiz()},${quiz.getTitle()},${quiz.getDescription()})"></div>
         </th:block>
     </div>
 
 
-    <div class="row align-items-end">
-        <div th:insert="fragments/general :: footer"></div>
-    </div>
+        <div th:replace="fragments/general :: footer" ></div>
+
+
+
+
 </div>
 
 <th:block th:insert="fragments/general :: js_import"/>

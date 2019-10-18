@@ -6,12 +6,15 @@
 <body style="background-color: aliceblue">
 <div class="container col-10">
     <div class="row">
-        <th:block th:insert="fragments/general :: navbar('logout')"/>
+        <th:block th:insert="fragments/general :: navbar('')"/>
     </div>
     <div>
         <div>
+
             <form th:object="${quizToRun}" th:action="@{/quiz/answer}" method="post">
+
                 <input type="hidden" th:field="*{idQuiz}" th:value="*{idQuiz}">
+
                 <th:block th:each="question,ind : *{questions}">
                     <div class="row row d-flex justify-content-center">
                         <div class="row card col-8 mt-3">
@@ -22,8 +25,6 @@
                                        th:value="${question.point}">
                                 <input type="hidden" th:field="*{questions[__${ind.index}__].question}"
                                        th:value="${question.question}">
-                                <input type="hidden" th:field="*{questions[__${ind.index}__].quiz}"
-                                       th:value="${question.quiz}">
                                 <div class="card-title">
                                     <span th:text="${question.question}"></span>
                                 </div>
@@ -34,10 +35,6 @@
                                     <input type="hidden"
                                            th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].answer}"
                                            th:value="${answer.answer}">
-                                    <input type="hidden"
-                                           th:field="*{questions[__${ind.index}__].answersList[__${iter.index}__].question}"
-                                           th:value="${question}">
-
                                     <div class="row">
                                         <div class="col-2">
                                             <input class="form-control"
@@ -61,13 +58,10 @@
                 </div>
             </form>
 
-
         </div>
     </div>
 
-    <div class="row align-items-end">
-        <div th:insert="fragments/general :: footer"></div>
-    </div>
+    <div th:replace="fragments/general :: footer" ></div>
     <th:block th:insert="fragments/general :: js_import"/>
 
 </div>
